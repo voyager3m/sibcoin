@@ -367,6 +367,7 @@ sibcoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPN
 sibcoind_CPPFLAGS = $(BITCOIN_INCLUDES)
 sibcoind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
+
 # sibcoin-cli binary #
 sibcoin_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
