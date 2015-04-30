@@ -60,11 +60,11 @@ bin_PROGRAMS =
 TESTS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += dashd
+  bin_PROGRAMS += sibcoind
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += dash-cli dash-tx
+  bin_PROGRAMS += sibcoin-cli sibcoin-tx
 endif
 
 .PHONY: FORCE
@@ -343,7 +343,7 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
-dashd_LDADD = \
+sibcoind_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UNIVALUE) \
@@ -354,35 +354,35 @@ dashd_LDADD = \
   $(LIBSECP256K1)
 
 if ENABLE_WALLET
-dashd_LDADD += libbitcoin_wallet.a
+sibcoind_LDADD += libbitcoin_wallet.a
 endif
-dashd_SOURCES = dashd.cpp
+sibcoind_SOURCES = sibcoind.cpp
 #
 
 if TARGET_WINDOWS
-dashd_SOURCES += dashd-res.rc
+sibcoind_SOURCES += sibcoind-res.rc
 endif
 
-dashd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
-dashd_CPPFLAGS = $(BITCOIN_INCLUDES)
-dashd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+sibcoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
+sibcoind_CPPFLAGS = $(BITCOIN_INCLUDES)
+sibcoind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
-# dash-cli binary #
-dash_cli_LDADD = \
+# sibcoin-cli binary #
+sibcoin_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBBITCOIN_UTIL) \
   $(BOOST_LIBS) \
   $(SSL_LIBS) \
   $(CRYPTO_LIBS)
 
-dash_cli_SOURCES = \
-  dash-cli.cpp
+sibcoin_cli_SOURCES = \
+  sibcoin-cli.cpp
 
-dash_cli_CPPFLAGS = $(BITCOIN_INCLUDES)
+sibcoin_cli_CPPFLAGS = $(BITCOIN_INCLUDES)
 #
 
 # dash-tx binary #
-dash_tx_LDADD = \
+sibcoin_tx_LDADD = \
   $(LIBBITCOIN_UNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -391,15 +391,15 @@ dash_tx_LDADD = \
   $(BOOST_LIBS) \
   $(CRYPTO_LIBS)
 
-dash_tx_SOURCES = dash-tx.cpp
-dash_tx_CPPFLAGS = $(BITCOIN_INCLUDES)
+sibcoin_tx_SOURCES = sibcoin-tx.cpp
+sibcoin_tx_CPPFLAGS = $(BITCOIN_INCLUDES)
 #
-dash_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+sibcoin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-dash_cli_SOURCES += dash-cli-res.rc
+sibcoin_cli_SOURCES += sibcoin-cli-res.rc
 endif
-dash_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+sibcoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if BUILD_BITCOIN_LIBS
 include_HEADERS = script/bitcoinconsensus.h
