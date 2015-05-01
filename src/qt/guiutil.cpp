@@ -1,6 +1,7 @@
-// Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The Dash Core developers
-// Distributed under the MIT software license, see the accompanying
+// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015 The Sibcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "guiutil.h"
@@ -116,7 +117,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #if QT_VERSION >= 0x040700
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a Dash address (e.g. %1)").arg("XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg"));
+    widget->setPlaceholderText(QObject::tr("Enter a Sibcoin address (e.g. %1)").arg("SwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg"));
 #endif
     widget->setValidator(new BitcoinAddressEntryValidator(parent));
     widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));
@@ -133,8 +134,8 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
 
 bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    // return if URI is not valid or is no dash: URI
-    if(!uri.isValid() || uri.scheme() != QString("dash"))
+    // return if URI is not valid or is no sibcoin: URI
+    if(!uri.isValid() || uri.scheme() != QString("sibcoin"))
         return false;
 
     SendCoinsRecipient rv;
@@ -203,13 +204,13 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 
 bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 {
-    // Convert dash:// to dash:
+    // Convert sibcoin:// to sibcoin:
     //
-    //    Cannot handle this later, because dash:// will cause Qt to see the part after // as host,
+    //    Cannot handle this later, because sibcoin:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("dash://", Qt::CaseInsensitive))
+    if(uri.startsWith("sibcoin://", Qt::CaseInsensitive))
     {
-        uri.replace(0, 7, "dash:");
+        uri.replace(0, 11, "sibcoin:");
     }
     QUrl uriInstance(uri);
     return parseBitcoinURI(uriInstance, out);
@@ -217,7 +218,7 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 
 QString formatBitcoinURI(const SendCoinsRecipient &info)
 {
-    QString ret = QString("dash:%1").arg(info.address);
+    QString ret = QString("sibcoin:%1").arg(info.address);
     int paramCount = 0;
 
     if (info.amount)
@@ -429,7 +430,7 @@ void openConfigfile()
 {
     boost::filesystem::path pathConfig = GetConfigFile();
 
-    /* Open dash.conf with the associated application */
+    /* Open sibcoin.conf with the associated application */
     if (boost::filesystem::exists(pathConfig))
         QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 }
@@ -646,7 +647,7 @@ boost::filesystem::path static StartupShortcutPath()
 
 bool GetStartOnSystemStartup()
 {
-    // check for Dash*.lnk
+    // check for Sibcoin.lnk
     return boost::filesystem::exists(StartupShortcutPath());
 }
 
@@ -803,7 +804,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl);
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl)
 {
-    // loop through the list of startup items and try to find the Dash Core app
+    // loop through the list of startup items and try to find the sibcoin app
     CFArrayRef listSnapshot = LSSharedFileListCopySnapshot(list, NULL);
     for(int i = 0; i < CFArrayGetCount(listSnapshot); i++) {
         LSSharedFileListItemRef item = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(listSnapshot, i);
@@ -848,7 +849,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
     LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, bitcoinAppUrl);
 
     if(fAutoStart && !foundItem) {
-        // add Dash Core app to startup item list
+        // add sibcoin app to startup item list
         LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, NULL, NULL, bitcoinAppUrl, NULL, NULL);
     }
     else if(!fAutoStart && foundItem) {

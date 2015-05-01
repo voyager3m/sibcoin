@@ -1,10 +1,11 @@
-// Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The Dash Core developers
-// Distributed under the MIT software license, see the accompanying
+// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015 The SibCoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/dash-config.h"
+#include "config/sibcoin-config.h"
 #endif
 
 #include "bitcoingui.h"
@@ -95,7 +96,7 @@ static void InitMessage(const std::string &message)
  */
 static std::string Translate(const char* psz)
 {
-    return QCoreApplication::translate("dash-core", psz).toStdString();
+    return QCoreApplication::translate("sibcoin-core", psz).toStdString();
 }
 
 static QString GetLangTerritory()
@@ -167,7 +168,7 @@ void DebugMessageHandler(QtMsgType type, const QMessageLogContext& context, cons
 }
 #endif
 
-/** Class encapsulating Dash Core startup and shutdown.
+/** Class encapsulating Sibcoin Core startup and shutdown.
  * Allows running startup and shutdown in a different thread from the UI thread.
  */
 class BitcoinCore: public QObject
@@ -197,7 +198,7 @@ private:
     void handleRunawayException(const std::exception *e);
 };
 
-/** Main Dash application object */
+/** Main Sibcoin application object */
 class BitcoinApplication: public QApplication
 {
     Q_OBJECT
@@ -515,7 +516,7 @@ void BitcoinApplication::initializeResult(int retval)
 
 #ifdef ENABLE_WALLET
         // Now that initialization/startup is done, process any command-line
-        // dash: URIs or payment requests:
+        // sibcoin: URIs or payment requests:
         connect(paymentServer, SIGNAL(receivedPaymentRequest(SendCoinsRecipient)),
                          window, SLOT(handlePaymentRequest(SendCoinsRecipient)));
         connect(window, SIGNAL(receivedURI(QString)),
@@ -537,8 +538,8 @@ void BitcoinApplication::shutdownResult(int retval)
 
 void BitcoinApplication::handleRunawayException(const QString &message)
 {
-    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. Dash Core can no longer continue safely and will quit.") + QString("\n\n") + message);
-    ::exit(EXIT_FAILURE);
+    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. Sibcoin can no longer continue safely and will quit.") + QString("\n\n") + message);
+    ::exit(1);
 }
 
 WId BitcoinApplication::getMainWinId() const
@@ -619,11 +620,11 @@ int main(int argc, char *argv[])
     // User language is set up: pick a data directory
     Intro::pickDataDirectory();
 
-    /// 6. Determine availability of data directory and parse dash.conf
+    /// 6. Determine availability of data directory and parse sibcoin.conf
     /// - Do not call GetDataDir(true) before this step finishes
     if (!boost::filesystem::is_directory(GetDataDir(false)))
     {
-        QMessageBox::critical(0, QObject::tr("Dash Core"),
+        QMessageBox::critical(0, QObject::tr("Sibcoin"),
                               QObject::tr("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
         return EXIT_FAILURE;
     }
@@ -664,7 +665,7 @@ int main(int argc, char *argv[])
     /// 7a. parse masternode.conf
     std::string strErr;
     if(!masternodeConfig.read(strErr)) {
-        QMessageBox::critical(0, QObject::tr("Dash Core"),
+        QMessageBox::critical(0, QObject::tr("Sibcoin"),
                               QObject::tr("Error reading masternode configuration file: %1").arg(strErr.c_str()));
         return EXIT_FAILURE;
     }
@@ -679,7 +680,7 @@ int main(int argc, char *argv[])
         exit(EXIT_SUCCESS);
 
     // Start up the payment server early, too, so impatient users that click on
-    // dash: links repeatedly have their payment requests routed to this process:
+    // sibcoin: links repeatedly have their payment requests routed to this process:
     app.createPaymentServer();
 #endif
 
@@ -713,7 +714,7 @@ int main(int argc, char *argv[])
         app.createWindow(networkStyle.data());
         app.requestInitialize();
 #if defined(Q_OS_WIN) && QT_VERSION >= 0x050000
-        WinShutdownMonitor::registerShutdownBlockReason(QObject::tr("Dash Core didn't yet exit safely..."), (HWND)app.getMainWinId());
+        WinShutdownMonitor::registerShutdownBlockReason(QObject::tr("Sibcoin Core didn't yet exit safely..."), (HWND)app.getMainWinId());
 #endif
         app.exec();
         app.requestShutdown();

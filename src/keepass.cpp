@@ -241,9 +241,9 @@ SecureString CKeePassIntegrator::generateRandomKey(size_t nSize)
 // Construct POST body for RPC JSON call
 std::string CKeePassIntegrator::constructHTTPPost(const std::string& strMsg, const std::map<std::string,std::string>& mapRequestHeaders)
 {
-    std::ostringstream streamOut;
-    streamOut << "POST / HTTP/1.1\r\n"
-      << "User-Agent: dash-json-rpc/" << FormatFullVersion() << "\r\n"
+    std::ostringstream s;
+    s << "POST / HTTP/1.1\r\n"
+      << "User-Agent: sibcoin-json-rpc/" << FormatFullVersion() << "\r\n"
       << "Host: localhost\r\n"
       << "Content-Type: application/json\r\n"
       << "Content-Length: " << strMsg.size() << "\r\n"
@@ -494,8 +494,8 @@ void CKeePassIntegrator::rpcSetLogin(const SecureString& sWalletPass, const Secu
     LogPrint("keepass", "CKeePassIntegrator::rpcSetLogin -- send Url: %s\n", sUrl);
 
     //request.addStrParameter("SubmitUrl", sSubmitUrl); // Is used to construct the entry title
-    request.addStrParameter("Login", SecureString("dash"));
-    request.addStrParameter("Password", sWalletPass);
+    request.addStrParameter("Login", SecureString("sibcoin"));
+    request.addStrParameter("Password", strWalletPass);
     if(sEntryId.size() != 0)
     {
         request.addStrParameter("Uuid", sEntryId); // Update existing
