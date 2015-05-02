@@ -1369,7 +1369,7 @@ void ThreadMapPort()
             }
         }
 
-        string strDesc = "Dash Core " + FormatFullVersion();
+        string strDesc = "Sibcoin " + FormatFullVersion();
 
         try {
             while (true) {
