@@ -60,8 +60,7 @@ public:
     {
         SIB,
         mSIB,
-        uSIB,
-        duffs
+        uSIB
     };
 
     enum SeparatorStyle
