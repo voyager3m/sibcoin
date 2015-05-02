@@ -134,6 +134,15 @@
         <layout class="QHBoxLayout" name="horizontalLayout_4_Main">
          <item>
           <widget class="QLabel" name="label">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>This setting determines the amount of individual masternodes that an input will be anonymized through.&lt;br/&gt;More rounds of anonymization gives a higher degree of privacy, but also costs more in fees.</string>
            </property>

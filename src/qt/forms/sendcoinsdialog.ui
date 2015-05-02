@@ -1331,7 +1331,13 @@
         <widget class="QCheckBox" name="checkUseDarksend">
          <property name="minimumSize">
           <size>
-           <width>95</width>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
@@ -1346,14 +1352,19 @@
        <item>
         <widget class="QCheckBox" name="checkInstantX">
          <property name="enabled">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="minimumSize">
           <size>
-           <width>85</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
          <property name="text">
           <string>InstantX</string>
          </property>
