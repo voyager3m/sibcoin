@@ -26,6 +26,63 @@ namespace Checkpoints {
 
     bool fEnabled = true;
 
+    // What makes a good checkpoint block?
+    // + Is surrounded by blocks with reasonable timestamps
+    //   (no blocks before with a timestamp after, none after with
+    //    timestamp before)
+    // + Contains no strange transactions
+    static MapCheckpoints mapCheckpoints =
+        boost::assign::map_list_of
+        (  0, uint256("0x00000c492bf73490420868bc577680bfc4c60116e7e85343bc624787c21efa4c"))
+        (  1000, uint256("0x000004051b89a63d2ed190863a4333ff01aa27e65f1b4b7644e279d9d3587e07"))    
+        (  5000, uint256("0x0000013ce4f5d0a624391cda2e3fe5d7ced85603f51370563f9a27dbcc5c7f45"))    
+        (  10000, uint256("0x000000f59e97128ac36be3597142acdc0ae64e4b2d8d31cd990fd341d94c6782"))    
+        (  15000, uint256("0x0000008deaa8e017c246ef7ecebc4c9f24615691a19918379aad7170c32e19ef"))    
+        (  20000, uint256("0x0000001d2ff5a5fcf62191ed47ba73127f5884f7a53276cdfbc15afd65bd99d2"))    
+        (  25000, uint256("0x0000006774f19670a0e9e7dbd7ec380ff5b4d8d8130dae68bc9d4840e277973f"))    
+        (  30000, uint256("0x0000007f8622cde9424e5a7e9bd86aefe844b43e20343bcde69a7d3cb9cc640d"))    
+        (  35000, uint256("0x000000160f53facbb70193a3dac0357331520eb9e4fb544ac33a96b81c5ea890"))    
+        (  38700, uint256("0x0000000922c8ae23533c8aa6a4a22f51fa4cdfba85e8c08f2a019dcf755ec48f"))    
+        ;
+    static const CCheckpointData data = {
+        &mapCheckpoints,
+        1403283082, // * UNIX timestamp of last checkpoint block
+        511516,     // * total number of transactions between genesis and last checkpoint
+                    //   (the tx=... number in the SetBestChain debug.log lines)
+        7701        // * estimated number of transactions per day after checkpoint
+    };
+
+    static MapCheckpoints mapCheckpointsTestnet =
+        boost::assign::map_list_of
+        ( 0, uint256("0x00000617791d0e19f524387f67e558b2a928b670b9a3b387ae003ad7f9093017"))
+        ;
+    static const CCheckpointData dataTestnet = {
+        &mapCheckpointsTestnet,
+        1405699509,
+        201,
+        500
+    };
+
+    static MapCheckpoints mapCheckpointsRegtest =
+        boost::assign::map_list_of
+        ( 0, uint256("0x000007bfa2866f77d1f22f9da7fda73ea3c5185dc156f4f6f8b3a3caed27247e"))
+        ;
+    static const CCheckpointData dataRegtest = {
+        &mapCheckpointsRegtest,
+        0,
+        0,
+        0
+    };
+
+    const CCheckpointData &Checkpoints() {
+        if (Params().NetworkID() == CChainParams::TESTNET)
+            return dataTestnet;
+        else if (Params().NetworkID() == CChainParams::MAIN)
+            return data;
+        else
+            return dataRegtest;
+    }
+
     bool CheckBlock(int nHeight, const uint256& hash)
     {
         if (!fEnabled)
