@@ -8,16 +8,15 @@
 #if defined(HAVE_CONFIG_H)
 #include "config/sibcoin-config.h"
 #else
+//
+// client versioning and copyright year
+//
 
-/**
- * client versioning and copyright year
- */
-
-//! These need to be macros, as clientversion.cpp's and dash*-res.rc's voodoo requires it
-#define CLIENT_VERSION_MAJOR 0
-#define CLIENT_VERSION_MINOR 12
-#define CLIENT_VERSION_REVISION 0
-#define CLIENT_VERSION_BUILD 48
+// These need to be macros, as version.cpp's and dash-qt.rc's voodoo requires it
+#define CLIENT_VERSION_MAJOR       0
+#define CLIENT_VERSION_MINOR       15
+#define CLIENT_VERSION_REVISION    0
+#define CLIENT_VERSION_BUILD       2
 
 //! Set to true for release, false for prerelease or test build
 #define CLIENT_VERSION_IS_RELEASE true
