@@ -351,6 +351,8 @@ void BitcoinGUI::createActions(const NetworkStyle *networkStyle)
     signMessageAction->setStatusTip(tr("Sign messages with your Sibcoin addresses to prove you own them"));
     verifyMessageAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message..."), this);
     verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Sibcoin addresses"));
+    genAndPrintAddressesAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message..."), this);
+    genAndPrintAddressesAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Sibcoin addresses"));
 
     openInfoAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation), tr("&Information"), this);
     openInfoAction->setStatusTip(tr("Show diagnostic information"));
@@ -372,6 +374,12 @@ void BitcoinGUI::createActions(const NetworkStyle *networkStyle)
     usedReceivingAddressesAction = new QAction(QIcon(":/icons/address-book"), tr("&Receiving addresses..."), this);
     usedReceivingAddressesAction->setStatusTip(tr("Show the list of used receiving addresses and labels"));
 
+    genAndPrintAddressesAction = new QAction(QIcon(":/icons/address-book"), tr("&Print sibcoins..."), this);
+    genAndPrintAddressesAction->setStatusTip(tr("Generate address and print"));
+
+    loadFromPaperAction = new QAction(QIcon(":/icons/address-book"), tr("&Load sibcoins..."), this);
+    loadFromPaperAction->setStatusTip(tr("Load sibcoins from paper"));
+    
     openAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_FileIcon), tr("Open &URI..."), this);
     openAction->setStatusTip(tr("Open a sibcoin: URI or payment request"));
 
@@ -397,6 +405,8 @@ void BitcoinGUI::createActions(const NetworkStyle *networkStyle)
         connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(gotoVerifyMessageTab()));
         connect(usedSendingAddressesAction, SIGNAL(triggered()), walletFrame, SLOT(usedSendingAddresses()));
         connect(usedReceivingAddressesAction, SIGNAL(triggered()), walletFrame, SLOT(usedReceivingAddresses()));
+        connect(genAndPrintAddressesAction, SIGNAL(triggered()), walletFrame, SLOT(genAndPrintAddresses()));
+        connect(loadFromPaperAction, SIGNAL(triggered()), walletFrame, SLOT(loadFromPaper()));
         connect(openAction, SIGNAL(triggered()), this, SLOT(openClicked()));
     }
 #endif // ENABLE_WALLET
@@ -424,6 +434,8 @@ void BitcoinGUI::createMenuBar()
         file->addAction(usedSendingAddressesAction);
         file->addAction(usedReceivingAddressesAction);
         file->addSeparator();
+        file->addAction(genAndPrintAddressesAction);
+        file->addAction(loadFromPaperAction);
     }
     file->addAction(quitAction);
 
@@ -564,6 +576,8 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
     verifyMessageAction->setEnabled(enabled);
     usedSendingAddressesAction->setEnabled(enabled);
     usedReceivingAddressesAction->setEnabled(enabled);
+    genAndPrintAddressesAction->setEnabled(enabled);
+    loadFromPaperAction->setEnabled(enabled);
     openAction->setEnabled(enabled);
 }
 
