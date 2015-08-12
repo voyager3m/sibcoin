@@ -487,8 +487,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../dash.qrc">
-             <normaloff>:/icons/drkblue/remove</normaloff>:/icons/drkblue/remove</iconset>
+            <iconset resource="../sibcoin.qrc">
+             <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
            </property>
            <property name="shortcut">
             <string notr="true">Ctrl+L</string>
@@ -1583,7 +1583,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../dash.qrc"/>
+  <include location="../sibcoin.qrc"/>
  </resources>
  <connections/>
 </ui>
