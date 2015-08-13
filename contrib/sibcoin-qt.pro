@@ -142,6 +142,7 @@ HEADERS += src/activemasternode.h \
            src/crypto/sph_groestl.h \
            src/crypto/sph_jh.h \
            src/crypto/sph_keccak.h \
+           src/crypto/gost.h \
            src/crypto/sph_luffa.h \
            src/crypto/sph_shavite.h \
            src/crypto/sph_simd.h \
@@ -172,6 +173,7 @@ HEADERS += src/activemasternode.h \
            src/qt/csvmodelwriter.h \
            src/qt/darksendconfig.h \
            src/qt/editaddressdialog.h \
+           src/qt/genandprintdialog.h \
            src/qt/guiconstants.h \
            src/qt/guiutil.h \
            src/qt/intro.h \
@@ -338,6 +340,7 @@ FORMS += src/qt/forms/addressbookpage.ui \
          src/qt/forms/coincontroldialog.ui \
          src/qt/forms/darksendconfig.ui \
          src/qt/forms/editaddressdialog.ui \
+         src/qt/forms/genandprintdialog.ui \
          src/qt/forms/helpmessagedialog.ui \
          src/qt/forms/intro.ui \
          src/qt/forms/openuridialog.ui \
@@ -437,6 +440,7 @@ SOURCES += src/activemasternode.cpp \
            src/crypto/hmac_sha512.cpp \
            src/crypto/jh.c \
            src/crypto/keccak.c \
+           src/crypto/gost.c \
            src/crypto/luffa.c \
            src/crypto/rfc6979_hmac_sha256.cpp \
            src/crypto/ripemd160.cpp \
@@ -466,6 +470,7 @@ SOURCES += src/activemasternode.cpp \
            src/qt/dash.cpp \
            src/qt/dashstrings.cpp \
            src/qt/editaddressdialog.cpp \
+           src/qt/genandprintdialog.cpp \ 
            src/qt/guiutil.cpp \
            src/qt/intro.cpp \
            src/qt/networkstyle.cpp \
@@ -633,7 +638,7 @@ SOURCES += src/activemasternode.cpp \
            src/leveldb/helpers/memenv/memenv.cc \
            src/leveldb/helpers/memenv/memenv_test.cc \
            src/secp256k1/src/java/org_bitcoin_NativeSecp256k1.c
-RESOURCES += src/qt/dash.qrc src/qt/dash_locale.qrc
+RESOURCES += src/qt/sibcoin.qrc src/qt/sibcoin_locale.qrc
 TRANSLATIONS += src/qt/locale/dash_bar.ts \
                 src/qt/locale/dash_bg.ts \
                 src/qt/locale/dash_ca.ts \
@@ -662,3 +667,4 @@ TRANSLATIONS += src/qt/locale/dash_bar.ts \
                 src/qt/locale/dash_vi.ts \
                 src/qt/locale/dash_zh_CN.ts \
                 src/qt/locale/dash_zh_HK.ts
+
