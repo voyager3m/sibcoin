@@ -111,6 +111,9 @@ void WalletView::setBitcoinGUI(BitcoinGUI *gui)
 
         // Pass through transaction notifications
         connect(this, SIGNAL(incomingTransaction(QString,int,CAmount,QString,QString)), gui, SLOT(incomingTransaction(QString,int,CAmount,QString,QString)));
+
+        // Follow new URI
+        connect(this, SIGNAL(receivedURI(QString)), gui, SIGNAL(receivedURI(QString)));
     }
 }
 
@@ -319,7 +322,11 @@ void WalletView::genAndPrintAddresses()
     
     GenAndPrintDialog dlg(GenAndPrintDialog::Export, this);
     dlg.setModel(walletModel);
-    dlg.exec();
+    if (dlg.exec())
+    {
+        QString uri = dlg.getURI();
+        emit receivedURI(uri);
+    }
 }
 
 void WalletView::loadFromPaper()

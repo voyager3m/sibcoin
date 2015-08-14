@@ -126,6 +126,8 @@ signals:
     void encryptionStatusChanged(int status);
     /** Notify that a new transaction appeared */
     void incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address);
+    /** Signal raised when a URI was entered or dragged to the GUI */
+    void receivedURI(const QString &uri); 
 };
 
 #endif // BITCOIN_QT_WALLETVIEW_H
