@@ -210,6 +210,12 @@
         <file alias="crownium">res/css/crownium.css</file>
         <file alias="light">res/css/light.css</file>
     </qresource>
+    <qresource prefix="/html" lang="en">
+        <file alias="paperwallet">res/html/paperwallet_en.html</file>
+    </qresource>
+    <qresource prefix="/html" lang="ru">
+        <file alias="paperwallet">res/html/paperwallet_ru.html</file>
+    </qresource>
     <qresource prefix="/images/drkblue">
         <file alias="about">res/images/drkblue/about.png</file>
         <file alias="dash_logo_horizontal">res/images/drkblue/dash_logo_horizontal.png</file>
