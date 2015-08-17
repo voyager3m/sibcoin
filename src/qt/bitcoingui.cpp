@@ -387,12 +387,17 @@ void BitcoinGUI::createActions(const NetworkStyle *networkStyle)
     showHelpMessageAction->setMenuRole(QAction::NoRole);
     showHelpMessageAction->setStatusTip(tr("Show the Sibcoin Core help message to get a list with possible Sibcoin command-line options"));
 
+    showHelpSibcoinAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation), tr("&Howto"), this);
+    showHelpSibcoinAction->setStatusTip(tr("How to use Sibcoins"));
+
+    
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
     connect(aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(optionsAction, SIGNAL(triggered()), this, SLOT(optionsClicked()));
     connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
     connect(showHelpMessageAction, SIGNAL(triggered()), this, SLOT(showHelpMessageClicked()));
+    connect(showHelpSibcoinAction, SIGNAL(triggered()), this, SLOT(showHelpSibcoinClicked()));
 #ifdef ENABLE_WALLET
     if(walletFrame)
     {
@@ -464,6 +469,7 @@ void BitcoinGUI::createMenuBar()
     }
 
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
+    help->addAction(showHelpSibcoinAction);
     help->addAction(showHelpMessageAction);
     help->addSeparator();
     help->addAction(aboutAction);
@@ -673,6 +679,14 @@ void BitcoinGUI::showHelpMessageClicked()
     help->setAttribute(Qt::WA_DeleteOnClose);
     help->show();
 }
+
+void BitcoinGUI::showHelpSibcoinClicked()
+{
+    HelpSibcoinDialog *help = new HelpSibcoinDialog(this);
+    help->setAttribute(Qt::WA_DeleteOnClose);
+    help->show();
+}
+
 
 #ifdef ENABLE_WALLET
 void BitcoinGUI::openClicked()
