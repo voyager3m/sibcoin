@@ -439,6 +439,10 @@ void BitcoinGUI::createActions()
     showPrivateSendHelpAction->setMenuRole(QAction::NoRole);
     showPrivateSendHelpAction->setStatusTip(tr("Show the PrivateSend basic information"));
 
+    showHelpSibcoinAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation), tr("&Howto"), this);
+    showHelpSibcoinAction->setStatusTip(tr("How to use Sibcoins"));
+
+    
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
     connect(aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
@@ -465,6 +469,7 @@ void BitcoinGUI::createActions()
     // prevents an open debug window from becoming stuck/unusable on client shutdown
     connect(quitAction, SIGNAL(triggered()), rpcConsole, SLOT(hide()));
 
+    connect(showHelpSibcoinAction, SIGNAL(triggered()), this, SLOT(showHelpSibcoinClicked()));
 #ifdef ENABLE_WALLET
     if(walletFrame)
     {
@@ -543,6 +548,7 @@ void BitcoinGUI::createMenuBar()
     }
 
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
+    help->addAction(showHelpSibcoinAction);
     help->addAction(showHelpMessageAction);
     help->addAction(showPrivateSendHelpAction);
     help->addSeparator();
@@ -834,6 +840,14 @@ void BitcoinGUI::showPrivateSendHelpClicked()
     HelpMessageDialog dlg(this, HelpMessageDialog::pshelp);
     dlg.exec();
 }
+
+void BitcoinGUI::showHelpSibcoinClicked()
+{
+    HelpSibcoinDialog *help = new HelpSibcoinDialog(this);
+    help->setAttribute(Qt::WA_DeleteOnClose);
+    help->show();
+}
+
 
 #ifdef ENABLE_WALLET
 void BitcoinGUI::openClicked()
