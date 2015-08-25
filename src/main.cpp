@@ -3325,6 +3325,18 @@ bool ProcessNewBlock(CValidationState &state, CNode* pfrom, CBlock* pblock, CDis
     LogPrintf("      mapSeenMasternodeBroadcast %d\n", (int)mnodeman.mapSeenMasternodeBroadcast.size());
     LogPrintf("      mapSeenMasternodePing %d\n", (int)mnodeman.mapSeenMasternodePing.size());
 
+    LogPrintf("      mapDarksendBroadcastTxes %d\n", (int)mapDarksendBroadcastTxes.size());
+    LogPrintf("      mapTxLockReq %d\n", (int)mapTxLockReq.size());
+    LogPrintf("      mapTxLockReqRejected %d\n", (int)mapTxLockReqRejected.size());
+    LogPrintf("      mapTxLockVote %d\n", (int)mapTxLockVote.size());
+    LogPrintf("      mapTxLockVote %d\n", (int)mapTxLockVote.size());
+
+    LogPrintf("      budget.mapSeenMasternodeBudgetVotes %d\n", (int)budget.mapSeenMasternodeBudgetVotes.size());
+    LogPrintf("      budget.mapSeenMasternodeBudgetProposals %d\n", (int)budget.mapSeenMasternodeBudgetProposals.size());
+    LogPrintf("      budget.mapSeenFinalizedBudgetVotes %d\n", (int)budget.mapSeenFinalizedBudgetVotes.size());
+    LogPrintf("      budget.mapSeenFinalizedBudgets %d\n", (int)budget.mapSeenFinalizedBudgets.size());
+    LogPrintf("      mnodeman.mapSeenMasternodeBroadcast %d\n", (int)mnodeman.mapSeenMasternodeBroadcast.size());
+    LogPrintf("      mnodeman.mapSeenMasternodePing %d\n", (int)mnodeman.mapSeenMasternodePing.size());
 
     LogPrintf("%s : ACCEPTED\n", __func__);
     return true;
