@@ -3313,6 +3313,19 @@ bool ProcessNewBlock(CValidationState &state, CNode* pfrom, CBlock* pblock, CDis
         }
     }
 
+    LogPrintf("Memory --------------\n");
+    LogPrintf("      mapMasternodePayeeVotes %d\n", (int)masternodePayments.mapMasternodePayeeVotes.size());
+    LogPrintf("      mapMasternodeBlocks %d\n", (int)masternodePayments.mapMasternodeBlocks.size());
+    LogPrintf("      mapMasternodesLastVote %d\n", (int)masternodePayments.mapMasternodesLastVote.size());
+
+    LogPrintf("      vMasternodes %d\n", (int)mnodeman.vMasternodes.size());
+    LogPrintf("      mAskedUsForMasternodeList %d\n", (int)mnodeman.mAskedUsForMasternodeList.size());
+    LogPrintf("      mWeAskedForMasternodeList %d\n", (int)mnodeman.mWeAskedForMasternodeList.size());
+    LogPrintf("      mWeAskedForMasternodeListEntry %d\n", (int)mnodeman.mWeAskedForMasternodeListEntry.size());
+    LogPrintf("      mapSeenMasternodeBroadcast %d\n", (int)mnodeman.mapSeenMasternodeBroadcast.size());
+    LogPrintf("      mapSeenMasternodePing %d\n", (int)mnodeman.mapSeenMasternodePing.size());
+
+
     LogPrintf("%s : ACCEPTED\n", __func__);
     return true;
 }

@@ -55,6 +55,8 @@ private:
     // critical section to protect the inner data structures specifically on messaging
     mutable CCriticalSection cs_process_message;
 
+public:
+
     // map to hold all MNs
     std::vector<CMasternode> vMasternodes;
     // who's asked for the Masternode list and the last time
@@ -64,7 +66,6 @@ private:
     // which Masternodes we've asked for
     std::map<COutPoint, int64_t> mWeAskedForMasternodeListEntry;
 
-public:
     // Keep track of all broadcasts I've seen
     map<uint256, CMasternodeBroadcast> mapSeenMasternodeBroadcast;
     // Keep track of all pings I've seen
