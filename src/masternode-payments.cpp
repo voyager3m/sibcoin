@@ -590,12 +590,12 @@ bool CMasternodePayments::IsTransactionValid(const CTransaction& txNew, int nBlo
 
 void CMasternodePayments::CleanPaymentList()
 {
-    LOCK(cs_mapMasternodePayeeVotes);
+    LOCK2(cs_mapMasternodePayeeVotes, cs_mapMasternodeBlocks);
 
     if(chainActive.Tip() == NULL) return;
 
     //keep up to five cycles for historical sake
-    int nLimit = std::max(((int)mnodeman.size())*5, 1000);
+    int nLimit = std::max(((int)mnodeman.size())*1, 1000);
 
     std::map<uint256, CMasternodePaymentWinner>::iterator it = mapMasternodePayeeVotes.begin();
     while(it != mapMasternodePayeeVotes.end()) {
@@ -605,6 +605,7 @@ void CMasternodePayments::CleanPaymentList()
             LogPrint("mnpayments", "CMasternodePayments::CleanPaymentList - Removing old Masternode payment - block %d\n", winner.nBlockHeight);
             masternodeSync.mapSeenSyncMNW.erase((*it).first);
             mapMasternodePayeeVotes.erase(it++);
+            mapMasternodeBlocks.erase(winner.nBlockHeight);
         } else {
             ++it;
         }
