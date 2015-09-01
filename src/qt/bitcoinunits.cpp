@@ -42,10 +42,9 @@ QString BitcoinUnits::id(int unit)
 {
     switch(unit)
     {
-        case DASH: return QString("dash");
-        case mDASH: return QString("mdash");
-        case uDASH: return QString::fromUtf8("udash");
-        case duffs: return QString("duffs");
+        case SIB: return QString("sib");
+        case mSIB: return QString("msib");
+        case uSIB: return QString::fromUtf8("usib");
         default: return QString("???");
     }
 }
@@ -81,8 +80,8 @@ QString BitcoinUnits::description(int unit)
         switch(unit)
         {
             case SIB: return QString("Sib");
-            case mSIB: return QString("Milli-Sib (1 / 1,000)");
-            case uSIB: return QString("Micro-Sib (1 / 1,000,000)");
+            case mSIB: return QString("Milli-Sib (1 / 1" THIN_SP_UTF8 "000)");
+            case uSIB: return QString("Micro-Sib (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             default: return QString("???");
         }
     }
@@ -90,9 +89,9 @@ QString BitcoinUnits::description(int unit)
     {
         switch(unit)
         {
-            case SIB: return QString("TestSibs");
-            case mSIB: return QString("Milli-TestSib (1 / 1,000)");
-            case uSIB: return QString("Micro-TestSib (1 / 1,000,000)");
+            case SIB: return QString("TestSib");
+            case mSIB: return QString("Milli-TestSib (1 / 1" THIN_SP_UTF8 "000)");
+            case uSIB: return QString("Micro-TestSib (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             default: return QString("???");
         }
     }
