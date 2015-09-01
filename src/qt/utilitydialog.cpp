@@ -123,7 +123,6 @@ HelpSibcoinDialog::HelpSibcoinDialog(QWidget *parent) :
     
     QFile  htmlFile(res_name);
     if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-        std::cerr << "Cant open " << res_name.toStdString() << std::endl;
         return;
     }
 
