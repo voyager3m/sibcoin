@@ -164,6 +164,7 @@ void PrepareShutdown()
     RenameThread("sibcoin-shutoff");
     mempool.AddTransactionsUpdated(1);
     StopRPCThreads();
+    ShutdownRPCMining();
 #ifdef ENABLE_WALLET
     if (pwalletMain)
         bitdb.Flush(false);
@@ -1616,6 +1617,8 @@ bool AppInit2(boost::thread_group& threadGroup)
 #endif
 
     // ********************************************************* Step 12: finished
+    // InitRPCMining is needed here so getwork/getblocktemplate in the GUI debug console works properly.
+    InitRPCMining();
 
     SetRPCWarmupFinished();
     uiInterface.InitMessage(_("Done loading"));
