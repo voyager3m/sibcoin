@@ -97,6 +97,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     usedReceivingAddressesAction(0),
     signMessageAction(0),
     verifyMessageAction(0),
+    goodsAction(0),
     aboutAction(0),
     receiveCoinsAction(0),
     receiveCoinsMenuAction(0),
@@ -326,6 +327,17 @@ void BitcoinGUI::createActions()
 #endif
     tabGroup->addAction(historyAction);
 
+    goodsAction = new QAction(QIcon(":/icons/history"), tr("&Goods&&&Services"), this);
+    goodsAction->setStatusTip(tr("Show links to services that accept sibcoins"));
+    goodsAction->setToolTip(goodsAction->statusTip());
+    goodsAction->setCheckable(true);
+#ifdef Q_OS_MAC
+    goodsAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_5));
+#else
+    historyAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_4));
+#endif
+    tabGroup->addAction(goodsAction);
+    
 #ifdef ENABLE_WALLET
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
@@ -357,6 +369,8 @@ void BitcoinGUI::createActions()
     connect(receiveCoinsMenuAction, SIGNAL(triggered()), this, SLOT(gotoReceiveCoinsPage()));
     connect(historyAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(historyAction, SIGNAL(triggered()), this, SLOT(gotoHistoryPage()));
+    connect(goodsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    connect(goodsAction, SIGNAL(triggered()), this, SLOT(gotoGoodsPage()));
 #endif // ENABLE_WALLET
 
     quitAction = new QAction(QIcon(":/icons/" + theme + "/quit"), tr("E&xit"), this);
@@ -571,6 +585,7 @@ void BitcoinGUI::createToolBars()
         {
             toolbar->addAction(masternodeAction);
         }
+        toolbar->addAction(goodsAction);        
         toolbar->setMovable(false); // remove unused icon in upper left corner
         overviewAction->setChecked(true);
 
@@ -695,6 +710,7 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
     if (settings.value("fShowMasternodesTab").toBool() && masternodeAction) {
         masternodeAction->setEnabled(enabled);
     }
+    goodsAction->setEnabled(enabled);
     encryptWalletAction->setEnabled(enabled);
     backupWalletAction->setEnabled(enabled);
     changePassphraseAction->setEnabled(enabled);
@@ -878,6 +894,10 @@ void BitcoinGUI::gotoMasternodePage()
         masternodeAction->setChecked(true);
         if (walletFrame) walletFrame->gotoMasternodePage();
     }
+void BitcoinGUI::gotoGoodsPage()
+{
+    goodsAction->setChecked(true);
+    if (walletFrame) walletFrame->gotoGoodsPage();
 }
 
 void BitcoinGUI::gotoReceiveCoinsPage()
