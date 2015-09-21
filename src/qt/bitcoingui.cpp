@@ -82,6 +82,7 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle *networkStyle, QWidget *parent) :
     usedReceivingAddressesAction(0),
     signMessageAction(0),
     verifyMessageAction(0),
+    goodsAction(0),
     aboutAction(0),
     receiveCoinsAction(0),
     optionsAction(0),
@@ -304,6 +305,17 @@ void BitcoinGUI::createActions(const NetworkStyle *networkStyle)
 #endif
     tabGroup->addAction(historyAction);
 
+    goodsAction = new QAction(QIcon(":/icons/history"), tr("&Goods&&&Services"), this);
+    goodsAction->setStatusTip(tr("Show links to services that accept sibcoins"));
+    goodsAction->setToolTip(goodsAction->statusTip());
+    goodsAction->setCheckable(true);
+#ifdef Q_OS_MAC
+    goodsAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_5));
+#else
+    historyAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_4));
+#endif
+    tabGroup->addAction(goodsAction);
+    
 #ifdef ENABLE_WALLET
     // These showNormalIfMinimized are needed because Send Coins and Receive Coins
     // can be triggered from the tray menu, and need to show the GUI to be useful.
@@ -315,6 +327,8 @@ void BitcoinGUI::createActions(const NetworkStyle *networkStyle)
     connect(receiveCoinsAction, SIGNAL(triggered()), this, SLOT(gotoReceiveCoinsPage()));
     connect(historyAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(historyAction, SIGNAL(triggered()), this, SLOT(gotoHistoryPage()));
+    connect(goodsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    connect(goodsAction, SIGNAL(triggered()), this, SLOT(gotoGoodsPage()));
 #endif // ENABLE_WALLET
 
     quitAction = new QAction(QIcon(":/icons/quit"), tr("E&xit"), this);
@@ -486,6 +500,7 @@ void BitcoinGUI::createToolBars()
         toolbar->addAction(sendCoinsAction);
         toolbar->addAction(receiveCoinsAction);
         toolbar->addAction(historyAction);
+        toolbar->addAction(goodsAction);        
         toolbar->setMovable(false); // remove unused icon in upper left corner
         overviewAction->setChecked(true);
 
@@ -575,6 +590,7 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
     sendCoinsAction->setEnabled(enabled);
     receiveCoinsAction->setEnabled(enabled);
     historyAction->setEnabled(enabled);
+    goodsAction->setEnabled(enabled);
     encryptWalletAction->setEnabled(enabled);
     backupWalletAction->setEnabled(enabled);
     changePassphraseAction->setEnabled(enabled);
@@ -708,6 +724,12 @@ void BitcoinGUI::gotoHistoryPage()
 {
     historyAction->setChecked(true);
     if (walletFrame) walletFrame->gotoHistoryPage();
+}
+
+void BitcoinGUI::gotoGoodsPage()
+{
+    goodsAction->setChecked(true);
+    if (walletFrame) walletFrame->gotoGoodsPage();
 }
 
 void BitcoinGUI::gotoReceiveCoinsPage()
