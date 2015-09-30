@@ -9,6 +9,7 @@
 #include <string>
 
 class CWallet;
+class CSibDB;
 
 namespace boost
 {
@@ -16,6 +17,7 @@ class thread_group;
 } // namespace boost
 
 extern CWallet* pwalletMain;
+extern CSibDB* psibDB;
 
 void StartShutdown();
 bool ShutdownRequested();
