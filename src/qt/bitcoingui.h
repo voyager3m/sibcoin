@@ -31,6 +31,7 @@ class WalletFrame;
 class WalletModel;
 class HelpMessageDialog;
 class MasternodeList;
+class SibModel;
 
 class CWallet;
 
@@ -65,6 +66,7 @@ public:
         The wallet model represents a bitcoin wallet, and offers access to the list of transactions, address book and sending
         functionality.
     */
+    void setSibModel(SibModel *sibModel);
     bool addWallet(const QString& name, WalletModel *walletModel);
     bool setCurrentWallet(const QString& name);
     void removeAllWallets();
@@ -81,6 +83,7 @@ protected:
 
 private:
     ClientModel *clientModel;
+    SibModel *sibModel;
     WalletFrame *walletFrame;
 
     UnitDisplayStatusBarControl *unitDisplayControl;
