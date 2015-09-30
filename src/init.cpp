@@ -42,6 +42,7 @@
 #include "wallet/db.h"
 #include "wallet/wallet.h"
 #include "wallet/walletdb.h"
+#include "sibdb.h"
 #endif
 
 #include "activemasternode.h"
@@ -86,6 +87,7 @@ using namespace std;
 
 #ifdef ENABLE_WALLET
 CWallet* pwalletMain = NULL;
+CSibDB *psibDB = NULL;
 #endif
 bool fFeeEstimatesInitialized = false;
 bool fRestartRequested = false;  // true: restart false: shutdown
@@ -1140,6 +1142,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     fSendFreeTransactions = GetBoolArg("-sendfreetransactions", DEFAULT_SEND_FREE_TRANSACTIONS);
 
     std::string strWalletFile = GetArg("-wallet", "wallet.dat");
+    std::string strSibFile = GetArg("-sibstore", "sib.dat");
 #endif // ENABLE_WALLET
 
     fIsBareMultisigStd = GetBoolArg("-permitbaremultisig", DEFAULT_PERMIT_BAREMULTISIG);
@@ -1638,6 +1641,8 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
             else
                 strErrors << _("Error loading wallet.dat") << "\n";
         }
+        
+        psibDB = new CSibDB(strSibFile, "cr+");
 
         if (GetBoolArg("-upgradewallet", fFirstRun))
         {
