@@ -2,6 +2,36 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ru">
 <context>
+    <name>AboutDialog</name>
+    <message>
+        <location filename="../forms/ui_aboutdialog.h" line="+129"/>
+        <source>About Sibcoin Core</source>
+        <translation type="unfinished">О программе: &quot;Сибирский Червонец&quot; (SIB)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&lt;b&gt;Sibcoin Core&lt;/b&gt; version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copyright &amp;copy; 2009-2014 The Bitcoin Core developers.
+Copyright &amp;copy; 2014-YYYY The Dash Core developers.
+Copyright &amp;copy; YYYY The Sibcoin Core developers.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>
+This is experimental software.
+
+Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/) and cryptographic software written by Eric Young (eay@cryptsoft.com) and UPnP software written by Thomas Bernard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddressBookPage</name>
     <message>
         <location filename="../forms/addressbookpage.ui" line="+30"/>
@@ -2300,7 +2330,7 @@ https://www.transifex.com/projects/p/sibcoin/</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../bitcoinunits.cpp" line="+252"/>
+        <location filename="../bitcoinunits.cpp" line="+243"/>
         <source>Amount</source>
         <translation type="unfinished">Сумма</translation>
     </message>
@@ -3589,7 +3619,7 @@ https://www.transifex.com/projects/p/sibcoin/</translation>
     </message>
     <message>
         <location line="+21"/>
-        <source>The Sibcoin address the message was signed with</source>
+        <source>The Sibcoin address the message was signed with (e.g. SwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4444,1489 +4474,643 @@ https://www.transifex.com/projects/p/sibcoin/</translation>
         <source>The wallet data was successfully saved to %1.</source>
         <translation>Данные бумажника были успешно сохранены в %1.</translation>
     </message>
+    <message>
+        <location line="+64"/>
+        <source>Before sending sibcoins to address please be sure
+that paper wallet has been printed successfully!</source>
+        <translation>Перед переводом монет на сгенерированный адрес убедитесь,
+что бумажный кошелек успешно распечатан.</translation>
+    </message>
 </context>
 <context>
     <name>sibcoin-core</name>
     <message>
-        <location filename="../sibcoinstrings.cpp" line="+22"/>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
-        <translation type="unfinished">Привязаться к указанному адресу и всегда прослушивать только его. Используйте [хост]:порт для IPv6</translation>
+        <translation type="obsolete">Привязаться к указанному адресу и всегда прослушивать только его. Используйте [хост]:порт для IPv6</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>Cannot obtain a lock on data directory %s. Sibcoin Core is probably already running.</source>
-        <translation type="unfinished">Не удалось установить блокировку на каталог данных %s. Возможно, &quot;Сибирский Червонец&quot; уже запущен.</translation>
+        <translation type="obsolete">Не удалось установить блокировку на каталог данных %s. Возможно, &quot;Сибирский Червонец&quot; уже запущен.</translation>
     </message>
     <message>
-        <location line="+12"/>
         <source>Darksend uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
-        <translation type="unfinished">При отправке Darksend использует только деноминированные средства, возможно, Вам просто нужно анонимизировать немного больше червонцев.</translation>
+        <translation type="obsolete">При отправке Darksend использует только деноминированные средства, возможно, Вам просто нужно анонимизировать немного больше червонцев.</translation>
     </message>
     <message>
-        <location line="+18"/>
         <source>Enter regression test mode, which uses a special chain in which blocks can be solved instantly.</source>
-        <translation type="unfinished">Войти в режим регрессионного тестирования, в котором используется специальная цепочка, где блоки находятся мгновенно.</translation>
+        <translation type="obsolete">Войти в режим регрессионного тестирования, в котором используется специальная цепочка, где блоки находятся мгновенно.</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Error: Listening for incoming connections failed (listen returned error %s)</source>
-        <translation type="unfinished">Ошибка: не удалось начать прослушивание входящих подключений (прослушивание вернуло ошибку %s)</translation>
+        <translation type="obsolete">Ошибка: не удалось начать прослушивание входящих подключений (прослушивание вернуло ошибку %s)</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
-        <translation type="unfinished">Выполнить команду, когда приходит соответствующее сообщение о тревоге или наблюдается очень длинная альтернативная цепочка блоков (%s в команде заменяется на сообщение)</translation>
+        <translation type="obsolete">Выполнить команду, когда приходит соответствующее сообщение о тревоге или наблюдается очень длинная альтернативная цепочка блоков (%s в команде заменяется на сообщение)</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)</source>
-        <translation type="unfinished">Выполнить команду, когда меняется транзакция в бумажнике (%s в команде заменяется на TxID)</translation>
+        <translation type="obsolete">Выполнить команду, когда меняется транзакция в бумажнике (%s в команде заменяется на TxID)</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Execute command when the best block changes (%s in cmd is replaced by block hash)</source>
-        <translation type="unfinished">Выполнить команду при появлении нового блока (%s в команде заменяется на хэш блока)</translation>
+        <translation type="obsolete">Выполнить команду при появлении нового блока (%s в команде заменяется на хэш блока)</translation>
     </message>
     <message>
-        <location line="+12"/>
         <source>Found unconfirmed denominated outputs, will wait till they confirm to continue.</source>
-        <translation type="unfinished">Найдены неподтверждённые номиналы, процесс продолжится после их подтверждения.</translation>
+        <translation type="obsolete">Найдены неподтверждённые номиналы, процесс продолжится после их подтверждения.</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>In this mode -genproclimit controls how many blocks are generated immediately.</source>
-        <translation type="unfinished">В этом режиме -genproclimit определяет, сколько блоков генерируется немедленно.</translation>
+        <translation type="obsolete">В этом режиме -genproclimit определяет, сколько блоков генерируется немедленно.</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>InstantX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
-        <translation type="unfinished">InstantX требует наличия средств с хотя бы 6 подтверждениями, возможно Вам нужно подождать пару минут и попробовать снова.</translation>
+        <translation type="obsolete">InstantX требует наличия средств с хотя бы 6 подтверждениями, возможно Вам нужно подождать пару минут и попробовать снова.</translation>
     </message>
     <message>
-        <location line="+17"/>
         <source>Name to construct url for KeePass entry that stores the wallet passphrase</source>
-        <translation type="unfinished">Имя для создания ссылки на запись KeePass, хранящую пароль к бумажнику</translation>
+        <translation type="obsolete">Имя для создания ссылки на запись KeePass, хранящую пароль к бумажнику</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect)</source>
-        <translation type="unfinished">Запрашивать адреса участников с помощью DNS, если адресов мало (по умолчанию: 1, если не указан -connect)</translation>
+        <translation type="obsolete">Запрашивать адреса участников с помощью DNS, если адресов мало (по умолчанию: 1, если не указан -connect)</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
-        <translation type="unfinished">Задать максимальный размер высокоприоритетных/низкокомиссионных транзакций в байтах (по умолчанию: %d)</translation>
+        <translation type="obsolete">Задать максимальный размер высокоприоритетных/низкокомиссионных транзакций в байтах (по умолчанию: %d)</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Set the number of script verification threads (%u to %d, 0 = auto, &lt;0 = leave that many cores free, default: %d)</source>
-        <translation type="unfinished">Задать число потоков проверки скрипта (от %u до %d, 0=авто, &lt;0 = оставить столько ядер свободными, по умолчанию: %d)</translation>
+        <translation type="obsolete">Задать число потоков проверки скрипта (от %u до %d, 0=авто, &lt;0 = оставить столько ядер свободными, по умолчанию: %d)</translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation type="unfinished">Это пре-релизная тестовая сборка - используйте на свой страх и риск - не используйте для добычи или торговых приложений</translation>
+        <translation type="obsolete">Это пре-релизная тестовая сборка - используйте на свой страх и риск - не используйте для добычи или торговых приложений</translation>
     </message>
     <message>
-        <location line="+20"/>
         <source>Unable to bind to %s on this computer. Sibcoin Core is probably already running.</source>
-        <translation type="unfinished">Не удалось привязаться к %s на этом компьютере. Возможно, &quot;Сибирский Червонец&quot; уже запущен.</translation>
+        <translation type="obsolete">Не удалось привязаться к %s на этом компьютере. Возможно, &quot;Сибирский Червонец&quot; уже запущен.</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Unable to locate enough Darksend denominated funds for this transaction.</source>
-        <translation type="unfinished">Не удалось обнаружить достаточных для выполнения этой транзакции номиналов Darksend.</translation>
+        <translation type="obsolete">Не удалось обнаружить достаточных для выполнения этой транзакции номиналов Darksend.</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Unable to locate enough Darksend non-denominated funds for this transaction that are not equal 1000 SIB.</source>
-        <translation type="unfinished">Не удалось обнаружить достаточных для выполнения этой транзакции неденоминированных средств, отличающихся от 1000 червонцев.</translation>
+        <translation type="obsolete">Не удалось обнаружить достаточных для выполнения этой транзакции неденоминированных средств, отличающихся от 1000 червонцев.</translation>
     </message>
     <message>
-        <location line="+12"/>
         <source>Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction.</source>
-        <translation type="unfinished">Внимание: установлено очень большое значение -paytxfee. Это комиссия, которую Вы заплатите при проведении транзакции.</translation>
+        <translation type="obsolete">Внимание: установлено очень большое значение -paytxfee. Это комиссия, которую Вы заплатите при проведении транзакции.</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation type="unfinished">Внимание: похоже, что в сети нет полного согласия! Некоторый майнеры, возможно, испытывают проблемы.</translation>
+        <translation type="obsolete">Внимание: похоже, что в сети нет полного согласия! Некоторый майнеры, возможно, испытывают проблемы.</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation type="unfinished">Внимание: обнаружено несогласие с подключенными участниками! Вам или другим участникам, возможно, следует обновиться.</translation>
+        <translation type="obsolete">Внимание: обнаружено несогласие с подключенными участниками! Вам или другим участникам, возможно, следует обновиться.</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Warning: error reading wallet.dat! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
-        <translation type="unfinished">Внимание: ошибка чтения wallet.dat! Все ключи прочитаны верно, но данные транзакций или записи адресной книги могут отсутствовать или быть неправильными.</translation>
+        <translation type="obsolete">Внимание: ошибка чтения wallet.dat! Все ключи прочитаны верно, но данные транзакций или записи адресной книги могут отсутствовать или быть неправильными.</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Warning: wallet.dat corrupt, data salvaged! Original wallet.dat saved as wallet.{timestamp}.bak in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
-        <translation type="unfinished">Внимание: wallet.dat повреждён, данные спасены! Оригинальный wallet.dat сохранён как wallet.{timestamp}.bak в %s. Если Ваш баланс или транзакции некорректны, Вы должны восстановить файл из резервной копии.</translation>
+        <translation type="obsolete">Внимание: wallet.dat повреждён, данные спасены! Оригинальный wallet.dat сохранён как wallet.{timestamp}.bak в %s. Если Ваш баланс или транзакции некорректны, Вы должны восстановить файл из резервной копии.</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>You must specify a masternodeprivkey in the configuration. Please see documentation for help.</source>
-        <translation type="unfinished">Необходимо указать masternodeprivkey в файле конфигурации. Пожалуйста, ознакомьтесь с документацией.</translation>
+        <translation type="obsolete">Необходимо указать masternodeprivkey в файле конфигурации. Пожалуйста, ознакомьтесь с документацией.</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>(default: 1)</source>
-        <translation type="unfinished">(по умолчанию: 1)</translation>
+        <translation type="obsolete">(по умолчанию: 1)</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Accept command line and JSON-RPC commands</source>
-        <translation type="unfinished">Принимать командную строку и команды JSON-RPC</translation>
+        <translation type="obsolete">Принимать командную строку и команды JSON-RPC</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>
-        <translation type="unfinished">Принимать подключения извне (по умолчанию: 1, если не используется -proxy или -connect)</translation>
+        <translation type="obsolete">Принимать подключения извне (по умолчанию: 1, если не используется -proxy или -connect)</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Add a node to connect to and attempt to keep the connection open</source>
-        <translation type="unfinished">Добавить узел для подключения и пытаться поддерживать соединение открытым</translation>
+        <translation type="obsolete">Добавить узел для подключения и пытаться поддерживать соединение открытым</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Allow DNS lookups for -addnode, -seednode and -connect</source>
-        <translation type="unfinished">Разрешить поиск в DNS для -addnode, -seednode и -connect</translation>
+        <translation type="obsolete">Разрешить поиск в DNS для -addnode, -seednode и -connect</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Already have that input.</source>
-        <translation type="unfinished">Уже есть этот вход.</translation>
+        <translation type="obsolete">Уже есть этот вход.</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Attempt to recover private keys from a corrupt wallet.dat</source>
-        <translation type="unfinished">Попытаться восстановить закрытые ключи из повреждённого wallet.dat</translation>
+        <translation type="obsolete">Попытаться восстановить закрытые ключи из повреждённого wallet.dat</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Block creation options:</source>
-        <translation type="unfinished">Параметры создания блоков:</translation>
+        <translation type="obsolete">Параметры создания блоков:</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Can&apos;t denominate: no compatible inputs left.</source>
-        <translation type="unfinished">Разбиение на номиналы невозможно: не осталось совместимых червонцев.</translation>
+        <translation type="obsolete">Разбиение на номиналы невозможно: не осталось совместимых червонцев.</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Cannot downgrade wallet</source>
-        <translation type="unfinished">Не удаётся понизить версию бумажника</translation>
+        <translation type="obsolete">Не удаётся понизить версию бумажника</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Cannot resolve -bind address: &apos;%s&apos;</source>
-        <translation type="unfinished">Не удаётся разрешить адрес в параметре -bind: &apos;%s&apos;</translation>
+        <translation type="obsolete">Не удаётся разрешить адрес в параметре -bind: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Cannot resolve -externalip address: &apos;%s&apos;</source>
-        <translation type="unfinished">Не удаётся разрешить адрес в параметре -externalip: &apos;%s&apos;</translation>
+        <translation type="obsolete">Не удаётся разрешить адрес в параметре -externalip: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Cannot write default address</source>
-        <translation type="unfinished">Не удаётся записать адрес по умолчанию</translation>
+        <translation type="obsolete">Не удаётся записать адрес по умолчанию</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Collateral not valid.</source>
-        <translation type="unfinished">Обеспечительная транзакция некорректна.</translation>
+        <translation type="obsolete">Обеспечительная транзакция некорректна.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Connect only to the specified node(s)</source>
-        <translation type="unfinished">Подключаться только к указанному узлу(ам)</translation>
+        <translation type="obsolete">Подключаться только к указанному узлу(ам)</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Connect to a node to retrieve peer addresses, and disconnect</source>
-        <translation type="unfinished">Подключиться к участнику, чтобы получить список адресов других участников, и отключиться</translation>
+        <translation type="obsolete">Подключиться к участнику, чтобы получить список адресов других участников, и отключиться</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Connection options:</source>
-        <translation type="unfinished">Параметры подключения:</translation>
+        <translation type="obsolete">Параметры подключения:</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Corrupted block database detected</source>
-        <translation type="unfinished">База данных блоков повреждена</translation>
+        <translation type="obsolete">База данных блоков повреждена</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Darksend options:</source>
-        <translation type="unfinished">Параметры анонимизации:</translation>
+        <translation type="obsolete">Параметры анонимизации:</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Debugging/Testing options:</source>
-        <translation type="unfinished">Параметры отладки/тестирования:</translation>
+        <translation type="obsolete">Параметры отладки/тестирования:</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Discover own IP address (default: 1 when listening and no -externalip)</source>
-        <translation type="unfinished">Определить свой IP (по умолчанию: 1 при прослушивании и если не используется -externalip)</translation>
+        <translation type="obsolete">Определить свой IP (по умолчанию: 1 при прослушивании и если не используется -externalip)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Do not load the wallet and disable wallet RPC calls</source>
-        <translation type="unfinished">Не загружать бумажник и запретить обращения к нему через RPC</translation>
+        <translation type="obsolete">Не загружать бумажник и запретить обращения к нему через RPC</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Do you want to rebuild the block database now?</source>
-        <translation type="unfinished">Перестроить базу данных блоков прямо сейчас?</translation>
+        <translation type="obsolete">Перестроить базу данных блоков прямо сейчас?</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Done loading</source>
-        <translation type="unfinished">Загрузка завершена</translation>
+        <translation type="obsolete">Загрузка завершена</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Entries are full.</source>
-        <translation type="unfinished">Очередь переполнена.</translation>
+        <translation type="obsolete">Очередь переполнена.</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Error initializing block database</source>
-        <translation type="unfinished">Ошибка инициализации базы данных блоков</translation>
+        <translation type="obsolete">Ошибка инициализации базы данных блоков</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Error initializing wallet database environment %s!</source>
-        <translation type="unfinished">Ошибка инициализации окружения БД бумажника %s!</translation>
+        <translation type="obsolete">Ошибка инициализации окружения БД бумажника %s!</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Error loading block database</source>
-        <translation type="unfinished">Ошибка загрузки базы данных блоков</translation>
+        <translation type="obsolete">Ошибка загрузки базы данных блоков</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Error loading wallet.dat</source>
-        <translation type="unfinished">Ошибка при загрузке wallet.dat</translation>
+        <translation type="obsolete">Ошибка при загрузке wallet.dat</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Error loading wallet.dat: Wallet corrupted</source>
-        <translation type="unfinished">Ошибка загрузки wallet.dat: бумажник поврежден</translation>
+        <translation type="obsolete">Ошибка загрузки wallet.dat: бумажник поврежден</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Error opening block database</source>
-        <translation type="unfinished">Не удалось открыть базу данных блоков</translation>
+        <translation type="obsolete">Не удалось открыть базу данных блоков</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Error reading from database, shutting down.</source>
-        <translation type="unfinished">Ошибка чтения базы данных, завершение работы.</translation>
+        <translation type="obsolete">Ошибка чтения базы данных, завершение работы.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Error recovering public key.</source>
-        <translation type="unfinished">Ошибка восстановления открытого ключа.</translation>
+        <translation type="obsolete">Ошибка восстановления открытого ключа.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation type="obsolete">Ошибка</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Error: Disk space is low!</source>
-        <translation type="unfinished">Ошибка: мало места на диске!</translation>
+        <translation type="obsolete">Ошибка: мало места на диске!</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Error: Wallet locked, unable to create transaction!</source>
-        <translation type="unfinished">Ошибка: бумажник заблокирован, создание транзакции невозможно!</translation>
+        <translation type="obsolete">Ошибка: бумажник заблокирован, создание транзакции невозможно!</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Error: You already have pending entries in the Darksend pool</source>
-        <translation type="unfinished">Ошибка: у Вас уже есть ожидающие записи в пуле Darksend</translation>
+        <translation type="obsolete">Ошибка: у Вас уже есть ожидающие записи в пуле Darksend</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
-        <translation type="unfinished">Не удалось начать прослушивание на порту. Используйте -listen=0, если вас это устраивает.</translation>
+        <translation type="obsolete">Не удалось начать прослушивание на порту. Используйте -listen=0, если вас это устраивает.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Failed to read block</source>
-        <translation type="unfinished">Ошибка чтения блока</translation>
+        <translation type="obsolete">Ошибка чтения блока</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>If &lt;category&gt; is not supplied, output all debugging information.</source>
-        <translation type="unfinished">Если &lt;category&gt; не предоставлена, выводить всю отладочную информацию.</translation>
+        <translation type="obsolete">Если &lt;category&gt; не предоставлена, выводить всю отладочную информацию.</translation>
     </message>
     <message>
-        <location line="-269"/>
-        <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Allow JSON-RPC connections from specified source. Valid for &lt;ip&gt; are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>An error occurred while setting up the RPC address %s port %u for listening: %s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Continuously rate-limit free transactions to &lt;n&gt;*1000 bytes per minute (default:%u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Create new files with system default permissions, instead of umask 077 (only effective with disabled wallet functionality)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Disable all Dash specific functionality (Masternodes, Darksend, InstantX, Budgeting) (0-1, default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Enable instantx, show confirmations for locked transactions (bool, default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Enable use of automated darksend for funds stored in this wallet (0-1, default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Error: Unsupported argument -socks found. Setting SOCKS version isn&apos;t possible anymore, only SOCKS5 proxies are supported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Fees (in DASH/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Fees (in DASH/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>How thorough the block verification of -checkblocks is (0-4, default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Log transaction priority and fee per kB when mining blocks (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Maintain a full transaction index, used by the getrawtransaction rpc call (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Maximum total fees to use in a single wallet transaction, setting too low may abort large transactions (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Number of seconds to keep misbehaving peers from reconnecting (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Output debugging information (default: %u, supplying &lt;category&gt; is optional)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Provide liquidity to Darksend by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Require high priority for relaying free or low-fee transactions (default:%u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Send trace/debug info to console instead of debug.log file (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Set the number of threads for coin generation if enabled (-1 = all cores, default: %d)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Show N confirmations for a successfully locked transaction (0-9999, default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit &lt;https://www.openssl.org/&gt; and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>To use dashd, or the -server option to dash-qt, you must set an rpcpassword in the configuration file:
-%s
-It is recommended you use the following random password:
-rpcuser=sibcoinrpc
-rpcpassword=%s
-(you do not need to remember this password)
-The username and password MUST NOT be the same.
-If the file does not exist, create it with owner-readable-only file permissions.
-It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Sibcoin Alert&quot; admin@foo.com
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Unable to locate enough funds for this transaction that are not equal 1000 DASH.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Warning: -maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Dash Core will not work properly.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Whitelist peers connecting from the given netmask or IP address. Can be specified multiple times.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>(1945 could be used only on mainnet)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>(default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>(must be 1945 for mainnet)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&lt;category&gt; can be:
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Accept public REST requests (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Acceptable ciphers (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Always query for peer addresses via DNS lookup (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Can&apos;t find random Masternode.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Can&apos;t mix while sync in progress.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Cannot resolve -whitebind address: &apos;%s&apos;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Connect through SOCKS5 proxy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Connect to KeePassHttp on port &lt;port&gt; (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copyright (C) 2014-%i The Dash Core Developers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Could not parse -rpcbind value %s as network address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Could not parse masternode.conf</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Darksend is idle.</source>
-        <translation type="unfinished">Анонимизация червонцев в режиме ожидания.</translation>
+        <translation type="obsolete">Анонимизация червонцев в режиме ожидания.</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Darksend request complete:</source>
-        <translation type="unfinished">Запрос анонимизации завершен:</translation>
+        <translation type="obsolete">Запрос анонимизации завершен:</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Darksend request incomplete:</source>
-        <translation type="unfinished">Запрос анонимизации не завершен:</translation>
+        <translation type="obsolete">Запрос анонимизации не завершен:</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Disable safemode, override a real safe mode event (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Enable the client to act as a masternode (0-1, default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Error connecting to Masternode.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Sibcoin Core</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Error: A fatal internal error occured, see debug.log for details</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error: Can&apos;t select current denominated inputs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Error: Unsupported argument -tor found, use -onion.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Fee (in DASH/kB) to add to transactions you send (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Finalizing transaction.</source>
-        <translation type="unfinished">Завершаем транзакцию.</translation>
+        <translation type="obsolete">Завершаем транзакцию.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Force safe mode (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Found enough users, signing ( waiting %s )</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Found enough users, signing ...</source>
-        <translation type="unfinished">Найдено достаточное количество участников, подписываем ...</translation>
+        <translation type="obsolete">Найдено достаточное количество участников, подписываем ...</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Generate coins (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>How many blocks to check at startup (default: %u, 0 = all)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
         <source>Importing...</source>
-        <translation type="unfinished">Импорт ...</translation>
+        <translation type="obsolete">Импорт ...</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Imports blocks from external blk000??.dat file</source>
-        <translation type="unfinished">Импортировать блоки из внешнего файла blk000??.dat</translation>
+        <translation type="obsolete">Импортировать блоки из внешнего файла blk000??.dat</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Include IP addresses in debug output (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Incompatible mode.</source>
-        <translation type="unfinished">Несовместимый режим.</translation>
+        <translation type="obsolete">Несовместимый режим.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Incompatible version.</source>
-        <translation type="unfinished">Несовместимая версия.</translation>
+        <translation type="obsolete">Несовместимая версия.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Incorrect or no genesis block found. Wrong datadir for network?</source>
-        <translation type="unfinished">Неверный или отсутствующий начальный блок. Неправильный каталог данных для сети?</translation>
+        <translation type="obsolete">Неверный или отсутствующий начальный блок. Неправильный каталог данных для сети?</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Information</source>
-        <translation type="unfinished">Информация</translation>
+        <translation type="obsolete">Информация</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Initialization sanity check failed. Sibcoin Core is shutting down.</source>
-        <translation type="unfinished">Проверка на непротиворечивость закончилась неудачно. &quot;Сибирский Червонец&quot; выключается.</translation>
+        <translation type="obsolete">Проверка на непротиворечивость закончилась неудачно. &quot;Сибирский Червонец&quot; выключается.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Input is not valid.</source>
-        <translation type="unfinished">Вход некорректен.</translation>
+        <translation type="obsolete">Вход некорректен.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>InstantX options:</source>
-        <translation type="unfinished">Параметры InstantX:</translation>
+        <translation type="obsolete">Параметры InstantX:</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <source>Keep N DASH anonymized (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Last successful Darksend action was too recent.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Limit size of signature cache to &lt;n&gt; entries (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Line: %d</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Listen for connections on &lt;port&gt; (default: %u or testnet: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Lock is already in place.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Lock masternodes from masternode configuration file (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Maintain at most &lt;n&gt; connections to peers (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Maximum per-connection receive buffer, &lt;n&gt;*1000 bytes (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Maximum per-connection send buffer, &lt;n&gt;*1000 bytes (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
         <source>Mixing in progress...</source>
-        <translation type="unfinished">Выполняется перемешивание...</translation>
+        <translation type="obsolete">Выполняется перемешивание...</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Need to specify a port with -whitebind: &apos;%s&apos;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>No Masternodes detected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>No compatible Masternode found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Not in the Masternode list.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Number of automatic wallet backups (default: 10)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Only accept block chain matching built-in checkpoints (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Only connect to nodes in network &lt;net&gt; (ipv4, ipv6 or onion)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Prepend debug output with timestamp (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Run a thread to flush wallet periodically (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Server certificate file (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Server private key (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Session timed out.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Set external address:port to get to this masternode (example: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Set key pool size to &lt;n&gt; (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Set minimum block size in bytes (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Set the number of threads to service RPC calls (default: %d)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Sets the DB_PRIVATE flag in the wallet db environment (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Signing timed out.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Specify configuration file (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Specify connection timeout in milliseconds (minimum: 1, default: %d)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Specify masternode configuration file (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Specify pid file (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Spend unconfirmed change when sending transactions (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Stop running after importing blocks from disk (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Submitted following entries to masternode: %u / %d</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Submitted to masternode, waiting for more entries ( %u / %d ) %s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Submitted to masternode, waiting in queue %s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Synchronization doesn&apos;t yet started</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Synchronization failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Synchronization finished</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Synchronizing budgets...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Synchronizing masternode winners...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Synchronizing masternodes...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Synchronizing sporks...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>This is not a Masternode.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Threshold for disconnecting misbehaving peers (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Use KeePass 2 integration using KeePassHttp plugin (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Use N separate masternodes to anonymize funds  (2-8, default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Use UPnP to map the listening port (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Wallet needed to be rewritten: restart Sibcoin Core to complete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-133"/>
         <source>Insufficient funds.</source>
-        <translation type="unfinished">Недостаточно средств.</translation>
+        <translation type="obsolete">Недостаточно средств.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Invalid -onion address: &apos;%s&apos;</source>
-        <translation type="unfinished">Неверный -onion адрес: &apos;%s&apos;</translation>
+        <translation type="obsolete">Неверный -onion адрес: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Invalid -proxy address: &apos;%s&apos;</source>
-        <translation type="unfinished">Неверный адрес -proxy: &apos;%s&apos;</translation>
+        <translation type="obsolete">Неверный адрес -proxy: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Invalid amount for -minrelaytxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished">Неверная сумма в параметре -minrelaytxfee=&lt;кол-во&gt;: &apos;%s&apos;</translation>
+        <translation type="obsolete">Неверная сумма в параметре -minrelaytxfee=&lt;кол-во&gt;: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Invalid amount for -mintxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished">Неверная сумма в параметре -mintxfee=&lt;кол-во&gt;: &apos;%s&apos;</translation>
+        <translation type="obsolete">Неверная сумма в параметре -mintxfee=&lt;кол-во&gt;: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished">Неверная сумма в параметре -paytxfee=&lt;кол-во&gt;: &apos;%s&apos;</translation>
+        <translation type="obsolete">Неверная сумма в параметре -paytxfee=&lt;кол-во&gt;: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Invalid masternodeprivkey. Please see documenation.</source>
-        <translation type="unfinished">Неправильное значение masternodeprivkey. Пожалуйста, ознакомьтесь с документацией.</translation>
+        <translation type="obsolete">Неправильное значение masternodeprivkey. Пожалуйста, ознакомьтесь с документацией.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Invalid netmask specified in -whitelist: &apos;%s&apos;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid port detected in masternode.conf</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Invalid private key.</source>
-        <translation type="unfinished">Некорректный закрытый ключ.</translation>
+        <translation type="obsolete">Некорректный закрытый ключ.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Invalid script detected.</source>
-        <translation type="unfinished">Обнаружен некорректный скрипт.</translation>
+        <translation type="obsolete">Обнаружен некорректный скрипт.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>KeePassHttp id for the established association</source>
-        <translation type="unfinished">Идентификатор KeePassHttp для установленной ассоциации</translation>
+        <translation type="obsolete">Идентификатор KeePassHttp для установленной ассоциации</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>KeePassHttp key for AES encrypted communication with KeePass</source>
-        <translation type="unfinished">Ключ KeePassHttp для зашифрованной коммуникации с KeePass</translation>
+        <translation type="obsolete">Ключ KeePassHttp для зашифрованной коммуникации с KeePass</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</source>
-        <translation type="unfinished">Держать в памяти до &lt;n&gt; несвязных транзакций (по умолчанию: %u)</translation>
+        <translation type="obsolete">Держать в памяти до &lt;n&gt; несвязных транзакций (по умолчанию: %u)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Last Darksend was too recent.</source>
-        <translation type="unfinished">Последнее действие анонимизации было слишком недавно.</translation>
+        <translation type="obsolete">Последнее действие анонимизации было слишком недавно.</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Loading addresses...</source>
-        <translation type="unfinished">Загрузка адресов...</translation>
+        <translation type="obsolete">Загрузка адресов...</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Loading block index...</source>
-        <translation type="unfinished">Загрузка индекса блоков...</translation>
+        <translation type="obsolete">Загрузка индекса блоков...</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Loading wallet... (%3.2f %%)</source>
-        <translation type="unfinished">Загрузка бумажника... (%3.2f %%)</translation>
+        <translation type="obsolete">Загрузка бумажника... (%3.2f %%)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Loading wallet...</source>
-        <translation type="unfinished">Загрузка бумажника...</translation>
+        <translation type="obsolete">Загрузка бумажника...</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Masternode options:</source>
-        <translation type="unfinished">Параметры мастерноды:</translation>
+        <translation type="obsolete">Параметры мастерноды:</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Masternode queue is full.</source>
-        <translation type="unfinished">Очередь на мастерноде переполнена.</translation>
+        <translation type="obsolete">Очередь на мастерноде переполнена.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Masternode:</source>
-        <translation type="unfinished">Мастернода:</translation>
+        <translation type="obsolete">Мастернода:</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Missing input transaction information.</source>
-        <translation type="unfinished">Отсутствует информация о входной транзакции.</translation>
+        <translation type="obsolete">Отсутствует информация о входной транзакции.</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>No funds detected in need of denominating.</source>
-        <translation type="unfinished">Не обнаружено средств для дальнейшего разбиения на номиналы.</translation>
+        <translation type="obsolete">Не обнаружено средств для дальнейшего разбиения на номиналы.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>No matching denominations found for mixing.</source>
-        <translation type="unfinished">Отсутствуют совпадающие для перемешивания номиналы.</translation>
+        <translation type="obsolete">Отсутствуют совпадающие для перемешивания номиналы.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Node relay options:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Non-standard public key detected.</source>
-        <translation type="unfinished">Обнаружен нестандартный открытый ключ.</translation>
+        <translation type="obsolete">Обнаружен нестандартный открытый ключ.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Not compatible with existing transactions.</source>
-        <translation type="unfinished">Не совместимо с существующими транзакциями.</translation>
+        <translation type="obsolete">Не совместимо с существующими транзакциями.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Not enough file descriptors available.</source>
-        <translation type="unfinished">Недостаточно файловых дескрипторов.</translation>
+        <translation type="obsolete">Недостаточно файловых дескрипторов.</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Options:</source>
-        <translation type="unfinished">Параметры:</translation>
+        <translation type="obsolete">Параметры:</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Password for JSON-RPC connections</source>
-        <translation type="unfinished">Пароль для подключений JSON-RPC</translation>
+        <translation type="obsolete">Пароль для подключений JSON-RPC</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>RPC SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
-        <translation type="unfinished">Параметры RPC SSL: (см. Bitcoin вики для инструкций по настройке SSL)</translation>
+        <translation type="obsolete">Параметры RPC SSL: (см. Bitcoin вики для инструкций по настройке SSL)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>RPC server options:</source>
-        <translation type="unfinished">Параметры сервера RPC:</translation>
+        <translation type="obsolete">Параметры сервера RPC:</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>RPC support for HTTP persistent connections (default: %d)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Randomly drop 1 of every &lt;n&gt; network messages</source>
-        <translation type="unfinished">Случайно отбрасывать 1 из каждых &lt;n&gt; сетевых сообщений</translation>
+        <translation type="obsolete">Случайно отбрасывать 1 из каждых &lt;n&gt; сетевых сообщений</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Randomly fuzz 1 of every &lt;n&gt; network messages</source>
-        <translation type="unfinished">Случайно разбрасывать 1 из каждых &lt;n&gt; сетевых сообщений</translation>
+        <translation type="obsolete">Случайно разбрасывать 1 из каждых &lt;n&gt; сетевых сообщений</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Rebuild block chain index from current blk000??.dat files</source>
-        <translation type="unfinished">Перестроить индекс цепочки блоков из текущих файлов blk000??.dat</translation>
+        <translation type="obsolete">Перестроить индекс цепочки блоков из текущих файлов blk000??.dat</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Receive and display P2P network alerts (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Relay and mine data carrier transactions (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Relay non-P2SH multisig (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Rescan the block chain for missing wallet transactions</source>
-        <translation type="unfinished">Перепроверить цепочку блоков на предмет отсутствующих в бумажнике транзакций</translation>
+        <translation type="obsolete">Перепроверить цепочку блоков на предмет отсутствующих в бумажнике транзакций</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Rescanning...</source>
-        <translation type="unfinished">Сканирование...</translation>
+        <translation type="obsolete">Сканирование...</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Run in the background as a daemon and accept commands</source>
-        <translation type="unfinished">Запускаться в фоне как демон и принимать команды</translation>
+        <translation type="obsolete">Запускаться в фоне как демон и принимать команды</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Session not complete!</source>
-        <translation type="unfinished">Сессия не закончена!</translation>
+        <translation type="obsolete">Сессия не закончена!</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Set database cache size in megabytes (%d to %d, default: %d)</source>
-        <translation type="unfinished">Установить размер кэша БД в мегабайтах(от %d до %d, по умолчанию: %d)</translation>
+        <translation type="obsolete">Установить размер кэша БД в мегабайтах(от %d до %d, по умолчанию: %d)</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Set maximum block size in bytes (default: %d)</source>
-        <translation type="unfinished">Установить максимальный размер блока в байтах (по умолчанию: %d)</translation>
+        <translation type="obsolete">Установить максимальный размер блока в байтах (по умолчанию: %d)</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Set the masternode private key</source>
-        <translation type="unfinished">Установить закрытый ключ мастерноды</translation>
+        <translation type="obsolete">Установить закрытый ключ мастерноды</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Show all debugging options (usage: --help -help-debug)</source>
-        <translation type="unfinished">Показать все отладочные параметры (использование: --help -help-debug)</translation>
+        <translation type="obsolete">Показать все отладочные параметры (использование: --help -help-debug)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation type="unfinished">Сжимать файл debug.log при запуске клиента (по умолчанию: 1, если нет -debug)</translation>
+        <translation type="obsolete">Сжимать файл debug.log при запуске клиента (по умолчанию: 1, если нет -debug)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Signing failed.</source>
-        <translation type="unfinished">Подписание завершилось неудачно.</translation>
+        <translation type="obsolete">Подписание завершилось неудачно.</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Signing transaction failed</source>
-        <translation type="unfinished">Подписание транзакции завершилось неудачно.</translation>
+        <translation type="obsolete">Подписание транзакции завершилось неудачно.</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Specify data directory</source>
-        <translation type="unfinished">Задать каталог данных</translation>
+        <translation type="obsolete">Задать каталог данных</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Specify wallet file (within data directory)</source>
-        <translation type="unfinished">Укажите файл бумажника (внутри каталога данных)</translation>
+        <translation type="obsolete">Укажите файл бумажника (внутри каталога данных)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Specify your own public address</source>
-        <translation type="unfinished">Укажите Ваш собственный публичный адрес</translation>
+        <translation type="obsolete">Укажите Ваш собственный публичный адрес</translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>This help message</source>
-        <translation type="unfinished">Эта справка</translation>
+        <translation type="obsolete">Эта справка</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>This is experimental software.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>This is intended for regression testing tools and app development.</source>
-        <translation type="unfinished">Это рассчитано на инструменты регрессионного тестирования и разработку приложений.</translation>
+        <translation type="obsolete">Это рассчитано на инструменты регрессионного тестирования и разработку приложений.</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Transaction amount too small</source>
-        <translation type="unfinished">Сумма транзакции слишком мала</translation>
+        <translation type="obsolete">Сумма транзакции слишком мала</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Transaction amounts must be positive</source>
-        <translation type="unfinished">Сумма транзакции должна быть положительна</translation>
+        <translation type="obsolete">Сумма транзакции должна быть положительна</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Transaction created successfully.</source>
-        <translation type="unfinished">Создание транзакции прошло успешно.</translation>
+        <translation type="obsolete">Создание транзакции прошло успешно.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Transaction fees are too high.</source>
-        <translation type="unfinished">Комиссия по транзакции слишком большая.</translation>
+        <translation type="obsolete">Комиссия по транзакции слишком большая.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Transaction not valid.</source>
-        <translation type="unfinished">Транзакция некорректна.</translation>
+        <translation type="obsolete">Транзакция некорректна.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Transaction too large for fee policy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Transaction too large</source>
-        <translation type="unfinished">Транзакция слишком большая</translation>
+        <translation type="obsolete">Транзакция слишком большая</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Transmitting final transaction.</source>
-        <translation type="unfinished">Передаем итоговую транзакцию.</translation>
+        <translation type="obsolete">Передаем итоговую транзакцию.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Unable to bind to %s on this computer (bind returned error %s)</source>
-        <translation type="unfinished">Невозможно привязаться к %s на этом компьютере (привязка вернула ошибку %s)</translation>
+        <translation type="obsolete">Невозможно привязаться к %s на этом компьютере (привязка вернула ошибку %s)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Unable to sign spork message, wrong key?</source>
-        <translation type="unfinished">Не удалось подписать spork-сообщение. Неправильный ключ?</translation>
+        <translation type="obsolete">Не удалось подписать spork-сообщение. Неправильный ключ?</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Unknown network specified in -onlynet: &apos;%s&apos;</source>
-        <translation type="unfinished">В параметре -onlynet указана неизвестная сеть: &apos;%s&apos;</translation>
+        <translation type="obsolete">В параметре -onlynet указана неизвестная сеть: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Unknown state: id = %u</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Upgrade wallet to latest format</source>
-        <translation type="unfinished">Обновить бумажник до последнего формата</translation>
+        <translation type="obsolete">Обновить бумажник до последнего формата</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Use OpenSSL (https) for JSON-RPC connections</source>
-        <translation type="unfinished">Использовать OpenSSL (https) для подключений JSON-RPC</translation>
+        <translation type="obsolete">Использовать OpenSSL (https) для подключений JSON-RPC</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Use UPnP to map the listening port (default: 1 when listening)</source>
-        <translation type="unfinished">Использовать UPnP для проброса порта (по умолчанию: 1, если используется прослушивание)</translation>
+        <translation type="obsolete">Использовать UPnP для проброса порта (по умолчанию: 1, если используется прослушивание)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Use the test network</source>
-        <translation type="unfinished">Использовать тестовую сеть</translation>
+        <translation type="obsolete">Использовать тестовую сеть</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Username for JSON-RPC connections</source>
-        <translation type="unfinished">Имя для подключений JSON-RPC</translation>
+        <translation type="obsolete">Имя для подключений JSON-RPC</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Value more than Darksend pool maximum allows.</source>
-        <translation type="unfinished">Превышено значение допустимой для пула Darksend суммы.</translation>
+        <translation type="obsolete">Превышено значение допустимой для пула Darksend суммы.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Verifying blocks...</source>
-        <translation type="unfinished">Проверка блоков...</translation>
+        <translation type="obsolete">Проверка блоков...</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Verifying wallet...</source>
-        <translation type="unfinished">Проверка бумажника...</translation>
+        <translation type="obsolete">Проверка бумажника...</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Wallet %s resides outside data directory %s</source>
-        <translation type="unfinished">Бумажник %s располагается вне каталога данных %s</translation>
+        <translation type="obsolete">Бумажник %s располагается вне каталога данных %s</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Wallet is locked.</source>
-        <translation type="unfinished">Бумажник заблокирован.</translation>
+        <translation type="obsolete">Бумажник заблокирован.</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Wallet options:</source>
-        <translation type="unfinished">Параметры бумажника:</translation>
+        <translation type="obsolete">Параметры бумажника:</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Wallet window title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Warning</source>
-        <translation type="unfinished">Внимание</translation>
+        <translation type="obsolete">Внимание</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Warning: This version is obsolete, upgrade required!</source>
-        <translation type="unfinished">Внимание: эта версия устарела, требуется обновление!</translation>
+        <translation type="obsolete">Внимание: эта версия устарела, требуется обновление!</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Warning: Unsupported argument -benchmark ignored, use -debug=bench.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Warning: Unsupported argument -debugnet ignored, use -debug=net.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Will retry...</source>
-        <translation type="unfinished">Попробуем еще раз...</translation>
+        <translation type="obsolete">Попробуем еще раз...</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>You need to rebuild the database using -reindex to change -txindex</source>
-        <translation type="unfinished">Вам необходимо пересобрать базы данных с помощью -reindex, чтобы изменить -txindex</translation>
+        <translation type="obsolete">Вам необходимо пересобрать базы данных с помощью -reindex, чтобы изменить -txindex</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Your entries added successfully.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Your transaction was accepted into the pool!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Zapping all transactions from wallet...</source>
-        <translation type="unfinished">Удаление всех транзакций из кошелька...</translation>
+        <translation type="obsolete">Удаление всех транзакций из кошелька...</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>on startup</source>
-        <translation type="unfinished">при запуске</translation>
+        <translation type="obsolete">при запуске</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>wallet.dat corrupt, salvage failed</source>
-        <translation type="unfinished">wallet.dat повреждён, спасение данных не удалось</translation>
+        <translation type="obsolete">wallet.dat повреждён, спасение данных не удалось</translation>
     </message>
 </context>
 </TS>
