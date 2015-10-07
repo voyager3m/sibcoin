@@ -418,6 +418,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += "  -masternodeprivkey=<n>     " + _("Set the masternode private key") + "\n";
     strUsage += "  -masternodeaddr=<n>        " + strprintf(_("Set external address:port to get to this masternode (example: %s)"), "128.127.106.235:9999") + "\n";
     strUsage += "  -budgetvotemode=<mode>     " + _("Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)") + "\n";
+    strUsage += "  -enablebudgetsync=<n>      " + strprintf(_("Enable use of automated darksend for funds stored in this wallet (0-1, default: %u)"), 0) + "\n";
 
     strUsage += "\n" + _("Darksend options:") + "\n";
     strUsage += "  -enabledarksend=<n>          " + strprintf(_("Enable use of automated darksend for funds stored in this wallet (0-1, default: %u)"), 0) + "\n";
@@ -1524,6 +1525,9 @@ bool AppInit2(boost::thread_group& threadGroup)
         }
     }
 
+    // ivansib: control to run budget synchonizing. Disable by default
+    fEnableBudgetSync = GetArg("-enablebudgetsync", false);
+
     fEnableDarksend = GetBoolArg("-enabledarksend", false);
 
     nDarksendRounds = GetArg("-darksendrounds", 2);
@@ -1556,6 +1560,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     LogPrintf("Darksend rounds %d\n", nDarksendRounds);
     LogPrintf("Anonymize Sibcoin Amount %d\n", nAnonymizeDarkcoinAmount);
     LogPrintf("Budget Mode %s\n", strBudgetMode.c_str());
+    LogPrintf("EnableBudgetSync %s\n", fEnableBudgetSync);
 
     /* Denominations
 

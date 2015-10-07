@@ -121,6 +121,7 @@ bool fEnableDarksend = false;
 /** All denominations used by darksend */
 std::vector<int64_t> darkSendDenominations;
 string strBudgetMode = "";
+bool fEnableBudgetSync = false;
 
 map<string, string> mapArgs;
 map<string, vector<string> > mapMultiArgs;
