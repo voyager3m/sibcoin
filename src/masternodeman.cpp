@@ -210,8 +210,11 @@ bool CMasternodeMan::Add(CMasternode &mn)
 {
     LOCK(cs);
 
-    if (!mn.IsEnabled())
+    if (!mn.IsEnabled()) {
+        LogPrint("masternode", "CMasternodeMan: Adding new Masternode %s - it is disabled\n", mn.addr.ToString());
+
         return false;
+    }
 
     CMasternode *pmn = Find(mn.vin);
     if (pmn == NULL)
@@ -751,6 +754,8 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
         CTxIn vin;
         vRecv >> vin;
 
+        LogPrint("masternode", "dseg - recieved from %s \n", pfrom->addr.ToString());
+
         if(vin == CTxIn()) { //only should ask for this once
             //local network
             bool isLocal = (pfrom->addr.IsRFC1918() || pfrom->addr.IsLocal());
@@ -773,6 +778,8 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
 
         int nInvCount = 0;
 
+        LogPrint("masternode", "dseg - before BOOST_FOREACH(CMasternode& mn, vMasternodes) \n");
+
         BOOST_FOREACH(CMasternode& mn, vMasternodes) {
             if(mn.addr.IsRFC1918()) continue; //local network
 
@@ -782,6 +789,8 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
                     CMasternodeBroadcast mnb = CMasternodeBroadcast(mn);
                     uint256 hash = mnb.GetHash();
                     pfrom->PushInventory(CInv(MSG_MASTERNODE_ANNOUNCE, hash));
+                    LogPrint("masternode", "dseg - pushed MSG_MASTERNODE_ANNOUNCE with entry - %s \n", hash.ToString());
+
                     nInvCount++;
 
                     if(!mapSeenMasternodeBroadcast.count(hash)) mapSeenMasternodeBroadcast.insert(make_pair(hash, mnb));
@@ -791,6 +800,9 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
                         return;
                     }
                 }
+            }
+            else {
+                LogPrint("masternode", "dseg - disabled mn entry - %s \n", mn.addr.ToString());
             }
         }
 

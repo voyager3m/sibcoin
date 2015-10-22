@@ -305,6 +305,8 @@ bool CActiveMasternode::Register(CTxIn vin, CService service, CKey keyCollateral
         CMasternode mn(mnb);
         mnodeman.Add(mn);
     } else {
+        LogPrint("masternode", "CActiveMasternode::Register() - pmn->UpdateFromNewBroadcast %s \n", mnb.addr.ToString());
+
         pmn->UpdateFromNewBroadcast(mnb);
     }
 

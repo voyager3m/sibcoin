@@ -4047,7 +4047,10 @@ bool static AlreadyHave(const CInv& inv)
         }
         return false;
     case MSG_MASTERNODE_ANNOUNCE:
+        LogPrint("masternode", "AlreadyHave - MSG_MASTERNODE_ANNOUNCE - %s \n", inv.hash.ToString());
+
         if(mnodeman.mapSeenMasternodeBroadcast.count(inv.hash)) {
+            LogPrint("masternode", "AlreadyHave - mnodeman.mapSeenMasternodeBroadcast.count(inv.hash)==true\n");
             masternodeSync.AddedMasternodeList(inv.hash);
             return true;
         }
@@ -4241,12 +4244,17 @@ void static ProcessGetData(CNode* pfrom)
                 }
 
                 if (!pushed && inv.type == MSG_MASTERNODE_ANNOUNCE) {
+                    LogPrint("masternode", "ProcessGetData - MSG_MASTERNODE_ANNOUNCE - %s \n", inv.hash.ToString());
                     if(mnodeman.mapSeenMasternodeBroadcast.count(inv.hash)){
+                        LogPrint("masternode", "mnb - pushed - %s \n", inv.hash.ToString());
                         CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
                         ss.reserve(1000);
                         ss << mnodeman.mapSeenMasternodeBroadcast[inv.hash];
                         pfrom->PushMessage("mnb", ss);
                         pushed = true;
+                    }
+                    else {
+                        LogPrint("masternode", "mnb - not pushed - mnodeman.mapSeenMasternodeBroadcast.count(inv.hash)==0 - %s \n", inv.hash.ToString());
                     }
                 }
 
