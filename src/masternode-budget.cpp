@@ -88,6 +88,11 @@ bool IsBudgetCollateralValid(uint256 nTxCollateralHash, uint256 nExpectedHash, s
     }
 }
 
+CBudgetManager::CBudgetManager() {
+    mapProposals.clear();
+    mapFinalizedBudgets.clear();
+}
+
 void CBudgetManager::CheckOrphanVotes()
 {
     LOCK(cs);
@@ -1291,6 +1296,24 @@ CBudgetProposal::CBudgetProposal(const CBudgetProposal& other)
     fValid = true;
 }
 
+void CBudgetProposalBroadcast::swap(CBudgetProposalBroadcast& first, CBudgetProposalBroadcast& second) // nothrow
+{
+    // enable ADL (not necessary in our case, but good practice)
+    using std::swap;
+
+    // by swapping the members of two classes,
+    // the two classes are effectively swapped
+    swap(first.strProposalName, second.strProposalName);
+    swap(first.nBlockStart, second.nBlockStart);
+    swap(first.strURL, second.strURL);
+    swap(first.nBlockEnd, second.nBlockEnd);
+    swap(first.nAmount, second.nAmount);
+    swap(first.address, second.address);
+    swap(first.nTime, second.nTime);
+    swap(first.nFeeTXHash, second.nFeeTXHash);
+    first.mapVotes.swap(second.mapVotes);
+}
+
 bool CBudgetProposal::IsValid(std::string& strError, bool fCheckCollateral)
 {
     if(GetNays() - GetYeas() > mnodeman.CountEnabled(MIN_BUDGET_PEER_PROTO_VERSION)/10){
@@ -1880,6 +1903,21 @@ void CFinalizedBudget::SubmitVote()
     } else {
         LogPrintf("CFinalizedBudget::SubmitVote : Error submitting vote - %s\n", strError);
     }
+}
+
+void CFinalizedBudgetBroadcast::swap(CFinalizedBudgetBroadcast& first, CFinalizedBudgetBroadcast& second) // nothrow
+{
+    // enable ADL (not necessary in our case, but good practice)
+    using std::swap;
+
+    // by swapping the members of two classes,
+    // the two classes are effectively swapped
+    swap(first.strBudgetName, second.strBudgetName);
+    swap(first.nBlockStart, second.nBlockStart);
+    first.mapVotes.swap(second.mapVotes);
+    first.vecBudgetPayments.swap(second.vecBudgetPayments);
+    swap(first.nFeeTXHash, second.nFeeTXHash);
+    swap(first.nTime, second.nTime);
 }
 
 CFinalizedBudgetBroadcast::CFinalizedBudgetBroadcast()

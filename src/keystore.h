@@ -60,6 +60,8 @@ protected:
     WatchOnlySet setWatchOnly;
 
 public:
+    CBasicKeyStore();
+
     bool AddKeyPubKey(const CKey& key, const CPubKey &pubkey);
     bool HaveKey(const CKeyID &address) const
     {

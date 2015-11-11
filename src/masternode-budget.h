@@ -97,10 +97,7 @@ public:
     std::map<uint256, CFinalizedBudgetVote> mapSeenFinalizedBudgetVotes;
     std::map<uint256, CFinalizedBudgetVote> mapOrphanFinalizedBudgetVotes;
 
-    CBudgetManager() {
-        mapProposals.clear();
-        mapFinalizedBudgets.clear();
-    }
+    CBudgetManager();
 
     void ClearSeen() {
         mapSeenMasternodeBudgetProposals.clear();
@@ -306,20 +303,7 @@ public:
     CFinalizedBudgetBroadcast(const CFinalizedBudget& other);
     CFinalizedBudgetBroadcast(std::string strBudgetNameIn, int nBlockStartIn, std::vector<CTxBudgetPayment> vecBudgetPaymentsIn, uint256 nFeeTXHashIn);
 
-    void swap(CFinalizedBudgetBroadcast& first, CFinalizedBudgetBroadcast& second) // nothrow
-    {
-        // enable ADL (not necessary in our case, but good practice)
-        using std::swap;
-
-        // by swapping the members of two classes,
-        // the two classes are effectively swapped
-        swap(first.strBudgetName, second.strBudgetName);
-        swap(first.nBlockStart, second.nBlockStart);
-        first.mapVotes.swap(second.mapVotes);
-        first.vecBudgetPayments.swap(second.vecBudgetPayments);
-        swap(first.nFeeTXHash, second.nFeeTXHash);
-        swap(first.nTime, second.nTime);
-    }
+    void swap(CFinalizedBudgetBroadcast& first, CFinalizedBudgetBroadcast& second); // nothrow
 
     CFinalizedBudgetBroadcast& operator=(CFinalizedBudgetBroadcast from)
     {
@@ -494,23 +478,7 @@ public:
     CBudgetProposalBroadcast(const CBudgetProposalBroadcast& other) : CBudgetProposal(other){}
     CBudgetProposalBroadcast(std::string strProposalNameIn, std::string strURLIn, int nPaymentCount, CScript addressIn, CAmount nAmountIn, int nBlockStartIn, uint256 nFeeTXHashIn);
 
-    void swap(CBudgetProposalBroadcast& first, CBudgetProposalBroadcast& second) // nothrow
-    {
-        // enable ADL (not necessary in our case, but good practice)
-        using std::swap;
-
-        // by swapping the members of two classes,
-        // the two classes are effectively swapped
-        swap(first.strProposalName, second.strProposalName);
-        swap(first.nBlockStart, second.nBlockStart);
-        swap(first.strURL, second.strURL);
-        swap(first.nBlockEnd, second.nBlockEnd);
-        swap(first.nAmount, second.nAmount);
-        swap(first.address, second.address);
-        swap(first.nTime, second.nTime);
-        swap(first.nFeeTXHash, second.nFeeTXHash);        
-        first.mapVotes.swap(second.mapVotes);
-    }
+    void swap(CBudgetProposalBroadcast& first, CBudgetProposalBroadcast& second); // nothrow
 
     CBudgetProposalBroadcast& operator=(CBudgetProposalBroadcast from)
     {

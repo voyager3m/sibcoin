@@ -177,23 +177,11 @@ public:
     MasterKeyMap mapMasterKeys;
     unsigned int nMasterKeyMaxID;
 
-    CWallet()
-    {
-        SetNull();
-    }
+    CWallet();
 
-    CWallet(std::string strWalletFileIn)
-    {
-        SetNull();
+    CWallet(std::string strWalletFileIn);
 
-        strWalletFile = strWalletFileIn;
-        fFileBacked = true;
-    }
-
-    ~CWallet()
-    {
-        delete pwalletdbEncryption;
-    }
+    ~CWallet();
 
     void SetNull()
     {
