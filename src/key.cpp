@@ -17,13 +17,15 @@
 namespace {
 
 class CSecp256k1Init {
+	secp256k1_context_t *secp256k_ctx;
 public:
     CSecp256k1Init() {
-        secp256k1_start(SECP256K1_START_SIGN);
+    	secp256k_ctx = secp256k1_context_create(SECP256K1_CONTEXT_SIGN);
     }
     ~CSecp256k1Init() {
-        secp256k1_stop();
+        secp256k1_context_destroy(secp256k_ctx);
     }
+    secp256k1_context_t *ctx() { return secp256k_ctx; };
 };
 static CSecp256k1Init instance_of_csecp256k1;
 
@@ -42,7 +44,7 @@ void CKey::MakeNewKey(bool fCompressedIn) {
 }
 
 bool CKey::SetPrivKey(const CPrivKey &privkey, bool fCompressedIn) {
-    if (!secp256k1_ec_privkey_import((unsigned char*)begin(), &privkey[0], privkey.size()))
+    if (!secp256k1_ec_privkey_import(instance_of_csecp256k1.ctx(), (unsigned char*)begin(), &privkey[0], privkey.size()))
         return false;
     fCompressed = fCompressedIn;
     fValid = true;
@@ -55,7 +57,7 @@ CPrivKey CKey::GetPrivKey() const {
     int privkeylen, ret;
     privkey.resize(279);
     privkeylen = 279;
-    ret = secp256k1_ec_privkey_export(begin(), (unsigned char*)&privkey[0], &privkeylen, fCompressed);
+    ret = secp256k1_ec_privkey_export(instance_of_csecp256k1.ctx(), begin(), (unsigned char*)&privkey[0], &privkeylen, fCompressed);
     assert(ret);
     privkey.resize(privkeylen);
     return privkey;
@@ -65,7 +67,7 @@ CPubKey CKey::GetPubKey() const {
     assert(fValid);
     CPubKey result;
     int clen = 65;
-    int ret = secp256k1_ec_pubkey_create((unsigned char*)result.begin(), &clen, begin(), fCompressed);
+    int ret = secp256k1_ec_pubkey_create(instance_of_csecp256k1.ctx(), (unsigned char*)result.begin(), &clen, begin(), fCompressed);
     assert((int)result.size() == clen);
     assert(ret);
     assert(result.IsValid());
@@ -82,7 +84,13 @@ bool CKey::Sign(const uint256 &hash, std::vector<unsigned char>& vchSig, uint32_
         prng.Generate((unsigned char*)&nonce, 32);
         nonce += test_case;
         int nSigLen = 72;
-        int ret = secp256k1_ecdsa_sign((const unsigned char*)&hash, 32, (unsigned char*)&vchSig[0], &nSigLen, begin(), (unsigned char*)&nonce);
+        int ret = secp256k1_ecdsa_sign(instance_of_csecp256k1.ctx(),
+        		(const unsigned char*)&hash,
+				(unsigned char*)&vchSig[0],
+				&nSigLen,
+				begin(),
+				NULL,
+				NULL);
         nonce = 0;
         if (ret) {
             vchSig.resize(nSigLen);
@@ -114,7 +122,13 @@ bool CKey::SignCompact(const uint256 &hash, std::vector<unsigned char>& vchSig) 
     do {
         uint256 nonce;
         prng.Generate((unsigned char*)&nonce, 32);
-        int ret = secp256k1_ecdsa_sign_compact((const unsigned char*)&hash, 32, &vchSig[1], begin(), (unsigned char*)&nonce, &rec);
+        int ret = secp256k1_ecdsa_sign_compact(instance_of_csecp256k1.ctx(),
+        		(const unsigned char*)&hash,
+				&vchSig[1],
+				begin(),
+				NULL,
+				NULL,
+				&rec);
         nonce = 0;
         if (ret)
             break;
@@ -125,7 +139,7 @@ bool CKey::SignCompact(const uint256 &hash, std::vector<unsigned char>& vchSig) 
 }
 
 bool CKey::Load(CPrivKey &privkey, CPubKey &vchPubKey, bool fSkipCheck=false) {
-    if (!secp256k1_ec_privkey_import((unsigned char*)begin(), &privkey[0], privkey.size()))
+    if (!secp256k1_ec_privkey_import(instance_of_csecp256k1.ctx(), (unsigned char*)begin(), &privkey[0], privkey.size()))
         return false;
     fCompressed = vchPubKey.IsCompressed();
     fValid = true;
@@ -151,7 +165,7 @@ bool CKey::Derive(CKey& keyChild, unsigned char ccChild[32], unsigned int nChild
     }
     memcpy(ccChild, out+32, 32);
     memcpy((unsigned char*)keyChild.begin(), begin(), 32);
-    bool ret = secp256k1_ec_privkey_tweak_add((unsigned char*)keyChild.begin(), out);
+    bool ret = secp256k1_ec_privkey_tweak_add(instance_of_csecp256k1.ctx(), (unsigned char*)keyChild.begin(), out);
     UnlockObject(out);
     keyChild.fCompressed = true;
     keyChild.fValid = ret;
