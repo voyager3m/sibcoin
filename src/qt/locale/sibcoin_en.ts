@@ -36,7 +36,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location filename="../forms/addressbookpage.ui" line="+30"/>
         <source>Right-click to edit address or label</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Right-click to edit address or label</translation>
     </message>
     <message>
         <location line="+27"/>
@@ -326,13 +326,13 @@ This product includes software developed by the OpenSSL Project for use in the O
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <location filename="../bitcoingui.cpp" line="+108"/>
-        <location line="+780"/>
+        <location filename="../bitcoingui.cpp" line="+111"/>
+        <location line="+808"/>
         <source>Sibcoin Core</source>
         <translation>Sibcoin Core</translation>
     </message>
     <message>
-        <location line="-771"/>
+        <location line="-799"/>
         <source>Wallet</source>
         <translation>Wallet</translation>
     </message>
@@ -382,7 +382,18 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>Browse transaction history</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+10"/>
+        <source>&amp;Goods&amp;&amp;&amp;Services</source>
+        <translatorcomment>&amp;Goods&amp;&amp;&amp;Services</translatorcomment>
+        <translation type="unfinished">&amp;Goods&amp;&amp;&amp;Services</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show links to services that accept sibcoins</source>
+        <translation type="unfinished">Show links to services that accept sibcoins</translation>
+    </message>
+    <message>
+        <location line="+25"/>
         <source>E&amp;xit</source>
         <translation>E&amp;xit</translation>
     </message>
@@ -663,15 +674,14 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>Tabs toolbar</translation>
     </message>
     <message>
-        <location line="+111"/>
+        <location line="+120"/>
         <source>Sibcoin Core client</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location line="+190"/>
+        <location line="+196"/>
         <source>Processed %n blocks of transaction history.</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -892,6 +902,11 @@ Address: %4
     </message>
     <message>
         <location line="+16"/>
+        <source>toggle lock state</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
         <source>Tree mode</source>
         <translation>Tree mode</translation>
     </message>
@@ -1012,7 +1027,12 @@ Address: %4
         <translation>Copy change</translation>
     </message>
     <message>
-        <location line="+329"/>
+        <location line="+162"/>
+        <source>Please switch to &quot;List mode&quot; to use this function.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+204"/>
         <source>Non-anonymized input selected. &lt;b&gt;Darksend will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Darksend, please deselect all non-nonymized inputs first and then check Darksend checkbox again.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1047,7 +1067,7 @@ Address: %4
         <translation>n/a</translation>
     </message>
     <message>
-        <location filename="../forms/coincontroldialog.ui" line="-318"/>
+        <location filename="../forms/coincontroldialog.ui" line="-334"/>
         <location filename="../coincontroldialog.cpp" line="-347"/>
         <source>medium</source>
         <translation>medium</translation>
@@ -1360,7 +1380,7 @@ Address: %4
         <translation>Import</translation>
     </message>
     <message>
-        <location filename="../genandprintdialog.cpp" line="+56"/>
+        <location filename="../genandprintdialog.cpp" line="+68"/>
         <source>Export key pair</source>
         <translation>Export key pair</translation>
     </message>
@@ -1406,24 +1426,22 @@ Address: %4
         <translation>Enter private key and passphrase</translation>
     </message>
     <message>
-        <location line="+90"/>
-        <location line="+16"/>
-        <location line="+20"/>
+        <location line="+146"/>
+        <location line="+21"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location line="-36"/>
         <source>Invalid private key! (Is password correct?)</source>
-        <translation>Invalid private key! (Is password correct?)</translation>
+        <translation type="obsolete">Invalid private key! (Is password correct?)</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="-21"/>
         <source>Cant import key into locked wallet</source>
         <translation>Can&apos;t import key into locked wallet</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+8"/>
         <source>Private key imported</source>
         <translation>Private key imported</translation>
     </message>
@@ -1433,7 +1451,7 @@ Address: %4
         <translation>Private key import error</translation>
     </message>
     <message>
-        <location line="+132"/>
+        <location line="+138"/>
         <location line="+24"/>
         <source>Warning: The Caps Lock key is on!</source>
         <translation>Warning: The Caps Lock key is on!</translation>
@@ -2100,7 +2118,6 @@ https://www.transifex.com/projects/p/sibcoin/</translation>
         <source>%n Rounds</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -2137,7 +2154,6 @@ https://www.transifex.com/projects/p/sibcoin/</translation>
         <location line="+1"/>
         <source>Denominated inputs have %5 of %n rounds on average</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -3387,7 +3403,6 @@ https://www.transifex.com/projects/p/sibcoin/</translation>
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -4404,20 +4419,26 @@ https://www.transifex.com/projects/p/sibcoin/</translation>
     <name>WalletModel</name>
     <message>
         <location filename="../walletmodel.cpp" line="+293"/>
-        <location line="+14"/>
+        <location line="+9"/>
+        <location line="+11"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="-20"/>
         <source>InstantX doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 SIB.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>InstantX doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 DASH.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>WalletView</name>
     <message>
-        <location filename="../walletview.cpp" line="+46"/>
+        <location filename="../walletview.cpp" line="+48"/>
         <source>&amp;Export</source>
         <translation>&amp;Export</translation>
     </message>
@@ -4427,12 +4448,12 @@ https://www.transifex.com/projects/p/sibcoin/</translation>
         <translation>Export the data in the current tab to a file</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+9"/>
         <source>Selected amount:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+196"/>
+        <location line="+212"/>
         <source>Backup Wallet</source>
         <translation>Backup Wallet</translation>
     </message>

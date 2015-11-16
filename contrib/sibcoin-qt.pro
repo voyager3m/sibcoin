@@ -647,24 +647,5 @@ SOURCES += src/activemasternode.cpp \
            src/leveldb/helpers/memenv/memenv_test.cc \
            src/secp256k1/src/java/org_bitcoin_NativeSecp256k1.c
 RESOURCES += src/qt/sibcoin.qrc src/qt/sibcoin_locale.qrc
-TRANSLATIONS += src/qt/locale/dash_bar.ts \
-                src/qt/locale/dash_bg.ts \
-                src/qt/locale/dash_ca.ts \
-                src/qt/locale/dash_cmn.ts \
-                src/qt/locale/dash_cs.ts \
-                src/qt/locale/dash_da.ts \
-                src/qt/locale/dash_de.ts \
-                src/qt/locale/dash_en.ts \
-                src/qt/locale/dash_es.ts \
-                src/qt/locale/dash_fi.ts \
-                src/qt/locale/dash_fr.ts \
-                src/qt/locale/dash_it.ts \
-                src/qt/locale/dash_ja.ts \
-                src/qt/locale/dash_pl.ts \
-                src/qt/locale/dash_pt.ts \
-                src/qt/locale/dash_ru.ts \
-                src/qt/locale/dash_sk.ts \
-                src/qt/locale/dash_sv.ts \
-                src/qt/locale/dash_vi.ts \
-                src/qt/locale/dash_zh_CN.ts \
-                src/qt/locale/dash_zh_HK.ts
+TRANSLATIONS += src/qt/locale/sibcoin_en.ts \
+                src/qt/locale/sibcoin_ru.ts 
