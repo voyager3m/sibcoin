@@ -33,11 +33,13 @@
 //#include <cstddef>
 //#include <string>
 //#include <boost/test/unit_test.hpp>
+#ifdef USE_BITCOIN
 #define WITH_ICU
 #include <bitcoin/bitcoin.hpp>
 
 using namespace bc;
 using namespace bc::wallet;
+#endif
 
 //#ifdef USE_QRCODE
 #include <qrencode.h>
@@ -154,7 +156,7 @@ void GenAndPrintDialog::textChanged()
     }
     ui->printButton->setEnabled(acceptable);
 }
-
+#ifdef USE_BITCOIN
 std::string decrypt_bip38(const std::string encrypted_str,  std::string passwd)
 {
     // try to decrypt bip38
@@ -187,6 +189,7 @@ std::string encrypt_bip38(const std::string secret_str,  std::string passwd)
 	std::string encrypted_key = encode_base58(out_private_key);
 	return encrypted_key;
 }
+#endif
 
 void GenAndPrintDialog::on_importButton_clicked()
 {
@@ -206,9 +209,11 @@ void GenAndPrintDialog::on_importButton_clicked()
 
     if (key.IsValid())
        secret = CBitcoinSecret(key).ToString();
+#ifdef USE_BITCOIN
     else if (!secret.compare(0, 2, "6P")) {
 		secret = decrypt_bip38(secret, passwd.toStdString());
     }
+#endif
     else {
     	// use secret as is
     }
@@ -287,6 +292,7 @@ void GenAndPrintDialog::on_printButton_clicked()
     QString qsecret = QString::fromStdString(secret_str);
     QString qaddress = QString::fromStdString(pubkey_str);
     
+#ifdef USE_BITCOIN
     std::vector<unsigned char> priv_data;
     for ( auto i = secret.begin(); i != secret.end(); i++ ) {
     	priv_data.push_back(*i);
@@ -294,6 +300,11 @@ void GenAndPrintDialog::on_printButton_clicked()
 
     std::string secret_16 = encode_base16(priv_data);
     std::string crypted = encrypt_bip38(secret_16, passwd.toStdString());
+#else
+    std::vector<unsigned char> crypted_key;
+    model->encryptKey(secret,  passwd.toStdString(), salt, crypted_key);
+    std::string crypted = EncodeBase58(crypted_key);
+#endif
 
     QString qcrypted = QString::fromStdString(crypted);
 
