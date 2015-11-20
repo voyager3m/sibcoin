@@ -154,14 +154,22 @@ public:
         assert(genesis.hashMerkleRoot == uint256("0x6a35812a1d2dd4ec413b7de5870c56455110ad6395ef00962e58f812da7cb4b9"));
 
         vSeeds.push_back(CDNSSeedData("sibcoin.net", "dnsseed.sibcoin.net"));
-
+#if __cplusplus > 199711L
         base58Prefixes[PUBKEY_ADDRESS] = {63};                  // Sibcoin addresses start with 'S'
         base58Prefixes[SCRIPT_ADDRESS] = {40};					// Sibcoin script addresses start with 'H'
         base58Prefixes[SECRET_KEY] =     {128};                 // Sibcoin private keys start with '5'
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04,0x88,0xB2,0x1E}; // Sibcoin BIP32 pubkeys start with 'xpub'
         base58Prefixes[EXT_SECRET_KEY] = {0x04,0x88,0xAD,0xE4}; // Sibcoin BIP32 prvkeys start with 'xprv'
         base58Prefixes[EXT_COIN_TYPE]  = {0x2D,0x00,0x00,0x80}; // Sibcoin BIP44 coin type is '45'
+#else
+        base58Prefixes[PUBKEY_ADDRESS] = list_of( 63);                    // Sibcoin addresses start with 'S'
+        base58Prefixes[SCRIPT_ADDRESS] = list_of( 40);                    // Sibcoin script addresses start with 'H'
+        base58Prefixes[SECRET_KEY] =     list_of(128);                    // Sibcoin private keys start with '5'
+        base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x88)(0xB2)(0x1E); // Sibcoin BIP32 pubkeys start with 'xpub'
+        base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x88)(0xAD)(0xE4); // Sibcoin BIP32 prvkeys start with 'xprv'
+        base58Prefixes[EXT_COIN_TYPE]  = list_of(0x8000002D);             // Sibcoin BIP44 coin type is '45'
 
+#endif
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
         fRequireRPCPassword = true;
@@ -223,14 +231,21 @@ public:
         //vSeeds.push_back(CDNSSeedData("darkcoin.io",  "testnet-seed.darkcoin.io"));
         //vSeeds.push_back(CDNSSeedData("darkcoin.qa", "testnet-seed.darkcoin.qa"));
         //vSeeds.push_back(CDNSSeedData("masternode.io", "test.dnsseed.masternode.io"));
-
+#if __cplusplus > 199711L
         base58Prefixes[PUBKEY_ADDRESS] = {125};                     // Testnet sibcoin addresses start with 's'
         base58Prefixes[SCRIPT_ADDRESS] = {100};						// Testnet sibcoin script addresses start with 'h'
         base58Prefixes[SECRET_KEY]     = {239};						// Testnet private keys start with '9' or 'c' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04,0x35,0x87,0xCF};		// Testnet sibcoin BIP32 pubkeys start with 'tpub'
         base58Prefixes[EXT_SECRET_KEY] = {0x04,0x35,0x83,0x94};		// Testnet sibcoin BIP32 prvkeys start with 'tprv'
         base58Prefixes[EXT_COIN_TYPE]  = {0x01,0x00,0x00,0x80};		// Testnet sibcoin BIP44 coin type is '1' (All coin's testnet default)
-
+#else
+        base58Prefixes[PUBKEY_ADDRESS] = list_of(125);                    // Testnet sibcoin addresses start with 's'
+        base58Prefixes[SCRIPT_ADDRESS] = list_of(100);                    // Testnet sibcoin script addresses start with 'h'
+        base58Prefixes[SECRET_KEY]     = list_of(239);                    // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
+        base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x35)(0x87)(0xCF); // Testnet sibcoin BIP32 pubkeys start with 'tpub'
+        base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x35)(0x83)(0x94); // Testnet sibcoin BIP32 prvkeys start with 'tprv'
+        base58Prefixes[EXT_COIN_TYPE]  = list_of(0x80000001);             // Testnet sibcoin BIP44 coin type is '1' (All coin's testnet default)
+#endif
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));
 
         fRequireRPCPassword = true;

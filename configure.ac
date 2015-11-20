@@ -40,7 +40,9 @@ else
 fi
 
 if test -z $CXXFLAGS; then
+if USE_BITCOIN; then
     CXXFLAGS='-std=c++11'
+fi
 fi
 
 AC_PROG_CXX
@@ -87,7 +89,7 @@ AC_ARG_ENABLE([wallet],
   [enable_wallet=$enableval],
   [enable_wallet=yes])
 
-AC_ARG_ENABLE([bitcoin],
+AC_ARG_WITH([bitcoin],
   [AS_HELP_STRING([--with-bitcoin],
   [enable bitcoin (default is yes if libbitcoin is enabled and libbitcoin is found)])],
   [use_bitcoin=$enableval],
@@ -930,7 +932,6 @@ AC_SUBST(COPYRIGHT_YEAR, _COPYRIGHT_YEAR)
 AC_SUBST(RELDFLAGS)
 AC_SUBST(LIBTOOL_APP_LDFLAGS)
 AC_SUBST(USE_UPNP)
-AC_SUBST(USE_BITCOIN)
 AC_SUBST(USE_QRCODE)
 AC_SUBST(BOOST_LIBS)
 AC_SUBST(TESTDEFS)
