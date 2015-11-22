@@ -39,12 +39,6 @@ else
   CXXFLAGS_overridden=no
 fi
 
-if test -z $CXXFLAGS; then
-if USE_BITCOIN; then
-    CXXFLAGS='-std=c++11'
-fi
-fi
-
 AC_PROG_CXX
 m4_ifdef([AC_PROG_OBJCXX],[AC_PROG_OBJCXX])
 
@@ -535,12 +529,21 @@ fi
 AC_LANG_PUSH([C++])
 dnl Check for libbitcoin (optional)
 if test x$use_bitcoin != xno; then
+  CXXFLAGS_bc="$CXXFLAGS"
+  CXXFLAGS="$CXXFLAGS -std=c++11"
+  have_bitcoin=yes
   AC_CHECK_HEADERS(
     [bitcoin/bitcoin.hpp],
     [AC_CHECK_LIB([bitcoin], [main],[BITCOIN_LIBS=-lbitcoin], [have_bitcoin=no])],
     [have_bitcoin=no]
   )
 fi
+
+if test x$have_bitcoin != xyes; then
+  use_bitcoin=no
+  CXXFLAGS="$CXXFLAGS_bc"
+fi
+
 AC_LANG_POP([C++])
 
 BITCOIN_QT_INIT
@@ -933,6 +936,7 @@ AC_SUBST(RELDFLAGS)
 AC_SUBST(LIBTOOL_APP_LDFLAGS)
 AC_SUBST(USE_UPNP)
 AC_SUBST(USE_QRCODE)
+AC_SUBST(USE_BITCOIN)
 AC_SUBST(BOOST_LIBS)
 AC_SUBST(TESTDEFS)
 AC_SUBST(LEVELDB_TARGET_FLAGS)
