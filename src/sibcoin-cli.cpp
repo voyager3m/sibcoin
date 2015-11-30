@@ -78,9 +78,9 @@ static int AppInitRPC(int argc, char* argv[])
         std::string strUsage = _("Sibcoin Core RPC client version") + " " + FormatFullVersion() + "\n";
         if (!mapArgs.count("-version")) {
             strUsage += "\n" + _("Usage:") + "\n" +
-                  "  dash-cli [options] <command> [params]  " + _("Send command to Sibcoin Core") + "\n" +
-                  "  dash-cli [options] help                " + _("List commands") + "\n" +
-                  "  dash-cli [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  sibcoin-cli [options] <command> [params]  " + _("Send command to Sibcoin Core") + "\n" +
+                  "  sibcoin-cli [options] help                " + _("List commands") + "\n" +
+                  "  sibcoin-cli [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessageCli();
         }
