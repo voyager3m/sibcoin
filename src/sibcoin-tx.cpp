@@ -49,8 +49,8 @@ static bool AppInitRawTx(int argc, char* argv[])
         // First part of help message is specific to this utility
         std::string strUsage = _("Sibcoin Core sibcoin-tx utility version") + " " + FormatFullVersion() + "\n\n" +
             _("Usage:") + "\n" +
-              "  dash-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded dash transaction") + "\n" +
-              "  dash-tx [options] -create [commands]   " + _("Create hex-encoded dash transaction") + "\n" +
+              "  sibcoin-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded sibcoin transaction") + "\n" +
+              "  sibcoin-tx [options] -create [commands]   " + _("Create hex-encoded sibcoin transaction") + "\n" +
               "\n";
 
         fprintf(stdout, "%s", strUsage.c_str());
