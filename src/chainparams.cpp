@@ -114,14 +114,14 @@ public:
         pchMessageStart[3] = 0xbd;
         vAlertPubKey = ParseHex("046e165af8bee5294a27bfcec06d5828399d442761e4ebf4296c38d4dbe891e15dc16df5254347833dcfc1c2c1b8d5473ccdccac2896b4783f47fe53eb45c8ac8c");
         nDefaultPort = 1945;
-        bnProofOfWorkLimit = ~uint256(0) >> 20;  // Dash starting difficulty is 1 / 2^12
+        bnProofOfWorkLimit = ~uint256(0) >> 20;  // Sibcoin starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 210000;
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
-        nTargetTimespan = 24 * 60 * 60; // Dash: 1 day
-        nTargetSpacing = 2.5 * 60; // Dash: 2.5 minutes
+        nTargetTimespan = 24 * 60 * 60; // Sibcoin: 1 day
+        nTargetSpacing = 2.5 * 60; // Sibcoin: 2.5 minutes
 
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
@@ -232,10 +232,7 @@ public:
         vSeeds.clear();
         /*vSeeds.push_back(CDNSSeedData("dashpay.io", "testnet-seed.dashpay.io"));
         vSeeds.push_back(CDNSSeedData("dash.qa", "testnet-seed.dash.qa"));
-        *///legacy seeders
-        //vSeeds.push_back(CDNSSeedData("darkcoin.io",  "testnet-seed.darkcoin.io"));
-        //vSeeds.push_back(CDNSSeedData("darkcoin.qa", "testnet-seed.darkcoin.qa"));
-        //vSeeds.push_back(CDNSSeedData("masternode.io", "test.dnsseed.masternode.io"));
+        */
 #if __cplusplus > 199711L
         base58Prefixes[PUBKEY_ADDRESS] = {125};                     // Testnet sibcoin addresses start with 's'
         base58Prefixes[SCRIPT_ADDRESS] = {100};						// Testnet sibcoin script addresses start with 'h'
@@ -291,8 +288,8 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
-        nTargetTimespan = 24 * 60 * 60; // Dash: 1 day
-        nTargetSpacing = 2.5 * 60; // Dash: 2.5 minutes
+        nTargetTimespan = 24 * 60 * 60; // Sibcoin: 1 day
+        nTargetSpacing = 2.5 * 60; // Sibcoin: 2.5 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.nTime = 1431129600;
         genesis.nBits = 0x207fffff;
