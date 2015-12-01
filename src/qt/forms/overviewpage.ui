@@ -400,13 +400,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
+           <height>350</height>
           </size>
          </property>
          <property name="layoutDirection">
