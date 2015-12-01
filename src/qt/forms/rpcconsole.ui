@@ -185,7 +185,7 @@
        <item row="16" column="0">
         <widget class="QPushButton" name="openDebugLogfileButton">
          <property name="toolTip">
-          <string>Open the Dash debug log file from the current data directory. This can take a few seconds for large log files.</string>
+          <string>Open the Sibcoin debug log file from the current data directory. This can take a few seconds for large log files.</string>
          </property>
          <property name="text">
           <string>&amp;Open</string>
@@ -1169,12 +1169,12 @@
          <x>10</x>
          <y>30</y>
          <width>711</width>
-         <height>41</height>
+         <height>50</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <weight>50</weight>
+         <weight>46</weight>
          <bold>false</bold>
         </font>
        </property>
