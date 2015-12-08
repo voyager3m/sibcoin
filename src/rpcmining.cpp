@@ -61,7 +61,7 @@ void InitRPCMining()
 void ShutdownRPCMining()
 {
 }
- #endif
+#endif
 
 /**
  * Return average network hashes per second based on the last 'lookup' blocks,
@@ -391,6 +391,7 @@ Value getwork(const Array& params, bool fHelp)
     if (params.size() == 0)
     {
         // Update block
+        boost::unique_lock<boost::mutex> lock(csBestBlock);
         static unsigned int nTransactionsUpdatedLast;
         static CBlockIndex* pindexPrev;
         static int64_t nStart;
@@ -403,7 +404,7 @@ Value getwork(const Array& params, bool fHelp)
                 // Deallocate old blocks since they're obsolete now
                 mapNewBlock.clear();
                 BOOST_FOREACH(CBlockTemplate* pblocktemplate, vNewBlockTemplate)
-                    delete pblocktemplate;
+                	delete pblocktemplate;
                 vNewBlockTemplate.clear();
             }
 
@@ -455,11 +456,10 @@ Value getwork(const Array& params, bool fHelp)
     else
     {
         // Parse parameters
-        vector<unsigned char> vchData = ParseHex(params[0].get_str());
+    	vector<unsigned char> vchData = ParseHex(params[0].get_str());
         if (vchData.size() != 128)
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter");
         CBlock* pdata = (CBlock*)&vchData[0];
-
         // Byte reverse
         for (int i = 0; i < 128/4; i++)
             ((unsigned int*)pdata)[i] = ByteReverse(((unsigned int*)pdata)[i]);
@@ -467,14 +467,17 @@ Value getwork(const Array& params, bool fHelp)
         // Get saved block
         if (!mapNewBlock.count(pdata->hashMerkleRoot))
             return false;
+
+        boost::unique_lock<boost::mutex> lock(csBestBlock);
+
         CBlock* pblock = mapNewBlock[pdata->hashMerkleRoot].first;
 
         pblock->nTime = pdata->nTime;
         pblock->nNonce = pdata->nNonce;
 
-        // ivansib: Durty hack. Is it better to make CTransaction.vin mutable instead?
-        std::vector<CTxIn> *p_vin = const_cast<std::vector<CTxIn>*>(&pblock->vtx[0].vin);
-        (*p_vin)[0].scriptSig = mapNewBlock[pdata->hashMerkleRoot].second;
+        CMutableTransaction txCoinbase(pblock->vtx[0]);
+        txCoinbase.vin[0].scriptSig = mapNewBlock[pdata->hashMerkleRoot].second;
+        pblock->vtx[0] = txCoinbase;
         pblock->hashMerkleRoot = pblock->BuildMerkleTree();
 
         assert(pwalletMain != NULL);
