@@ -1864,6 +1864,11 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     if(fMasterNode && fLiteMode){
         return InitError("You can not start a masternode in litemode");
     }
+#ifdef ENABLE_WALLET
+    if(fMasterNode && fDisableWallet){
+        return InitError("You can not start a masternode with disabled wallet");
+    }
+#endif // ENABLE_WALLET
 
     LogPrintf("fLiteMode %d\n", fLiteMode);
     LogPrintf("nInstantSendDepth %d\n", nInstantSendDepth);
