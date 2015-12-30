@@ -5,6 +5,7 @@
 #include "masternode.h"
 #include "masternodeman.h"
 #include "darksend.h"
+#include "spork.h"
 #include "util.h"
 #include "sync.h"
 #include "addrman.h"
@@ -138,10 +139,20 @@ bool CMasternode::UpdateFromNewBroadcast(CMasternodeBroadcast& mnb)
         addr = mnb.addr;
         lastTimeChecked = 0;
         int nDoS = 0;
-        if(mnb.lastPing == CMasternodePing() || (mnb.lastPing != CMasternodePing() && mnb.lastPing.CheckAndUpdate(nDoS, false))) {
-            lastPing = mnb.lastPing;
+
+        // one more kostil for v15>v16 update
+        if (protocolVersion < MIN_MASTERNODE_PAYMENT_PROTO_VERSION_2 && !IsSporkActive(SPORK_10_MASTERNODE_PAY_UPDATED_NODES)){
+            //fake ping
+            lastPing = CMasternodePing(mnb.vin);
             mnodeman.mapSeenMasternodePing.insert(make_pair(lastPing.GetHash(), lastPing));
         }
+        else {
+            if(mnb.lastPing == CMasternodePing() || (mnb.lastPing != CMasternodePing() && mnb.lastPing.CheckAndUpdate(nDoS, false))) {
+                lastPing = mnb.lastPing;
+                mnodeman.mapSeenMasternodePing.insert(make_pair(lastPing.GetHash(), lastPing));
+            }
+        }
+           
         return true;
     }
     return false;
@@ -356,6 +367,11 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
     std::string vchPubKey2(pubkey2.begin(), pubkey2.end());
     std::string strMessage = addr.ToString() + boost::lexical_cast<std::string>(sigTime) + vchPubKey + vchPubKey2 + boost::lexical_cast<std::string>(protocolVersion);
 
+    if (protocolVersion < MIN_MASTERNODE_PAYMENT_PROTO_VERSION_2 && !IsSporkActive(SPORK_10_MASTERNODE_PAY_UPDATED_NODES)){
+        // v15 kostil
+        strMessage = strMessage + "0";
+    }    
+    
     if(protocolVersion < masternodePayments.GetMinMasternodePaymentsProto()) {
         LogPrintf("mnb - ignoring outdated Masternode %s protocol version %d\n", vin.ToString(), protocolVersion);
         return false;
@@ -387,7 +403,12 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
     std::string errorMessage = "";
     if(!darkSendSigner.VerifyMessage(pubkey, sig, strMessage, errorMessage)){
         LogPrintf("mnb - Got bad Masternode address signature\n");
-        nDos = 100;
+        if (protocolVersion < MIN_MASTERNODE_PAYMENT_PROTO_VERSION_2 && !IsSporkActive(SPORK_10_MASTERNODE_PAY_UPDATED_NODES)){        
+            nDos = 1;
+        } else {
+            nDos = 100;
+        }
+        
         return false;
     }
 
