@@ -27,20 +27,6 @@
 #include <QTextDocument>
 #include <QUrl>
 
-#include "wallet.h"
-
-//#include <algorithm>
-//#include <cstddef>
-//#include <string>
-//#include <boost/test/unit_test.hpp>
-#ifdef USE_BITCOIN
-#define WITH_ICU
-#include <bitcoin/bitcoin.hpp>
-
-using namespace bc;
-using namespace bc::wallet;
-#endif
-
 //#ifdef USE_QRCODE
 #include <qrencode.h>
 //#endif
@@ -51,7 +37,7 @@ GenAndPrintDialog::GenAndPrintDialog(Mode mode, QWidget *parent) :
     mode(mode),
     model(0),
     fCapsLock(false),
-    salt("12345678")
+    salt("12345678")src/qt/genandprintdialog.cpp
 {
     ui->setupUi(this);
 
@@ -156,40 +142,6 @@ void GenAndPrintDialog::textChanged()
     }
     ui->printButton->setEnabled(acceptable);
 }
-#ifdef USE_BITCOIN
-std::string decrypt_bip38(const std::string encrypted_str,  std::string passwd)
-{
-    // try to decrypt bip38
-	byte_array<43> key;
-	decode_base58(key, encrypted_str);
-
-    ec_secret out_secret;
-    uint8_t out_version = 0;
-    bool is_compressed = true;
-    if (!encrypted_str.compare(0, 2, "6Pf") || !encrypted_str.compare(0, 2, "6PR"))
-    	is_compressed = false;
-
-    bc::wallet::decrypt(out_secret, out_version, is_compressed, key, passwd);
-
-	std::string decrypted_key = encode_base16(out_secret);
-	return decrypted_key;
-}
-
-std::string encrypt_bip38(const std::string secret_str,  std::string passwd)
-{
-    // Encrypt the secret as a private key.
-	ec_secret secret_key;
-	decode_base16(secret_key, secret_str);
-
-    encrypted_private out_private_key;
-    const uint8_t version = 0;
-    const auto is_compressed = false;
-    bc::wallet::encrypt(out_private_key, secret_key, passwd, version, is_compressed);
-
-	std::string encrypted_key = encode_base58(out_private_key);
-	return encrypted_key;
-}
-#endif
 
 void GenAndPrintDialog::on_importButton_clicked()
 {
@@ -209,17 +161,6 @@ void GenAndPrintDialog::on_importButton_clicked()
 
     if (key.IsValid())
        secret = CBitcoinSecret(key).ToString();
-#ifdef USE_BITCOIN
-    else if (!secret.compare(0, 2, "6P")) {
-		secret = decrypt_bip38(secret, passwd.toStdString());
-    }
-#endif
-    else {
-    	// use secret as is
-    }
-
-//	QMessageBox::information(this, tr("Info"), QString::fromStdString(secret));
-//	return;
 
     params.push_back(json_spirit::Value(secret.c_str()));
     params.push_back(json_spirit::Value(label_str.toStdString().c_str()));
@@ -248,7 +189,7 @@ void GenAndPrintDialog::on_importButton_clicked()
         // To be investigate
         catch (...)
         {
-            std::cerr << "Import private key error!" << std::endl;
+            cerr << "Import private key error!" << endl;            
 //            for (json_spirit::Object::iterator it = err.begin(); it != err.end(); ++it)
 //            {
 //                cerr << it->name_ << " = " << it->value_.get_str() << endl;
@@ -263,7 +204,7 @@ bool readHtmlTemplate(const QString &res_name, QString &htmlContent)
 {
     QFile  htmlFile(res_name);
     if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-        std::cerr << "Cant open " << res_name.toStdString() << std::endl;
+        cerr << "Cant open " << res_name.toStdString() << endl;
         return false;
     }
 
@@ -292,24 +233,13 @@ void GenAndPrintDialog::on_printButton_clicked()
     QString qsecret = QString::fromStdString(secret_str);
     QString qaddress = QString::fromStdString(pubkey_str);
     
-#ifdef USE_BITCOIN
-    std::vector<unsigned char> priv_data;
-    for ( auto i = secret.begin(); i != secret.end(); i++ ) {
-    	priv_data.push_back(*i);
-    }
-
-    std::string secret_16 = encode_base16(priv_data);
-    std::string crypted = encrypt_bip38(secret_16, passwd.toStdString());
-#else
     std::vector<unsigned char> crypted_key;
     model->encryptKey(secret,  passwd.toStdString(), salt, crypted_key);
     std::string crypted = EncodeBase58(crypted_key);
-#endif
-
     QString qcrypted = QString::fromStdString(crypted);
-
+    
     QPrinter printer;
-    printer.setResolution(QPrinter::HighResolution);
+    printer.setResolution(QPrinter::ScreenResolution);
     printer.setPageMargins(0, 10, 0, 0, QPrinter::Millimeter);
     
     QPrintDialog *dlg = new QPrintDialog(&printer, this);
@@ -340,11 +270,10 @@ void GenAndPrintDialog::on_printButton_clicked()
         html.replace("__ADDRESS__", qaddress);
         html.replace("__PRIVATE__", qcrypted);
         
-        QTextDocument *document = new QTextDocument(this);
+        QTextDocument *document = new QTextDocument();
+        document->setHtml(html);
         document->addResource(QTextDocument::ImageResource, QUrl(":qr1.png" ), img1);
         document->addResource(QTextDocument::ImageResource, QUrl(":qr2.png" ), img2);
-        document->setHtml(html);
-        document->setPageSize(QSizeF(printer.pageRect().size()));
         document->print(&printer);
         
         model->setAddressBook(keyid, strAccount.toStdString(), "send");        

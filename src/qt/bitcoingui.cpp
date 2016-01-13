@@ -455,11 +455,8 @@ void BitcoinGUI::createMenuBar()
         file->addAction(usedSendingAddressesAction);
         file->addAction(usedReceivingAddressesAction);
         file->addSeparator();
-#ifdef USE_BITCOIN
-        // Don't use printing features without BIP38 provided by libbitcoin
         file->addAction(genAndPrintAddressesAction);
         file->addAction(loadFromPaperAction);
-#endif
     }
     file->addAction(quitAction);
 

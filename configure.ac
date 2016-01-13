@@ -83,12 +83,6 @@ AC_ARG_ENABLE([wallet],
   [enable_wallet=$enableval],
   [enable_wallet=yes])
 
-AC_ARG_WITH([bitcoin],
-  [AS_HELP_STRING([--with-bitcoin],
-  [enable bitcoin (default is yes if libbitcoin is enabled and libbitcoin is found)])],
-  [use_bitcoin=$enableval],
-  [use_bitcoin=auto])
-
 AC_ARG_WITH([miniupnpc],
   [AS_HELP_STRING([--with-miniupnpc],
   [enable UPNP (default is yes if libminiupnpc is found)])],
@@ -526,26 +520,6 @@ if test x$use_upnp != xno; then
   )
 fi
 
-AC_LANG_PUSH([C++])
-dnl Check for libbitcoin (optional)
-if test x$use_bitcoin != xno; then
-  CXXFLAGS_bc="$CXXFLAGS"
-  CXXFLAGS="$CXXFLAGS -std=c++11"
-  have_bitcoin=yes
-  AC_CHECK_HEADERS(
-    [bitcoin/bitcoin.hpp],
-    [AC_CHECK_LIB([bitcoin], [main],[BITCOIN_LIBS=-lbitcoin], [have_bitcoin=no])],
-    [have_bitcoin=no]
-  )
-fi
-
-if test x$have_bitcoin != xyes; then
-  use_bitcoin=no
-  CXXFLAGS="$CXXFLAGS_bc"
-fi
-
-AC_LANG_POP([C++])
-
 BITCOIN_QT_INIT
 
 dnl sets $bitcoin_enable_qt, $bitcoin_enable_qt_test, $bitcoin_enable_qt_dbus
@@ -709,9 +683,6 @@ if test x$use_pkgconfig = xyes; then
     [
       PKG_CHECK_MODULES([SSL], [libssl],, [AC_MSG_ERROR(openssl  not found.)])
       PKG_CHECK_MODULES([CRYPTO], [libcrypto],,[AC_MSG_ERROR(libcrypto  not found.)])
-      if test x$use_bitcoin != xno; then
-	    BITCOIN_QT_CHECK([PKG_CHECK_MODULES([BITCOIN], [libbitcoin],[have_bitcoin=yes], [have_bitcoin=no])])
-      fi  
       BITCOIN_QT_CHECK([PKG_CHECK_MODULES([PROTOBUF], [protobuf], [have_protobuf=yes], [BITCOIN_QT_FAIL(libprotobuf not found)])])
       if test x$use_qr != xno; then
         BITCOIN_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
@@ -724,11 +695,6 @@ else
 
   AC_CHECK_HEADER([openssl/ssl.h],, AC_MSG_ERROR(libssl headers missing),)
   AC_CHECK_LIB([ssl],         [main],SSL_LIBS=-lssl, AC_MSG_ERROR(libssl missing))
-
-  if test x$use_bitcoin != xno; then
-    AC_CHECK_HEADER([bitcoin/bitcoin.hpp],, AC_MSG_ERROR(libbitcoin headers missing),)
-    AC_CHECK_LIB([bitcoin],         [main], BITCOIN_LIBS=-lbitcoin, AC_MSG_ERROR(libbitcoin missing))
-  fi
 
   BITCOIN_QT_CHECK(AC_CHECK_LIB([protobuf] ,[main],[PROTOBUF_LIBS=-lprotobuf], BITCOIN_QT_FAIL(libprotobuf not found)))
   if test x$use_qr != xno; then
@@ -800,23 +766,6 @@ if test x$enable_wallet != xno; then
 else
   AC_MSG_RESULT(no)
 fi
-
-
-AC_MSG_CHECKING([whether to build with libbitcoin])
-  if test x$have_bitcoin = xno; then
-    if test x$use_bitcoin = xyes; then
-     AC_MSG_ERROR("libbitcoin support requested but cannot be built. use --without-bitcoin")
-    fi
-    AC_MSG_RESULT(no)
-  else
-    if test x$use_bitcoin != xno; then
-      AC_MSG_RESULT(yes)
-      AC_DEFINE([USE_BITCOIN],[1],[Define if libbitcoin support should be compiled in])
-      use_bitcoin=yes
-    else
-      AC_MSG_RESULT(no)
-    fi
-  fi
 
 dnl enable upnp support
 AC_MSG_CHECKING([whether to build with support for UPnP])
@@ -912,7 +861,6 @@ AM_CONDITIONAL([ENABLE_TESTS],[test x$use_tests = xyes])
 AM_CONDITIONAL([ENABLE_QT],[test x$bitcoin_enable_qt = xyes])
 AM_CONDITIONAL([ENABLE_QT_TESTS],[test x$use_tests$bitcoin_enable_qt_test = xyesyes])
 AM_CONDITIONAL([USE_QRCODE], [test x$use_qr = xyes])
-AM_CONDITIONAL([USE_BITCOIN],[test x$use_bitcoin = xyes])
 AM_CONDITIONAL([USE_LCOV],[test x$use_lcov = xyes])
 AM_CONDITIONAL([USE_COMPARISON_TOOL],[test x$use_comparison_tool != xno])
 AM_CONDITIONAL([USE_COMPARISON_TOOL_REORG_TESTS],[test x$use_comparison_tool_reorg_test != xno])
@@ -936,7 +884,6 @@ AC_SUBST(RELDFLAGS)
 AC_SUBST(LIBTOOL_APP_LDFLAGS)
 AC_SUBST(USE_UPNP)
 AC_SUBST(USE_QRCODE)
-AC_SUBST(USE_BITCOIN)
 AC_SUBST(BOOST_LIBS)
 AC_SUBST(TESTDEFS)
 AC_SUBST(LEVELDB_TARGET_FLAGS)

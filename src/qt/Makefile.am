@@ -345,12 +345,7 @@ if ENABLE_WALLET
 sibcoin_qt_LDADD += $(LIBBITCOIN_WALLET)
 endif
 sibcoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBLEVELDB) $(LIBMEMENV) \
-  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) 
-  
-if USE_BITCOIN
-sibcoin_qt_LDADD += $(BITCOIN_LIBS)
-endif
-
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS)
 sibcoin_qt_LDFLAGS = $(QT_LDFLAGS)
 
 # forms/foo.h -> forms/ui_foo.h
