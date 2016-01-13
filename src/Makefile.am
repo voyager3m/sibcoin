@@ -17,8 +17,10 @@ $(LIBLEVELDB) $(LIBMEMENV):
           OPT="$(CXXFLAGS) $(CPPFLAGS)"
 endif
 
+BIP_CPPFLAGS = -I$(srcdir)/bip
+
 BITCOIN_CONFIG_INCLUDES=-I$(builddir)/config
-BITCOIN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
+BITCOIN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(BIP_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
 
 BITCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
 
@@ -154,6 +156,13 @@ BITCOIN_CORE_H = \
   walletdb.h \
   compat/sanity.h
 
+BIP_H = \
+  bip/crypto_aesctr.h \
+  bip/crypto_scrypt.h \
+  bip/sha256.h \
+  bip/crypto.h \
+  bip/bip38.h
+
 JSON_H = \
   json/json_spirit.h \
   json/json_spirit_error_position.h \
@@ -226,7 +235,14 @@ libbitcoin_wallet_a_SOURCES = \
   wallet_ismine.cpp \
   walletdb.cpp \
   keepass.cpp \
-  $(BITCOIN_CORE_H)
+  bip/crypto_aesctr.c \
+  bip/crypto_scrypt-nosse.c \
+  bip/crypto_scrypt-ref.c \
+  bip/crypto_scrypt-sse.c \
+  bip/sha256.c \
+  bip/crypto.c \
+  bip/bip38.cpp \
+  $(BITCOIN_CORE_H) 
 
 # crypto primitives library
 crypto_libbitcoin_crypto_a_CFLAGS = -fPIC

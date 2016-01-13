@@ -15,6 +15,11 @@
 #include "../rpcserver.h"
 //#include "../rpcprotocol.h"
 #include "json/json_spirit_writer.h"
+#include <stdlib.h>
+
+#include "ecwrapper.h"
+#include "bip/bip38.h"
+#include "hash.h"
 
 #include <QKeyEvent>
 #include <QMessageBox>
@@ -27,9 +32,13 @@
 #include <QTextDocument>
 #include <QUrl>
 
+#include "wallet.h"
+
 //#ifdef USE_QRCODE
 #include <qrencode.h>
 //#endif
+
+
 
 GenAndPrintDialog::GenAndPrintDialog(Mode mode, QWidget *parent) :
     QDialog(parent),
@@ -37,7 +46,7 @@ GenAndPrintDialog::GenAndPrintDialog(Mode mode, QWidget *parent) :
     mode(mode),
     model(0),
     fCapsLock(false),
-    salt("12345678")src/qt/genandprintdialog.cpp
+    salt("12345678")
 {
     ui->setupUi(this);
 
@@ -151,16 +160,56 @@ void GenAndPrintDialog::on_importButton_clicked()
     QString passwd = ui->passEdit2->text();
     QString label_str = ui->passEdit3->text();
     std::string secret = privkey_str.toStdString();
-    
     std::vector<unsigned char> priv_data;
+    
+    // test keys for bip38
+    // With EC
+	// secret = "6PfLGnQs6VZnrNpmVKfjotbnQuaJK4KZoPFrAjx1JMJUa1Ft8gnf5WxfKd";
+    // Without EC
+	// secret = "6PRVWUbkzzsbcVac2qwfssoUJAN1Xhrg6bNk8J7Nzm5H7kxEbn2Nh2ZoGg";
 
-    DecodeBase58(privkey_str.toStdString(), priv_data);
+	if (!DecodeBase58(secret, priv_data)) {
+        LogPrintf("DecodeBase58 failed: str=%s\n", secret.c_str());
+        return;
+	}
 
     CKey key;
     model->decryptKey(priv_data, passwd.toStdString(), salt, key);
 
     if (key.IsValid())
        secret = CBitcoinSecret(key).ToString();
+    else if (!secret.compare(0, 2, "6P")) {
+    	if (secret[2] == 'f') {
+    		// With EC
+			//	Passphrase: Satoshi
+			//	Passphrase code: passphraseoRDGAXTWzbp72eVbtUDdn1rwpgPUGjNZEc6CGBo8i5EC1FPW8wcnLdq4ThKzAS
+			//	Encrypted key: 6PfLGnQs6VZnrNpmVKfjotbnQuaJK4KZoPFrAjx1JMJUa1Ft8gnf5WxfKd
+			//	Bitcoin address: 1CqzrtZC6mXSAhoxtFwVjz8LtwLJjDYU3V
+			//	Unencrypted private key (WIF): 5KJ51SgxWaAYR13zd9ReMhJpwrcX47xTJh2D3fGPG9CM8vkv5sH
+			//	Unencrypted private key (hex): C2C8036DF268F498099350718C4A3EF3984D2BE84618C2650F5171DCC5EB660A
+			priv_data = decrypt_bip38_ec(priv_data, passwd.toStdString());
+			key.Set(priv_data.begin(), priv_data.end(), true);
+			secret = CBitcoinSecret(key).ToString();
+    	}
+    	else if (secret[2] == 'R' || secret[2] == 'Y') {
+    		bool compressed = secret[2] == 'Y';
+    		// Without EC
+    		// passwd = "TestingOneTwoThree";
+			priv_data = decrypt_bip38(priv_data, passwd.toStdString());
+			key.Set(priv_data.begin(), priv_data.end(), compressed);
+			secret = CBitcoinSecret(key).ToString();
+    	}
+    	else {
+    		QMessageBox::information(this, tr(""), QString::fromStdString("This BIP38 mode is not implemented"));
+    		return;
+    	}
+    }
+    else {
+    	// use secret as is
+    }
+
+//	QMessageBox::information(this, tr("Info"), QString::fromStdString(secret));
+//	return;
 
     params.push_back(json_spirit::Value(secret.c_str()));
     params.push_back(json_spirit::Value(label_str.toStdString().c_str()));
@@ -223,21 +272,34 @@ void GenAndPrintDialog::on_printButton_clicked()
     ui->passEdit3->setText("");
     
     CKey secret = model->generateNewKey();
+    // Test key to encrypt
+    //std::string test_str = "CBF4B9F70470856BB4F40F80B87EDB90865997FFEE6DF315AB166D713AF433A5";
+    //std::vector<unsigned char> test_data = decode_base16(test_str);
+    //CKey secret = CKey();
+    //secret.Set(test_data.begin(), test_data.end(), false);
+
     CPrivKey privkey = secret.GetPrivKey();
     CPubKey pubkey = secret.GetPubKey();
     CKeyID keyid = pubkey.GetID();
     
     std::string secret_str = CBitcoinSecret(secret).ToString();
-    std::string pubkey_str = CBitcoinAddress(keyid).ToString();
+    std::string address = CBitcoinAddress(keyid).ToString();
     
     QString qsecret = QString::fromStdString(secret_str);
-    QString qaddress = QString::fromStdString(pubkey_str);
+    QString qaddress = QString::fromStdString(address);
     
-    std::vector<unsigned char> crypted_key;
-    model->encryptKey(secret,  passwd.toStdString(), salt, crypted_key);
-    std::string crypted = EncodeBase58(crypted_key);
+    std::vector<unsigned char> priv_data;
+    for (const unsigned char *i = secret.begin(); i != secret.end(); i++ ) {
+    	priv_data.push_back(*i);
+    }
+
+    // Test address (BTC) for key above
+    //address = "1Jq6MksXQVWzrznvZzxkV6oY57oWXD9TXB";
+
+    std::vector<unsigned char> crypted_key = encrypt_bip38(priv_data, address, passwd.toStdString());
+    std::string crypted = EncodeBase58Check(crypted_key);
+
     QString qcrypted = QString::fromStdString(crypted);
-    
     QPrinter printer;
     printer.setResolution(QPrinter::ScreenResolution);
     printer.setPageMargins(0, 10, 0, 0, QPrinter::Millimeter);
