@@ -1595,7 +1595,7 @@ bool CBudgetVote::SignatureValid(bool fSignatureCheck)
 
     if(pmn == NULL)
     {
-        LogPrintf("CBudgetVote::SignatureValid() - Unknown Masternode - %s\n", vin.ToString());
+        LogPrint("mnbudget", "CBudgetVote::SignatureValid() - Unknown Masternode - %s\n", vin.ToString());
         return false;
     }
 
@@ -2012,7 +2012,7 @@ bool CFinalizedBudgetVote::SignatureValid(bool fSignatureCheck)
 
     if(pmn == NULL)
     {
-        LogPrintf("CFinalizedBudgetVote::SignatureValid() - Unknown Masternode\n");
+        LogPrint("mnbudget", "CFinalizedBudgetVote::SignatureValid() - Unknown Masternode\n");
         return false;
     }
 
