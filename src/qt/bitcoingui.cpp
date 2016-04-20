@@ -307,7 +307,7 @@ void BitcoinGUI::createActions(const NetworkStyle *networkStyle)
 #endif
     tabGroup->addAction(historyAction);
 
-    goodsAction = new QAction(QIcon(":/icons/history"), tr("&Goods&&&Services"), this);
+    goodsAction = new QAction(QIcon(":/icons/shopping_cart"), tr("&Goods&&&Services"), this);
     goodsAction->setStatusTip(tr("Show links to services that accept sibcoins"));
     goodsAction->setToolTip(goodsAction->statusTip());
     goodsAction->setCheckable(true);
