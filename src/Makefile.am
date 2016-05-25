@@ -245,6 +245,7 @@ libbitcoin_wallet_a_SOURCES = \
   bip/sha256.c \
   bip/crypto.c \
   bip/bip38.cpp \
+  $(BIP_H) \
   $(BITCOIN_CORE_H) 
 
 # crypto primitives library
