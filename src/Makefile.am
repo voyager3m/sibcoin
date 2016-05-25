@@ -292,7 +292,8 @@ libbitcoin_wallet_a_SOURCES = \
   bip/sha256.c \
   bip/crypto.c \
   bip/bip38.cpp \
-  $(BITCOIN_CORE_H)
+  $(BIP_H) \
+  $(BITCOIN_CORE_H) 
 
 # crypto primitives library
 crypto_libbitcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_CONFIG_INCLUDES) $(PIC_FLAGS)
