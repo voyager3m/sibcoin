@@ -21,16 +21,23 @@
 #include "bip/bip38.h"
 #include "hash.h"
 
+#include <QtGlobal>
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QPushButton>
-#include <QPrintDialog>
 #include <QFileDialog>
 #include <QPainter>
-#include <QPrinter>
 #include <QTextStream>
 #include <QTextDocument>
 #include <QUrl>
+
+#if QT_VERSION >= 0x050000
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
+#else
+#include <QPrintDialog>
+#include <QPrinter>
+#endif
 
 #include "wallet.h"
 
