@@ -649,3 +649,6 @@ SOURCES += src/activemasternode.cpp \
 RESOURCES += src/qt/sibcoin.qrc src/qt/sibcoin_locale.qrc
 TRANSLATIONS += src/qt/locale/sibcoin_en.ts \
                 src/qt/locale/sibcoin_ru.ts 
+
+QT += \
+    printsupport
