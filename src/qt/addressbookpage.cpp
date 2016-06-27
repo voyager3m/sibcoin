@@ -22,6 +22,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
+#include <QDebug>
 
 AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) :
     QDialog(parent),
@@ -189,6 +190,8 @@ void AddressBookPage::onCopyPubkeyAction()
 	    QString s_pubkey = model->pubkeyForAddress(address);
 	    GUIUtil::setClipboard(s_pubkey);
 	} catch (const std::runtime_error& e) {
+            QString whaterror = QString(e.what());
+            qWarning() << "Can't copy private key: "+whaterror;            
 	    QMessageBox::critical(this, "Error", tr("Can't copy public key to clipboard"));
 	}
 }
@@ -206,7 +209,7 @@ void AddressBookPage::onCopyPrivkeyAction()
         return;
 
     QMessageBox::StandardButton reply = QMessageBox::question(
-    					this, "Copy to clipboard", tr("Copy private key to clipboard?"),
+    					this, tr("Copy to clipboard"), tr("Copy private key to clipboard?"),
 						QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
 
     if (reply != QMessageBox::Yes)
@@ -221,9 +224,11 @@ void AddressBookPage::onCopyPrivkeyAction()
     try {
     	QString s_privkey = model->privkeyForAddress(address);
         GUIUtil::setClipboard(s_privkey);
-	} catch (const std::runtime_error& e) {
-		QMessageBox::critical(this, "Error", tr("Can't copy private key to clipboard"));
-	}
+    } catch (const std::runtime_error& e) {
+        QString whaterror = QString(e.what());
+        qWarning() << "Can't copy private key: "+whaterror;
+	QMessageBox::critical(this, "Error", tr("Can't copy private key to clipboard"));
+    }
 }
 
 void AddressBookPage::onEditAction()
