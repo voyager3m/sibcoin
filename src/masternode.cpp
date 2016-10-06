@@ -385,21 +385,22 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
         return false;
     }
 
-    // In dash this commit also prepares changes for protocol version
-    // we will pick it up later if needed
     std::string strMessage;
-    
-    std::string vchPubKey(pubkey.begin(), pubkey.end());
-    std::string vchPubKey2(pubkey2.begin(), pubkey2.end());
-    strMessage = addr.ToString() + boost::lexical_cast<std::string>(sigTime) + vchPubKey + vchPubKey2 + boost::lexical_cast<std::string>(protocolVersion);
-    
+    if(protocolVersion < 70201) {
+        std::string vchPubKey(pubkey.begin(), pubkey.end());
+        std::string vchPubKey2(pubkey2.begin(), pubkey2.end());
+        strMessage = addr.ToString() + boost::lexical_cast<std::string>(sigTime) + vchPubKey + vchPubKey2 + boost::lexical_cast<std::string>(protocolVersion);
+    } else {
+        strMessage = addr.ToString() + boost::lexical_cast<std::string>(sigTime) +
+                        pubkey.GetID().ToString() + pubkey2.GetID().ToString() +
+                        boost::lexical_cast<std::string>(protocolVersion);
+}    
     
     std::string errorMessage = "";
     if(!darkSendSigner.VerifyMessage(pubkey, sig, strMessage, errorMessage)){
         LogPrintf("mnb - Got bad Masternode address signature\n");
-        // There is a bug in MN signatures, ignore such MN but do not ban the peer we got this from
-        // nDos = 100;
-        // nDos = protocolVersion < 70201 ? 0 : 100;
+        // There is a bug in old MN signatures, ignore such MN but do not ban the peer we got this from
+        nDos = protocolVersion < 70201 ? 0 : 100;
         return false;
     }
 
