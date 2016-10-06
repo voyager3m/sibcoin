@@ -403,12 +403,8 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
     std::string errorMessage = "";
     if(!darkSendSigner.VerifyMessage(pubkey, sig, strMessage, errorMessage)){
         LogPrintf("mnb - Got bad Masternode address signature\n");
-        if (protocolVersion < MIN_MASTERNODE_PAYMENT_PROTO_VERSION_2 && !IsSporkActive(SPORK_10_MASTERNODE_PAY_UPDATED_NODES)){        
-            nDos = 1;
-        } else {
-            nDos = 100;
-        }
-        
+        // There is a bug in MN signatures, ignore such MN but do not ban the peer we got this from
+        // nDos = 100;
         return false;
     }
 
