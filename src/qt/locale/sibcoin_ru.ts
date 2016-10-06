@@ -17,10 +17,10 @@
         <location line="+1"/>
         <source>Copyright &amp;copy; 2009-2014 The Bitcoin Core developers.
 Copyright &amp;copy; 2014-YYYY The Dash Core developers.
-Copyright &amp;copy; YYYY The Sibcoin Core developers.</source>
+Copyright &amp;copy; 2015-YYYY The Sibcoin Core developers.</source>
         <translation>Copyright &amp;copy; 2009-2014 Разработчики Bitcoin Core.
 Copyright &amp;copy; 2014-YYYY Разработчики Dash Core.
-Copyright &amp;copy; YYYY Разработчики Sibcoin Core.</translation>
+Copyright &amp;copy; 2015-YYYY Разработчики Sibcoin Core.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -5022,8 +5022,8 @@ rpcpassword=%s
         <translation>Copyright (C) 2014-%i Разработчики Dash Core</translation>
     </message>
     <message>
-        <source>Copyright (C) %i The Sibcoin Core Developers</source>
-        <translation>Copyright (C) %i Разработчики Sibcoin Core</translation>
+        <source>Copyright (C) 2015-%i The Sibcoin Core Developers</source>
+        <translation>Copyright (C) 2015-%i Разработчики Sibcoin Core</translation>
     </message>
     <message>
         <source>Could not parse -rpcbind value %s as network address</source>

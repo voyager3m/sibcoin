@@ -17,7 +17,7 @@
         <location line="+1"/>
         <source>Copyright &amp;copy; 2009-2014 The Bitcoin Core developers.
 Copyright &amp;copy; 2014-YYYY The Dash Core developers.
-Copyright &amp;copy; YYYY The Sibcoin Core developers.</source>
+Copyright &amp;copy; 2015-YYYY The Sibcoin Core developers.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
