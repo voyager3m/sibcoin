@@ -74,8 +74,6 @@ CMasternode::CMasternode()
     nScanningErrorCount = 0;
     nLastScanningErrorBlockHeight = 0;
     lastTimeChecked = 0;
-    nLastDsee = 0;// temporary, do not save. Remove after migration to v12
-    nLastDseep = 0;// temporary, do not save. Remove after migration to v12
 }
 
 CMasternode::CMasternode(const CMasternode& other)
@@ -98,8 +96,6 @@ CMasternode::CMasternode(const CMasternode& other)
     nScanningErrorCount = other.nScanningErrorCount;
     nLastScanningErrorBlockHeight = other.nLastScanningErrorBlockHeight;
     lastTimeChecked = 0;
-    nLastDsee = other.nLastDsee;// temporary, do not save. Remove after migration to v12
-    nLastDseep = other.nLastDseep;// temporary, do not save. Remove after migration to v12
 }
 
 CMasternode::CMasternode(const CMasternodeBroadcast& mnb)
@@ -122,8 +118,6 @@ CMasternode::CMasternode(const CMasternodeBroadcast& mnb)
     nScanningErrorCount = 0;
     nLastScanningErrorBlockHeight = 0;
     lastTimeChecked = 0;
-    nLastDsee = 0;// temporary, do not save. Remove after migration to v12
-    nLastDseep = 0;// temporary, do not save. Remove after migration to v12
 }
 
 //
@@ -363,15 +357,6 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
         return false;
     }
 
-    std::string vchPubKey(pubkey.begin(), pubkey.end());
-    std::string vchPubKey2(pubkey2.begin(), pubkey2.end());
-    std::string strMessage = addr.ToString() + boost::lexical_cast<std::string>(sigTime) + vchPubKey + vchPubKey2 + boost::lexical_cast<std::string>(protocolVersion);
-
-    if (protocolVersion < MIN_MASTERNODE_PAYMENT_PROTO_VERSION_2 && !IsSporkActive(SPORK_10_MASTERNODE_PAY_UPDATED_NODES)){
-        // v15 kostil
-        strMessage = strMessage + "0";
-    }    
-    
     if(protocolVersion < masternodePayments.GetMinMasternodePaymentsProto()) {
         LogPrintf("mnb - ignoring outdated Masternode %s protocol version %d\n", vin.ToString(), protocolVersion);
         return false;
@@ -400,11 +385,21 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
         return false;
     }
 
+    // In dash this commit also prepares changes for protocol version
+    // we will pick it up later if needed
+    std::string strMessage;
+    
+    std::string vchPubKey(pubkey.begin(), pubkey.end());
+    std::string vchPubKey2(pubkey2.begin(), pubkey2.end());
+    strMessage = addr.ToString() + boost::lexical_cast<std::string>(sigTime) + vchPubKey + vchPubKey2 + boost::lexical_cast<std::string>(protocolVersion);
+    
+    
     std::string errorMessage = "";
     if(!darkSendSigner.VerifyMessage(pubkey, sig, strMessage, errorMessage)){
         LogPrintf("mnb - Got bad Masternode address signature\n");
         // There is a bug in MN signatures, ignore such MN but do not ban the peer we got this from
         // nDos = 100;
+        // nDos = protocolVersion < 70201 ? 0 : 100;
         return false;
     }
 
