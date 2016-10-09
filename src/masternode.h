@@ -219,6 +219,8 @@ public:
 
     void Check(bool forceCheck = false);
 
+    bool IsValidNetAddr();
+
     bool IsBroadcastedWithin(int seconds)
     {
         return (GetAdjustedTime() - sigTime) < seconds;

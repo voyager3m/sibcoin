@@ -227,6 +227,14 @@ void CMasternode::Check(bool forceCheck)
     activeState = MASTERNODE_ENABLED; // OK
 }
 
+bool CMasternode::IsValidNetAddr()
+{
+    // TODO: regtest is fine with any addresses for now,
+    // should probably be a bit smarter if one day we start to implement tests for this
+    return Params().NetworkIDString() == CBaseChainParams::REGTEST ||
+            (addr.IsIPv4() && IsReachable(addr) && addr.IsRoutable());
+}
+
 int64_t CMasternode::SecondsSincePayment() {
     CScript pubkeyScript;
     pubkeyScript = GetScriptForDestination(pubkey.GetID());
