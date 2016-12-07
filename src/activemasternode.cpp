@@ -266,6 +266,14 @@ bool CActiveMasternode::CreateBroadcast(CTxIn vin, CService service, CKey keyCol
     }
 
     mnb = CMasternodeBroadcast(service, vin, pubKeyCollateralAddress, pubKeyMasternode, PROTOCOL_VERSION);
+    
+    if(!mnb.IsValidNetAddr()) {
+        errorMessage = strprintf("Invalid IP address, vin=%s", vin.ToString());
+        LogPrintf("CActiveMasternode::CreateBroadcast() -- %s\n", errorMessage);
+        mnb = CMasternodeBroadcast();
+        return false;
+    }    
+    
     mnb.lastPing = mnp;
     if(!mnb.Sign(keyCollateralAddress)){
         errorMessage = strprintf("Failed to sign broadcast, vin: %s", vin.ToString());
