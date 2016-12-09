@@ -1,6 +1,6 @@
 /* $Id: gost.c 259 2011-07-19 22:11:27Z tp $ */
 /*
- * Keccak implementation.
+ * GOST R 34.11-2012 implementation.
  *
  * ==========================(LICENSE BEGIN)============================
  *
