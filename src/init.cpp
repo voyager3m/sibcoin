@@ -221,6 +221,9 @@ void PrepareShutdown()
 #ifdef ENABLE_WALLET
     if (pwalletMain)
         pwalletMain->Flush(false);
+    if (psibDB)
+        psibDB->Close();
+    //GenerateBitcoins(false, NULL, 0);
 #endif
     GenerateBitcoins(false, 0, Params());
     StopNode();
