@@ -170,6 +170,8 @@ void PrepareShutdown()
 #ifdef ENABLE_WALLET
     if (pwalletMain)
         bitdb.Flush(false);
+    if (psibDB)
+        psibDB->Close();
     GenerateBitcoins(false, NULL, 0);
 #endif
     StopNode();
