@@ -1,11 +1,11 @@
-SibCore staging tree
+Sibcoin Core staging tree
 ===============================
 
-Copyright (c) 2009-2015 Bitcoin Core Developers
+Copyright (c) 2009-2016 Bitcoin Core Developers
 
-Copyright (c) 2014-2015 Dash Core Developers
+Copyright (c) 2014-2016 Dash Core Developers
 
-Copyright (c) 2014-2015 Sib Core Developers
+Copyright (c) 2014-2016 Sibcoin Core Developers
 
 
 What is Sibcoin?
