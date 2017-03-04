@@ -1,6 +1,6 @@
-// Copyright (c) 2011-2014 The Bitcoin developers
-// Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015 The Sibcoin developers
+// Copyright (c) 2011-2016 The Bitcoin developers
+// Copyright (c) 2014-2017 The Dash developers
+// Copyright (c) 2015-2017 The Sibcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -639,10 +639,10 @@ boost::filesystem::path static StartupShortcutPath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Dash.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Sibcoin.lnk";
     if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Dash (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Dash (%s).lnk", chain);
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Sibcoin (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Sibcoin (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -739,8 +739,8 @@ boost::filesystem::path static GetAutostartFilePath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "dash.desktop";
-    return GetAutostartDir() / strprintf("dash-%s.lnk", chain);
+        return GetAutostartDir() / "sibcoin.desktop";
+    return GetAutostartDir() / strprintf("sibcoin-%s.lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -779,13 +779,13 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         if (!optionFile.good())
             return false;
         std::string chain = ChainNameFromCommandLine();
-        // Write a dash.desktop file to the autostart directory:
+        // Write a sibcoin.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == CBaseChainParams::MAIN)
-            optionFile << "Name=Dash\n";
+            optionFile << "Name=Sibcoin\n";
         else
-            optionFile << strprintf("Name=Bitcoin (%s)\n", chain);
+            optionFile << strprintf("Name=Sibcoin (%s)\n", chain);
         optionFile << "Exec=" << pszExePath << strprintf(" -min -testnet=%d -regtest=%d\n", GetBoolArg("-testnet", false), GetBoolArg("-regtest", false));
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
