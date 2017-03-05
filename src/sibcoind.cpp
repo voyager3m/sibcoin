@@ -71,7 +71,7 @@ bool AppInit(int argc, char* argv[])
     //
     // Parameters
     //
-    // If Qt is used, parameters/dash.conf are parsed in qt/dash.cpp's main()
+    // If Qt is used, parameters/sibcoin.conf are parsed in qt/sibcoin.cpp's main()
     ParseParameters(argc, argv);
 
     // Process help and version before taking care about datadir
