@@ -42,6 +42,7 @@
      </property>
      <property name="topMargin">
       <number>0</number>
+     </property>
      <property name="pixmap">
       <pixmap resource="../sibcoin.qrc">:/images/about</pixmap>
      </property>
