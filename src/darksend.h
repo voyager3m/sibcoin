@@ -240,7 +240,7 @@ class CDarkSendSigner
 {
 public:
     /// Is the inputs associated with this public key? (and there is 1000 SIB - checking if valid masternode)
-    bool IsVinAssociatedWithPubkey(CTxIn& vin, CPubKey& pubkey);
+    bool IsVinAssociatedWithPubkey(const CTxIn& vin, const CPubKey& pubkey);
     /// Set the private/public key values, returns true if successful
     bool GetKeysFromSecret(std::string strSecret, CKey& keyRet, CPubKey& pubkeyRet);
     /// Sign the message, returns true if successful
