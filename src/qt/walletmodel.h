@@ -144,7 +144,7 @@ public:
     CAmount getWatchImmatureBalance() const;
     EncryptionStatus getEncryptionStatus() const;
     CKey generateNewKey() const;
-    bool setAddressBook(const CTxDestination& address, const string& strName, const string& strPurpose);
+    bool setAddressBook(const CTxDestination& address, const std::string& strName, const std::string& strPurpose);
     void encryptKey(const CKey key, const std::string &pwd, const std::string &slt, std::vector<unsigned char> &crypted);
     void decryptKey(const std::vector<unsigned char> &crypted, const std::string &slt, const std::string &pwd, CKey &key);
 
