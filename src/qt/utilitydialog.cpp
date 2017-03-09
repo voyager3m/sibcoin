@@ -220,7 +220,7 @@ HelpSibcoinDialog::HelpSibcoinDialog(QWidget *parent) :
     htmlContent = in.readAll();
     
     // Set help message text
-    ui->helpMessageLabel->setText(htmlContent);
+    ui->aboutMessage->setText(htmlContent);
 }
 
 HelpSibcoinDialog::~HelpSibcoinDialog()
