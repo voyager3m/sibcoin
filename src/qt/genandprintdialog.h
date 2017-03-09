@@ -41,7 +41,7 @@ private:
     std::string salt;
     QString uri;
    
-private slots:
+private Q_SLOTS:
     void textChanged();
 
     /** Print button clicked */
