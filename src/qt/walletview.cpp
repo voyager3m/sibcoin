@@ -382,7 +382,7 @@ void WalletView::genAndPrintAddresses()
         			"that paper wallet has been printed successfully!"));
 
         QString uri = dlg.getURI();
-        emit receivedURI(uri);
+        Q_EMIT receivedURI(uri);
     }
 }
 

@@ -23,7 +23,7 @@
 #include "darksend.h"
 #include "instantx.h"
 #include "spork.h"
-#include "../crypter.h"
+#include "wallet/crypter.h"
 
 #include <stdint.h>
 
