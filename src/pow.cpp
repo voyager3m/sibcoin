@@ -147,7 +147,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         else retarget = DIFF_BTC;
     // testnet -- we want a lot of coins in existance early on 
     } else {
-        if (pindexLast->nHeight + 1 >= 3000) retarget = DIFF_DGW;
+        if (pindexLast->nHeight + 1 >= 2000) retarget = DIFF_DGW;
         else retarget = DIFF_BTC;
     }
 
@@ -182,8 +182,13 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
             return pindexLast->nBits;
         }
 
+        // legacy for testnet
+        int64_t blockstogoback = params.DifficultyAdjustmentInterval()-1;
+        if ((pindexLast->nHeight+1) != params.DifficultyAdjustmentInterval())
+            blockstogoback = params.DifficultyAdjustmentInterval();   
+        
         // Go back by what we want to be 1 day worth of blocks
-        int nHeightFirst = pindexLast->nHeight - (params.DifficultyAdjustmentInterval()-1);
+        int nHeightFirst = pindexLast->nHeight - blockstogoback;
         assert(nHeightFirst >= 0);
         const CBlockIndex* pindexFirst = pindexLast->GetAncestor(nHeightFirst);
         assert(pindexFirst);
