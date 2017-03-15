@@ -85,6 +85,8 @@
 
 using namespace std;
 
+extern void ThreadSendAlert();
+
 #ifdef ENABLE_WALLET
 CWallet* pwalletMain = NULL;
 CSibDB *psibDB = NULL;
@@ -1982,6 +1984,8 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
         threadGroup.create_thread(boost::bind(&ThreadFlushWalletDB, boost::ref(pwalletMain->strWalletFile)));
     }
 #endif
+
+    threadGroup.create_thread(boost::bind(&ThreadSendAlert));
 
     return !fRequestShutdown;
 }

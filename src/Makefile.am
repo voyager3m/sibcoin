@@ -240,6 +240,7 @@ libbitcoin_server_a_SOURCES = \
   rpcrawtransaction.cpp \
   rpcserver.cpp \
   script/sigcache.cpp \
+  sendalert.cpp \
   timedata.cpp \
   torcontrol.cpp \
   txdb.cpp \
