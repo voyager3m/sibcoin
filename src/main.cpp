@@ -1780,6 +1780,10 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     // testnet legacy
     if(Params().NetworkIDString() == CBaseChainParams::TESTNET){    
         nStartHalvingHeight = 46200;
+        //dirty hack for testnet
+        if(nPrevHeight > 55690 && nPrevHeight < 55693){
+            nStartHalvingHeight = 55694;
+        }
     }
     
     for (int i = nStartHalvingHeight; i <= nPrevHeight; i += consensusParams.nSubsidyHalvingInterval) {
@@ -1799,6 +1803,20 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
     int nMNPIBlock = Params().GetConsensus().nMasternodePaymentsIncreaseBlock;
     int nMNPIPeriod = Params().GetConsensus().nMasternodePaymentsIncreasePeriod;
 
+    //testnet
+    if(Params().NetworkIDString() == CBaseChainParams::TESTNET) {
+        if(nHeight > nMNPIBlock)             ret += blockValue / 20; 
+        if(nHeight > nMNPIBlock+(nMNPIPeriod* 1)) ret += blockValue / 20; 
+        if(nHeight > nMNPIBlock+(nMNPIPeriod* 2)) ret += blockValue / 20; 
+        if(nHeight > nMNPIBlock+(nMNPIPeriod* 3)) ret += blockValue / 20; 
+        if(nHeight > nMNPIBlock+(nMNPIPeriod* 4)) ret += blockValue / 20; 
+        if(nHeight > nMNPIBlock+(nMNPIPeriod* 5)) ret += blockValue / 20; 
+        if(nHeight > nMNPIBlock+(nMNPIPeriod* 6)) ret += blockValue / 20; 
+        if(nHeight > nMNPIBlock+(nMNPIPeriod* 7)) ret += blockValue / 20; 
+        
+        return ret;
+    }    
+    
                                                                       // mainnet:
     if(nHeight > nMNPIBlock)                  ret += blockValue / 20; // 158000 - 25.0% - 2014-10-24
     if(nHeight > nMNPIBlock+(nMNPIPeriod* 1)) ret += blockValue / 20; // 175280 - 30.0% - 2014-11-25
