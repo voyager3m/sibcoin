@@ -84,7 +84,7 @@ In a typical situation, where you're only reachable via Tor, this should suffice
 listen on all devices and another node could establish a clearnet connection, when knowing
 your address. To mitigate this, additionally bind the address of your Tor proxy:
 
-	./dashd ... -bind=127.0.0.1
+	./sibcoind ... -bind=127.0.0.1
 
 If you don't care too much about hiding your node, and want to be reachable on IPv4
 as well, use `discover` instead:
@@ -120,14 +120,14 @@ for normal IPv4/IPv6 communication, use:
 
 Starting with Tor version 0.2.7.1 it is possible, through Tor's control socket
 API, to create and destroy 'ephemeral' hidden services programmatically.
-Dash Core has been updated to make use of this.
+Sibcoin Core has been updated to make use of this.
 
 This means that if Tor is running (and proper authorization is available),
-Dash Core automatically creates a hidden service to listen on, without
+Sibcoin Core automatically creates a hidden service to listen on, without
 manual configuration. This will positively affect the number of available
 .onion nodes.
 
-This new feature is enabled by default if Dash Core is listening, and
+This new feature is enabled by default if Sibcoin Core is listening, and
 a connection to Tor can be made. It can be configured with the `-listenonion`,
 `-torcontrol` and `-torpassword` settings. To show verbose debugging
 information, pass `-debug=tor`.

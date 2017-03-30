@@ -1,6 +1,6 @@
-Dash Core version 0.12.1 is now available from:
+Sibcoin Core version 0.16.1 is now available from:
 
-  <https://www.dash.org/downloads/>
+  <https://www.sibcoin.org/downloads/>
 
 
 
@@ -13,14 +13,14 @@ Dash was previously known as Darkcoin.
 Darkcoin tree 0.8.x was a fork of Litecoin tree 0.8, original name was XCoin
 which was first released on Jan/18/2014.
 
-### Downgrade to a version < 0.12.0
+### Downgrade to a version < 0.16.0
 
-Because release 0.12.0 and later will obfuscate the chainstate on every
+Because release 0.16.0 and later will obfuscate the chainstate on every
 fresh sync or reindex, the chainstate is not backwards-compatible with
-pre-0.12 versions of Bitcoin Core or other software.
+pre-0.16 versions of Sibcoin Core or other software.
 
-If you want to downgrade after you have done a reindex with 0.12.0 or later,
-you will need to reindex when you first start Bitcoin Core version 0.11 or
+If you want to downgrade after you have done a reindex with 0.16.0 or later,
+you will need to reindex when you first start Sitcoin Core version 0.15 or
 earlier.
 
 Notable changes
@@ -31,7 +31,7 @@ Example item
 
 Example text.
 
-0.12.1 Change log
+0.16.1 Change log
 =================
 
 Detailed release notes follow. This overview includes changes that affect
@@ -103,6 +103,10 @@ Dash Core tree 0.11.x was a fork of Bitcoin Core tree 0.9, Darkcoin was rebrande
 to Dash.
 
 Dash Core tree 0.12.0.x was a fork of Bitcoin Core tree 0.10.
+
+Sibcoin Core tree 0.15.x was a fork of Dash Core tree 0.11.
+
+Sibcoin Core tree 0.16.0.x was a fork of Dash Core tree 0.12.0.x.
 
 These release are considered obsolete. Old changelogs can be found here:
 
