@@ -2328,6 +2328,10 @@ https://www.transifex.com/projects/p/sibcoin/</translation>
         <translation>Начать/остановить автоматическое перемешивание</translation>
     </message>
     <message>
+        <source>PrivateSend Balance:</source>
+        <translation>Баланс PrivateSend:</translation>
+    </message>
+    <message>
         <location line="-917"/>
         <source>Balances</source>
         <translation>Баланс</translation>
