@@ -891,9 +891,9 @@ bool CGovernanceManager::MasternodeRateCheck(const CGovernanceObject& govobj, up
     CRateCheckBuffer* pBuffer = NULL;
     switch(nObjectType) {
     case GOVERNANCE_OBJECT_TRIGGER:
-        // Allow 1 trigger per mn per cycle, with a small fudge factor
+        // Allow 3 trigger per mn per cycle, with a small fudge factor
         pBuffer = &it->second.triggerBuffer;
-        dMaxRate = 2 * 1.1 / double(nSuperblockCycleSeconds);
+        dMaxRate = 6 * 1.1 / double(nSuperblockCycleSeconds);
         break;
     case GOVERNANCE_OBJECT_WATCHDOG:
         pBuffer = &it->second.watchdogBuffer;
