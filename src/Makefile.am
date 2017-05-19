@@ -5,10 +5,9 @@ AM_CXXFLAGS = $(HARDENED_CXXFLAGS)
 AM_CPPFLAGS = $(HARDENED_CPPFLAGS)
 EXTRA_LIBRARIES =
 
-BIP_CPPFLAGS = -I$(srcdir)/bip -msse2
 
 BITCOIN_CONFIG_INCLUDES=-I$(builddir)/config
-BITCOIN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(BIP_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS) $(BIP_CPPFLAGS)
+BITCOIN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
 
 BITCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
 BITCOIN_INCLUDES += -I$(srcdir)/univalue/include
@@ -187,15 +186,7 @@ BITCOIN_CORE_H = \
   zmq/zmqnotificationinterface.h \
   zmq/zmqpublishnotifier.h
 
-BIP_H = \
-  bip/config.h \
-  bip/scrypt_platform.h \
-  bip/crypto_aesctr.h \
-  bip/crypto_scrypt.h \
-  bip/sha256.h \
-  bip/sysendian.h \
-  bip/crypto.h \
-  bip/bip38.h
+
 
 obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
@@ -266,7 +257,6 @@ endif
 # when wallet enabled
 libbitcoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libbitcoin_wallet_a_CFLAGS = -fPIC
 libbitcoin_wallet_a_SOURCES = \
   activemasternode.cpp \
   darksend.cpp \
@@ -287,14 +277,6 @@ libbitcoin_wallet_a_SOURCES = \
   wallet/wallet_ismine.cpp \
   wallet/walletdb.cpp \
   policy/rbf.cpp \
-  bip/crypto_aesctr.c \
-  bip/crypto_scrypt-nosse.c \
-  bip/crypto_scrypt-ref.c \
-  bip/crypto_scrypt-sse.c \
-  bip/sha256.c \
-  bip/crypto.c \
-  bip/bip38.cpp \
-  $(BIP_H) \
   $(BITCOIN_CORE_H) 
 
 # crypto primitives library
