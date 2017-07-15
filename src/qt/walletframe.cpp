@@ -154,6 +154,13 @@ void WalletFrame::gotoGoodsPage()
         i.value()->gotoGoodsPage();
 }
 
+void WalletFrame::gotoOfferPage()
+{
+    QMap<QString, WalletView*>::const_iterator i;
+    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
+        i.value()->gotoOfferPage();
+}
+
 void WalletFrame::gotoSignMessageTab(QString addr)
 {
     WalletView *walletView = currentWalletView();

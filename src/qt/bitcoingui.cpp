@@ -80,6 +80,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     QMainWindow(parent),
     clientModel(0),
     sibModel(0),
+	offerModel(0),
     walletFrame(0),
     unitDisplayControl(0),
     labelEncryptionIcon(0),
@@ -100,6 +101,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     signMessageAction(0),
     verifyMessageAction(0),
     goodsAction(0),
+    offerAction(0),
     aboutAction(0),
     receiveCoinsAction(0),
     receiveCoinsMenuAction(0),
@@ -336,10 +338,22 @@ void BitcoinGUI::createActions()
 #ifdef Q_OS_MAC
     goodsAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_5));
 #else
-    historyAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_4));
+    goodsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
 #endif
     tabGroup->addAction(goodsAction);
     
+    offerAction = new QAction(QIcon(":/icons/offers"), tr("&Offers"), this);
+    offerAction->setStatusTip(tr("Show offers to buy/sell sibcoins"));
+    offerAction->setToolTip(offerAction->statusTip());
+    offerAction->setCheckable(true);
+#ifdef Q_OS_MAC
+    offerAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_6));
+#else
+    offerAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
+#endif
+    tabGroup->addAction(offerAction);
+
+
 #ifdef ENABLE_WALLET
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
@@ -373,6 +387,8 @@ void BitcoinGUI::createActions()
     connect(historyAction, SIGNAL(triggered()), this, SLOT(gotoHistoryPage()));
     connect(goodsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(goodsAction, SIGNAL(triggered()), this, SLOT(gotoGoodsPage()));
+    connect(offerAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    connect(offerAction, SIGNAL(triggered()), this, SLOT(gotoOfferPage()));
 #endif // ENABLE_WALLET
 
     quitAction = new QAction(QIcon(":/icons/" + theme + "/quit"), tr("E&xit"), this);
@@ -588,6 +604,7 @@ void BitcoinGUI::createToolBars()
             toolbar->addAction(masternodeAction);
         }
         toolbar->addAction(goodsAction);        
+        toolbar->addAction(offerAction);
         toolbar->setMovable(false); // remove unused icon in upper left corner
         overviewAction->setChecked(true);
 
@@ -681,6 +698,11 @@ void BitcoinGUI::setSibModel(SibModel *sibModel)
     this->sibModel = sibModel;
 }
 
+void BitcoinGUI::setOfferModel(OfferModel *offerModel)
+{
+    this->offerModel = offerModel;
+}
+
 #ifdef ENABLE_WALLET
 bool BitcoinGUI::addWallet(const QString& name, WalletModel *walletModel)
 {
@@ -720,6 +742,7 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
         masternodeAction->setEnabled(enabled);
     }
     goodsAction->setEnabled(enabled);
+    offerAction->setEnabled(enabled);
     encryptWalletAction->setEnabled(enabled);
     backupWalletAction->setEnabled(enabled);
     changePassphraseAction->setEnabled(enabled);
@@ -909,6 +932,12 @@ void BitcoinGUI::gotoGoodsPage()
 {
     goodsAction->setChecked(true);
     if (walletFrame) walletFrame->gotoGoodsPage();
+}
+
+void BitcoinGUI::gotoOfferPage()
+{
+    offerAction->setChecked(true);
+    if (walletFrame) walletFrame->gotoOfferPage();
 }
 
 void BitcoinGUI::gotoReceiveCoinsPage()
