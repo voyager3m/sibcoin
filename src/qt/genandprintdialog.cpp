@@ -163,12 +163,16 @@ void GenAndPrintDialog::on_importButton_clicked()
 {
     UniValue params;
 
+    params.setArray();
+
     QString privkey_str = ui->passEdit1->text();
     QString passwd = ui->passEdit2->text();
     QString label_str = ui->passEdit3->text();
     std::string secret = privkey_str.toStdString();
     std::vector<unsigned char> priv_data;
     
+    LogPrintf("on_importButton_clicked\n");
+
     // test keys for bip38
     // With EC
 	// secret = "6PfLGnQs6VZnrNpmVKfjotbnQuaJK4KZoPFrAjx1JMJUa1Ft8gnf5WxfKd";
@@ -202,9 +206,12 @@ void GenAndPrintDialog::on_importButton_clicked()
     		bool compressed = secret[2] == 'Y';
     		// Without EC
     		// passwd = "TestingOneTwoThree";
+    	    LogPrintf("decrypt_bip38\n");
+
 			priv_data = decrypt_bip38(priv_data, passwd.toStdString());
 			key.Set(priv_data.begin(), priv_data.end(), compressed);
 			secret = CBitcoinSecret(key).ToString();
+    	    LogPrintf("after: secret = CBitcoinSecret(key).ToString();\n");
     	}
     	else {
     		QMessageBox::information(this, tr(""), QString::fromStdString("This BIP38 mode is not implemented"));
@@ -215,13 +222,17 @@ void GenAndPrintDialog::on_importButton_clicked()
     	// use secret as is
     }
 
-//	QMessageBox::information(this, tr("Info"), QString::fromStdString(secret));
+	QMessageBox::information(this, tr("Info"), QString::fromStdString(secret));
 //	return;
 
-    params.push_back(UniValue(secret.c_str()));
+    bool b = params.push_back(UniValue(secret.c_str()));
+    LogPrintf("push_back returns: %d\n", b);
+
     params.push_back(UniValue(label_str.toStdString().c_str()));
 
     WalletModel::EncryptionStatus encStatus = model->getEncryptionStatus();
+    LogPrintf("encStatus %d;\n", encStatus);
+
     if(encStatus == model->Locked || encStatus == model->UnlockedForMixingOnly)
     {
         ui->importButton->setEnabled(false);
@@ -233,7 +244,7 @@ void GenAndPrintDialog::on_importButton_clicked()
             ui->importButton->setEnabled(true);
             return;
         }
-        
+    }
         try
         {
             importprivkey(params, false);
@@ -253,7 +264,7 @@ void GenAndPrintDialog::on_importButton_clicked()
             QMessageBox::critical(this, tr("Error"), tr("Private key import error"));
             ui->importButton->setEnabled(true);
         }
-    }    
+
 }
 
 bool readHtmlTemplate(const QString &res_name, QString &htmlContent)

@@ -206,6 +206,7 @@ std::vector<unsigned char> decrypt_bip38(const std::vector<unsigned char> enc_da
 
 	//#5. Decrypt encryptedpart1 to yield the remainder of seedb.
 	//decryptedhalf1 = Aes.dec(encryptedhalf1)
+    EVP_CIPHER_CTX_init(&de);
     EVP_DecryptInit_ex(&de, EVP_aes_256_cbc(), NULL, derivedhalf2, NULL);
     EVP_DecryptUpdate(&de, decryptedhalf1, &decrypt_len, encryptedhalf1, 16);
 
@@ -275,6 +276,7 @@ std::vector<unsigned char> encrypt_bip38(const std::vector<unsigned char> priv_k
     EVP_CIPHER_CTX_init(&en);
     EVP_EncryptInit_ex(&en, EVP_aes_256_cbc(), NULL, derivedhalf2, NULL);
     EVP_EncryptUpdate(&en, encryptedhalf1, &encrypt_len, part1, 16);
+    EVP_CIPHER_CTX_init(&en);
     EVP_EncryptInit_ex(&en, EVP_aes_256_cbc(), NULL, derivedhalf2, NULL);
     EVP_EncryptUpdate(&en, encryptedhalf2, &encrypt_len, part2, 16);
 
