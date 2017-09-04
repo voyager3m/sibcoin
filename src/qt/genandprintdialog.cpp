@@ -4,6 +4,7 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include <QApplication>
 #include "genandprintdialog.h"
 #include "ui_genandprintdialog.h"
 
@@ -161,6 +162,7 @@ void GenAndPrintDialog::textChanged()
 
 void GenAndPrintDialog::on_importButton_clicked()
 {
+    qApp->setOverrideCursor(Qt::WaitCursor);
     UniValue params;
 
     params.setArray();
@@ -179,10 +181,12 @@ void GenAndPrintDialog::on_importButton_clicked()
     // Without EC
 	// secret = "6PRVWUbkzzsbcVac2qwfssoUJAN1Xhrg6bNk8J7Nzm5H7kxEbn2Nh2ZoGg";
 
-	if (!DecodeBase58(secret, priv_data)) {
+    if (!DecodeBase58(secret, priv_data)) {
         LogPrintf("DecodeBase58 failed: str=%s\n", secret.c_str());
+        qApp->setOverrideCursor(Qt::ArrowCursor);
+        QMessageBox::critical(this, tr("Error"), tr("Import error: Incorrect key format"));
         return;
-	}
+    }
 
     CKey key;
     model->decryptKey(priv_data, passwd.toStdString(), salt, key);
@@ -214,6 +218,7 @@ void GenAndPrintDialog::on_importButton_clicked()
     	    LogPrintf("after: secret = CBitcoinSecret(key).ToString();\n");
     	}
     	else {
+            qApp->setOverrideCursor(Qt::ArrowCursor);
     		QMessageBox::information(this, tr(""), QString::fromStdString("This BIP38 mode is not implemented"));
     		return;
     	}
@@ -240,38 +245,44 @@ void GenAndPrintDialog::on_importButton_clicked()
         if(!ctx.isValid())
         {
             // Unlock wallet was cancelled
+            qApp->setOverrideCursor(Qt::ArrowCursor);
             QMessageBox::critical(this, tr("Error"), tr("Cant import key into locked wallet"));
             ui->importButton->setEnabled(true);
             return;
-        }
+        }        
     }
-        try
-        {
-            importprivkey(params, false);
-            QMessageBox::information(this, tr(""), tr("Private key imported"));
-            close();
-        }
-        //catch (json_spirit::Object &err)
-        // TODO: Cant catch exception of type json_spirit::Object &
-        // To be investigate
-        catch (...)
-        {
-            std::cerr << "Import private key error!" << std::endl;            
+    
+    try
+    {
+        ui->importButton->setEnabled(false);
+        importprivkey(params, false);
+        qApp->setOverrideCursor(Qt::ArrowCursor);
+        QMessageBox::information(this, tr(""), tr("Private key imported"));
+        close();
+    }
+    //catch (json_spirit::Object &err)
+    // TODO: Cant catch exception of type json_spirit::Object &
+    // To be investigate
+    catch (...)
+    {
+        LogPrintf("Import private key error!\n");
 //            for (json_spirit::Object::iterator it = err.begin(); it != err.end(); ++it)
 //            {
 //                cerr << it->name_ << " = " << it->value_.get_str() << endl;
 //            }
-            QMessageBox::critical(this, tr("Error"), tr("Private key import error"));
-            ui->importButton->setEnabled(true);
-        }
+        qApp->setOverrideCursor(Qt::ArrowCursor);
+        QMessageBox::critical(this, tr("Error"), tr("Private key import error"));
+        ui->importButton->setEnabled(true);
+    }
 
+    qApp->setOverrideCursor(Qt::ArrowCursor);
 }
 
 bool readHtmlTemplate(const QString &res_name, QString &htmlContent)
 {
     QFile  htmlFile(res_name);
     if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-        std::cerr << "Cant open " << res_name.toStdString() << std::endl;
+        LogPrintf("Cant open %s\n", res_name.toStdString());
         return false;
     }
 
@@ -315,15 +326,14 @@ void GenAndPrintDialog::on_printButton_clicked()
     // Test address (BTC) for key above
     //address = "1Jq6MksXQVWzrznvZzxkV6oY57oWXD9TXB";
 
-    std::vector<unsigned char> crypted_key = encrypt_bip38(priv_data, address, passwd.toStdString());
+    std::vector<unsigned char> crypted_key = encrypt_bip38(priv_data, address, passwd.toStdString(), secret.IsCompressed());
     std::string crypted = EncodeBase58Check(crypted_key);
 
     QString qcrypted = QString::fromStdString(crypted);
-    QPrinter printer;
-    printer.setResolution(QPrinter::HighResolution);
-    printer.setPageMargins(0, 10, 0, 0, QPrinter::Millimeter);
+    QPrinter *printer = new QPrinter(QPrinter::HighResolution);
+    printer->setPageMargins(0, 10, 0, 0, QPrinter::Millimeter);
     
-    QPrintDialog *dlg = new QPrintDialog(&printer, this);
+    QPrintDialog *dlg = new QPrintDialog(printer, this);
     if(dlg->exec() == QDialog::Accepted) {
         
         QImage img1(200, 200, QImage::Format_ARGB32);
@@ -355,8 +365,8 @@ void GenAndPrintDialog::on_printButton_clicked()
         document->addResource(QTextDocument::ImageResource, QUrl(":qr1.png" ), img1);
         document->addResource(QTextDocument::ImageResource, QUrl(":qr2.png" ), img2);
         document->setHtml(html);
-        document->setPageSize(QSizeF(printer.pageRect().size()));
-        document->print(&printer);
+        document->setPageSize(QSizeF(printer->pageRect(QPrinter::Point).size()));
+        document->print(printer);
         
         model->setAddressBook(keyid, strAccount.toStdString(), "send");        
         SendCoinsRecipient rcp(qaddress, strAccount, 0, "");
@@ -365,6 +375,7 @@ void GenAndPrintDialog::on_printButton_clicked()
         accept();
     }
     delete dlg;
+    delete printer;
 }
 
 void GenAndPrintDialog::printAsQR(QPainter &painter, QString &vchKey, int shift)
