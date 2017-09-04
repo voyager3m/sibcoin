@@ -172,8 +172,6 @@ void GenAndPrintDialog::on_importButton_clicked()
     QString label_str = ui->passEdit3->text();
     std::string secret = privkey_str.toStdString();
     std::vector<unsigned char> priv_data;
-    
-    LogPrintf("on_importButton_clicked\n");
 
     // test keys for bip38
     // With EC
@@ -210,12 +208,9 @@ void GenAndPrintDialog::on_importButton_clicked()
     		bool compressed = secret[2] == 'Y';
     		// Without EC
     		// passwd = "TestingOneTwoThree";
-    	    LogPrintf("decrypt_bip38\n");
-
-			priv_data = decrypt_bip38(priv_data, passwd.toStdString());
-			key.Set(priv_data.begin(), priv_data.end(), compressed);
-			secret = CBitcoinSecret(key).ToString();
-    	    LogPrintf("after: secret = CBitcoinSecret(key).ToString();\n");
+                priv_data = decrypt_bip38(priv_data, passwd.toStdString());
+                key.Set(priv_data.begin(), priv_data.end(), compressed);
+                secret = CBitcoinSecret(key).ToString();
     	}
     	else {
             qApp->setOverrideCursor(Qt::ArrowCursor);
@@ -227,16 +222,14 @@ void GenAndPrintDialog::on_importButton_clicked()
     	// use secret as is
     }
 
-	QMessageBox::information(this, tr("Info"), QString::fromStdString(secret));
+//	QMessageBox::information(this, tr("Info"), QString::fromStdString(secret));
 //	return;
 
-    bool b = params.push_back(UniValue(secret.c_str()));
-    LogPrintf("push_back returns: %d\n", b);
+    params.push_back(UniValue(secret.c_str()));
 
     params.push_back(UniValue(label_str.toStdString().c_str()));
 
     WalletModel::EncryptionStatus encStatus = model->getEncryptionStatus();
-    LogPrintf("encStatus %d;\n", encStatus);
 
     if(encStatus == model->Locked || encStatus == model->UnlockedForMixingOnly)
     {

@@ -79,9 +79,6 @@ UniValue importprivkey(const UniValue& params, bool fHelp)
         return NullUniValue;
     
     if (fHelp || params.size() < 1 || params.size() > 3) {
-    	std::cerr << "params.size=" << params.size() << std::endl;
-        std::cerr << "throw runtime_error" << std::endl;
-
         throw runtime_error(
             "importprivkey \"sibcoinprivkey\" ( \"label\" rescan )\n"
             "\nAdds a private key (as returned by dumpprivkey) to your wallet.\n"
@@ -117,45 +114,32 @@ UniValue importprivkey(const UniValue& params, bool fHelp)
     if (params.size() > 2)
         fRescan = params[2].get_bool();
 
-    if (fRescan && fPruneMode) {
-        std::cerr << "Rescan is disabled in pruned mode" << std::endl;
+    if (fRescan && fPruneMode)
         throw JSONRPCError(RPC_WALLET_ERROR, "Rescan is disabled in pruned mode");
-    }
 
     CBitcoinSecret vchSecret;
     bool fGood = vchSecret.SetString(strSecret);
 
-    if (!fGood) {
-        std::cerr << "Invalid private key encoding" << std::endl;
-    	throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key encoding");
-    }
+    if (!fGood) throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key encoding");
 
     CKey key = vchSecret.GetKey();
-    if (!key.IsValid()) {
-        std::cerr << "Private key outside allowed range" << std::endl;
-    	throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Private key outside allowed range");
-    }
+    if (!key.IsValid()) throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Private key outside allowed range");
 
     CPubKey pubkey = key.GetPubKey();
     assert(key.VerifyPubKey(pubkey));
     CKeyID vchAddress = pubkey.GetID();
-    std::cerr << vchAddress.GetHex() << std::endl;
     {
         pwalletMain->MarkDirty();
         pwalletMain->SetAddressBook(vchAddress, strLabel, "receive");
 
         // Don't throw error in case a key is already there
-        if (pwalletMain->HaveKey(vchAddress)) {
-            std::cerr << "Private key already imported" << std::endl;
+        if (pwalletMain->HaveKey(vchAddress))
             return NullUniValue;
-    	}
 
         pwalletMain->mapKeyMetadata[vchAddress].nCreateTime = 1;
 
-        if (!pwalletMain->AddKeyPubKey(key, pubkey)) {
-            std::cerr << "Error adding key to wallet" << std::endl;
+        if (!pwalletMain->AddKeyPubKey(key, pubkey))
             throw JSONRPCError(RPC_WALLET_ERROR, "Error adding key to wallet");
-        }
 
         // whenever a key is imported, we need to scan the whole chain
         pwalletMain->nTimeFirstKey = 1; // 0 would be considered 'no value'
