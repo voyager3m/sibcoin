@@ -3764,7 +3764,7 @@ https://www.transifex.com/projects/p/sibcoin/</translation>
     </message>
     <message>
         <source>Pay only the required fee of %1</source>
-        <translation>Заплатить только требуюмую комиссию %1</translation>
+        <translation>Заплатить только требуемую комиссию %1</translation>
     </message>
     <message>
         <location line="+24"/>
