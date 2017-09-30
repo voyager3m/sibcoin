@@ -7,7 +7,7 @@ EXTRA_LIBRARIES =
 
 
 BITCOIN_CONFIG_INCLUDES=-I$(builddir)/config
-BITCOIN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
+BITCOIN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS) $(SQLITE_CPPFLAGS)
 
 BITCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
 BITCOIN_INCLUDES += -I$(srcdir)/univalue/include
@@ -417,6 +417,10 @@ if ENABLE_ZMQ
 sibcoind_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 endif
 
+if ENABLE_DEX
+sibcoind_LDADD += $(LIBDEXDB)
+endif
+
 if ENABLE_WALLET
 sibcoind_LDADD += libbitcoin_wallet.a
 endif
@@ -490,7 +494,7 @@ libbitcoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 endif
 #
 
-CLEANFILES = leveldb/libleveldb.a leveldb/libmemenv.a
+CLEANFILES = leveldb/libleveldb.a leveldb/libmemenv.a sqlite/libdexdb.a
 CLEANFILES += *.gcda *.gcno
 CLEANFILES += compat/*.gcda compat/*.gcno
 CLEANFILES += consensus/*.gcda consensus/*.gcno
@@ -559,4 +563,6 @@ if ENABLE_QT_TESTS
 include Makefile.qttest.include
 endif
 
+if ENABLE_DEX
 include Makefile.sqlite.include
+endif

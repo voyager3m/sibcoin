@@ -172,6 +172,9 @@ AC_ARG_ENABLE([debug],
     [enable_debug=no])
 
 AC_LANG_PUSH([C++])
+AX_CHECK_COMPILE_FLAG([-std=c++0x], [CXXFLAGS="$CXXFLAGS -std=c++0x"])
+AX_CHECK_COMPILE_FLAG([-fPIC], [CXXFLAGS="$CXXFLAGS -fPIC"])
+AX_CHECK_COMPILE_FLAG([-DBOOST_NO_CXX11_SCOPED_ENUMS], [CXXFLAGS="$CXXFLAGS -DBOOST_NO_CXX11_SCOPED_ENUMS"])
 AX_CHECK_COMPILE_FLAG([-Werror],[CXXFLAG_WERROR="-Werror"],[CXXFLAG_WERROR=""])
 
 if test "x$enable_debug" = xyes; then
@@ -218,6 +221,12 @@ AC_ARG_WITH([daemon],
   [build sibcoind daemon (default=yes)])],
   [build_bitcoind=$withval],
   [build_bitcoind=yes])
+
+AC_ARG_WITH([dex],
+  [AS_HELP_STRING([--with-dex],
+  [enable Decentralized EXchange (default=no)])],
+  [enable_dex=$withval],
+  [enable_dex=no])
 
 use_pkgconfig=yes
 case $host in
@@ -549,12 +558,16 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 CXXFLAGS="$TEMP_CXXFLAGS"
 
 LEVELDB_CPPFLAGS=
+SQLITE_CPPFLAGS=
 LIBLEVELDB=
+LIBDEXDB=
 LIBMEMENV=
 AM_CONDITIONAL([EMBEDDED_LEVELDB],[true])
 AC_SUBST(LEVELDB_CPPFLAGS)
 AC_SUBST(LIBLEVELDB)
+AC_SUBST(LIBDEXDB)
 AC_SUBST(LIBMEMENV)
+AC_SUBST(SQLITE_CPPFLAGS)
 
 if test x$enable_wallet != xno; then
     dnl Check for libdb_cxx only if wallet enabled
@@ -923,6 +936,16 @@ if test x$build_bitcoin_utils$build_bitcoin_libs$build_bitcoind$bitcoin_enable_q
   AC_MSG_ERROR([No targets! Please specify at least one of: --with-utils --with-libs --with-daemon --with-gui or --enable-tests])
 fi
 
+dnl enable DEX
+AC_MSG_CHECKING([if DEX should be enabled])
+if test x$enable_dex != xno; then
+  AC_MSG_RESULT(yes)
+  AC_CHECK_LIB([sqlite3],  [main],SQLITE_LIBS=-lsqlite3, AC_MSG_ERROR(sqlite3 missing))
+  AC_DEFINE_UNQUOTED([ENABLE_DEX],[1],[Define to 1 to enable dex functions])
+else
+  AC_MSG_RESULT(no)
+fi
+
 AM_CONDITIONAL([TARGET_DARWIN], [test x$TARGET_OS = xdarwin])
 AM_CONDITIONAL([BUILD_DARWIN], [test x$BUILD_OS = xdarwin])
 AM_CONDITIONAL([TARGET_WINDOWS], [test x$TARGET_OS = xwindows])
@@ -937,6 +960,7 @@ AM_CONDITIONAL([USE_COMPARISON_TOOL],[test x$use_comparison_tool != xno])
 AM_CONDITIONAL([USE_COMPARISON_TOOL_REORG_TESTS],[test x$use_comparison_tool_reorg_test != xno])
 AM_CONDITIONAL([GLIBC_BACK_COMPAT],[test x$use_glibc_compat = xyes])
 AM_CONDITIONAL([HARDEN],[test x$use_hardening = xyes])
+AM_CONDITIONAL([ENABLE_DEX],[test x$enable_dex = xyes])
 
 AC_DEFINE(CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MAJOR, [Major version])
 AC_DEFINE(CLIENT_VERSION_MINOR, _CLIENT_VERSION_MINOR, [Minor version])
