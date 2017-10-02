@@ -494,7 +494,7 @@ libbitcoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 endif
 #
 
-CLEANFILES = leveldb/libleveldb.a leveldb/libmemenv.a sqlite/libdexdb.a
+CLEANFILES = leveldb/libleveldb.a leveldb/libmemenv.a dex/libdexdb.a
 CLEANFILES += *.gcda *.gcno
 CLEANFILES += compat/*.gcda compat/*.gcno
 CLEANFILES += consensus/*.gcda consensus/*.gcno
@@ -564,5 +564,5 @@ include Makefile.qttest.include
 endif
 
 if ENABLE_DEX
-include Makefile.sqlite.include
+include Makefile.dex.include
 endif
